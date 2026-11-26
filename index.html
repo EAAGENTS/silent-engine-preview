@@ -63,9 +63,11 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-comparison thead th:first-child{width:35%;color:#c5c5c5;text-align:left;font-weight:500}
 .engine-comparison tbody th{text-align:left;color:#ddd;font-size:.77rem;font-weight:600}
 .engine-comparison td{font-size:.9rem;font-weight:750;overflow-wrap:anywhere}
-.engine-comparison tr > :last-child{background:#2d281f;border-left:1px solid #524835}
+.engine-comparison :is(thead,tbody) tr > :last-child{background:#2d281f;border-left:1px solid #524835}
 .engine-comparison thead th:last-child,.engine-comparison [data-engine-value="after-revenue"]{color:#f1cc91}
 .engine-comparison .engine-stat{display:inline-block}
+.engine-comparison .engine-current{position:relative}
+.engine-comparison .engine-direction{position:absolute;z-index:1;left:100%;top:50%;width:1.35rem;transform:translate(-50%,-50%);background:#292620;border:1px solid #524835;border-radius:1rem;color:#e8bf7d;font-size:.76rem;line-height:1.1}
 @container(max-width:315px){
 .engine-comparison :is(th,td){padding-inline:.32rem}
 .engine-comparison tbody th{font-size:.73rem}
@@ -75,8 +77,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end;gap:.42rem .55rem;margin:.42rem 0 .08rem}
 .audit-field{display:grid;gap:.25rem;min-width:0}
 .audit-field-wide{grid-column:1 / -1}
-.audit-field > span{font-size:.82rem;font-weight:650;line-height:1.3}
-@container(max-width:245px){
+.audit-field > span:first-child{font-size:.875rem;font-weight:400;line-height:1.25}
+@container(max-width:400px){
 .audit-fields > *{grid-column:1 / -1}
 }
 .audit-currency{position:relative;display:block}
@@ -105,16 +107,11 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 }
 .mini-audit .btn{min-height:34px;padding:.28rem .25rem;font-size:.77rem;line-height:1.16}
 .mini-audit :is(input,select,button):focus-visible,.audit-result:focus-visible{outline-color:#f0f0ee}
-.engine-comparison .audit-next{border-left:0;background:#232323}
-.audit-next-action{padding:.5rem .25rem;border:0;background:none;color:#f1e8d9;font-size:.78rem;font-weight:650;text-decoration:underline;text-underline-offset:.2em}
-.audit-next-action:hover{color:#f1cc91}
-.audit-result{margin:0;color:#f3ece0}
-.audit-result h3{margin:0 0 .33rem;font-size:.7rem;font-weight:650;line-height:1.2;letter-spacing:-.01em}
-.audit-result h3 strong,.audit-annual-total dd{color:#e8bf7d;font-weight:750;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.audit-result h3 strong{font-size:.97rem}
-.audit-annual-total{display:grid;grid-template-rows:auto auto;gap:.08rem;margin:0}
-.audit-annual-total dt{grid-row:2;color:#d7cbb5;font-size:.65rem;line-height:1.16}
-.audit-annual-total dd{grid-row:1;margin:0;font-size:clamp(.96rem,4.3cqw,1.24rem);line-height:1.05;letter-spacing:-.035em}
+.engine-comparison tfoot td{padding:.52rem .65rem;background:#2d281f;text-align:left;border-bottom:0;overflow-wrap:anywhere}
+.audit-result{margin:0;color:#f3ece0;font-size:.8rem;font-weight:400;line-height:1.3}
+.audit-result p{margin:0}
+.audit-result p + p{margin-top:.14rem}
+.audit-result strong{color:#e8bf7d;font-size:.98rem;font-weight:750;font-variant-numeric:tabular-nums}
 .audit-result:focus-visible{outline:2px solid #a78755;outline-offset:2px}
 .engine-scene{overflow:hidden;background:#242424}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
@@ -146,7 +143,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine[data-running] .engine-slot-pulse{animation:engine-slot-scan .42s ease-out .96s both}
 .engine[data-running] .engine-wheel{animation:engine-turn 1.82s ease-in-out 1.4s both}
 .engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 1.82s ease-in-out 1.4s both}
-.engine[data-running] .audit-next-action{animation:audit-next-reveal .28s ease-out 4.38s both}
 .engine[data-running] #engine-multiplier{animation:engine-stat-highlight .38s ease-out 1.75s both}
 .engine[data-running] [data-engine-value="after-revenue"] .engine-stat{animation:engine-stat-highlight .38s ease-out 3.72s both}
 }
@@ -154,7 +150,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine[data-audit-complete] .engine-motion-still{opacity:1}
 }
 @keyframes engine-slot-scan{0%,100%{opacity:0}42%{opacity:.66}}
-@keyframes audit-next-reveal{from{visibility:hidden;opacity:0}to{visibility:visible;opacity:1}}
 @keyframes engine-stat-highlight{from{opacity:.55;transform:scale(.94)}to{opacity:1;transform:none}}
 @keyframes engine-turn{from{transform:rotate(9deg)}to{transform:rotate(149deg)}}
 @keyframes engine-turn-reverse{from{transform:rotate(24deg)}to{transform:rotate(-170deg)}}
@@ -265,7 +260,7 @@ dialog p{color:var(--muted)}
           <div class="audit-fields">
             <label class="audit-field audit-field-wide"><span>Monthly marketing spend</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-spend" aria-label="Monthly marketing spend in euros" type="number" inputmode="decimal" required min="0.01" max="1000000000" step="0.01" placeholder=" "><span class="audit-example" aria-hidden="true"><span>5,000</span><span>10,000</span><span>20,000</span><span>50,000</span></span></span></label>
             <label class="audit-field"><span>New customers from spend</span><input id="audit-customers" aria-label="New customers from spend" type="number" inputmode="numeric" required min="0" max="10000000" step="1"></label>
-            <label class="audit-field"><span>Lifetime revenue per customer</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="Lifetime customer revenue in euros" type="number" inputmode="decimal" required min="0" max="1000000000" step="0.01"></span></label>
+            <label class="audit-field"><span>Lifetime revenue per customer</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="Lifetime revenue per customer in euros" type="number" inputmode="decimal" required min="0" max="1000000000" step="0.01"></span></label>
             <label class="audit-field"><span>Your sector</span><select id="audit-sector" aria-label="Customer sector, optional"><option value="">Select sector</option><option value="technology">Technology and SaaS</option><option value="retail">Retail and ecommerce</option><option value="financial">Financial services</option><option value="healthcare">Healthcare</option><option value="services">Professional services</option><option value="manufacturing">Manufacturing</option><option value="other">Other or mixed sectors</option></select></label>
             <button class="btn btn-light" type="submit">Start audit</button>
           </div>
@@ -285,7 +280,7 @@ dialog p{color:var(--muted)}
         </div>
         <table class="engine-comparison" aria-label="Revenue engine before and after" hidden>
           <thead>
-            <tr><th scope="col" aria-label="Metric"></th><th scope="col">Today</th><th scope="col">Potential</th></tr>
+            <tr><th scope="col" aria-label="Metric"></th><th scope="col" class="engine-current">Current<span class="engine-direction" aria-hidden="true">→</span></th><th scope="col">Potential</th></tr>
           </thead>
           <tbody>
             <tr><th scope="row">Marketing spend</th><td data-engine-value="spend"><span class="engine-stat">—</span></td><td data-engine-value="spend"><span class="engine-stat">—</span></td></tr>
@@ -297,14 +292,10 @@ dialog p{color:var(--muted)}
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="2" class="audit-next"><button class="audit-next-action" type="button" data-book>Talk to an expert</button></td>
-              <td>
-                <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-labelledby="audit-result-title">
-                  <h3 id="audit-result-title"><strong id="audit-lift"></strong> <span id="audit-lift-copy"></span></h3>
-                  <dl class="audit-annual-total" title="Assumes the same spend and acquisition results each month.">
-                    <dt>Extra lifetime revenue<br>Same annual spend</dt>
-                    <dd id="audit-annual-gain"></dd>
-                  </dl>
+              <td colspan="3">
+                <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
+                  <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per euro spent</p>
+                  <p title="Assumes the same spend and acquisition results each month."><strong id="audit-annual-gain"></strong> extra lifetime revenue at the same annual spend</p>
                 </section>
               </td>
             </tr>
@@ -532,10 +523,7 @@ dialog p{color:var(--muted)}
 
     const lift = document.querySelector('#audit-lift');
     lift.textContent = canCompare ? auditPercent.format(extraRevenue / lifetimeRevenue) : '';
-    lift.hidden = !canCompare;
-    document.querySelector('#audit-lift-copy').textContent = canCompare
-      ? 'revenue per euro spent'
-      : 'Estimated revenue lift';
+    document.querySelector('#audit-uplift').hidden = !canCompare;
     document.querySelector('#audit-annual-gain').textContent = auditMoney(extraRevenue * 12);
     auditResult.title = sectorGap > 0
       ? 'This scenario combines a 10% lift with closing the gap to the modeled sector target.'
