@@ -56,13 +56,21 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .text-link{font-size:.92rem;font-weight:700;text-decoration:none;padding:.7rem .25rem}
 .engine{container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:clamp(.95rem,2.4vw,1.7rem)}
 .engine figcaption h2{font-size:1rem;font-weight:750;letter-spacing:-.025em;margin:0 0 .62rem}
-.engine-label{font:700 .72rem/1.35 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#c5c5c5}
-.engine-machine{overflow:hidden;margin-bottom:0;border:1px solid #393939;border-radius:8px;background:#202020}
-.engine-band{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,min(59%,13.5rem));align-items:center;min-height:3.4rem;gap:.48rem;padding:.3rem .65rem;font-size:.9rem;line-height:1.3}
-.engine-band-copy{display:grid;grid-template-columns:3rem minmax(0,1fr);align-items:baseline;gap:.4rem}
-.engine-multiplier-band .engine-band-copy strong{white-space:nowrap}
-@container(max-width:365px){
-.engine-band-copy{grid-template-columns:1fr;gap:.12rem}
+.engine-machine{overflow:hidden;margin:0;border:1px solid #393939;border-radius:8px;background:#202020}
+.engine-comparison{width:100%;table-layout:fixed;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.engine-comparison :is(th,td){padding:.43rem .56rem;text-align:center;border-bottom:1px solid #393939;line-height:1.26}
+.engine-comparison thead th{background:#262626;font-size:.8rem}
+.engine-comparison thead th:first-child{width:35%;color:#c5c5c5;text-align:left;font-weight:500}
+.engine-comparison tbody th{text-align:left;color:#ddd;font-size:.77rem;font-weight:600}
+.engine-comparison td{font-size:.9rem;font-weight:750;overflow-wrap:anywhere}
+.engine-comparison tr > :last-child{background:#2d281f;border-left:1px solid #524835}
+.engine-comparison thead th:last-child,.engine-comparison [data-engine-value="after-revenue"]{color:#f1cc91}
+.engine-comparison small{display:block;margin-top:.14rem;color:#d7c6a9;font-size:.65rem;font-weight:500}
+.engine-comparison .engine-stat{display:inline-block}
+@container(max-width:315px){
+.engine-comparison :is(th,td){padding-inline:.32rem}
+.engine-comparison tbody th{font-size:.73rem}
+.engine-comparison thead th{font-size:.74rem}
 }
 .mini-audit{margin:0 0 .68rem;padding:.62rem .72rem;border:1px solid #454545;border-radius:8px;background:#1b1b1b}
 .audit-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.44rem .6rem;margin:.52rem 0}
@@ -96,29 +104,14 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .mini-audit .btn{min-height:37px;padding:.34rem .72rem;font-size:.83rem}
 .mini-audit :is(input,select,button):focus-visible,.audit-result:focus-visible{outline-color:#f0f0ee}
 .audit-result{margin:0;padding:.58rem .65rem;border-top:1px solid #635137;background:#29251e;color:#f3ece0}
-.audit-result :is(h3,p){display:flex;align-items:baseline;flex-wrap:wrap;gap:.05rem .4rem;font-size:.875rem;margin:0;line-height:1.3;letter-spacing:-.015em}
-.audit-result h3{font-weight:500;color:#e1d6c6}
-.audit-result h3 strong{color:#f3ece0;font-size:.92rem}
-.audit-result p{margin-top:.22rem;font-weight:650}
-.audit-result .audit-gain{font-size:.79rem;font-weight:500;color:#e1d6c6}
-.audit-result-arrow{color:#c69b62}
+.audit-result :is(h3,p){display:flex;align-items:baseline;flex-wrap:wrap;gap:.05rem .4rem;font-size:.86rem;margin:0;line-height:1.3;letter-spacing:-.015em}
+.audit-result h3{font-weight:650}
+.audit-result .audit-gain{margin-top:.2rem;font-size:.79rem;font-weight:500;color:#e1d6c6}
 .audit-result:focus-visible{outline:2px solid #a78755;outline-offset:-2px}
 .audit-result strong{color:#e8bf7d;font-size:1.18rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.engine-band + .engine-band,.engine-scene{border-top:1px solid #393939}
-.engine-scene{overflow:hidden;background:#242424}
+.engine-scene{overflow:hidden;background:#242424;border-top:1px solid #393939}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
-.engine-notification{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:.42rem;min-width:0;padding:.38rem .55rem;border:1px solid #5c5c5c;border-radius:10px;background:#333;color:#f4f4f2;font-size:.75rem;line-height:1.2;box-shadow:0 2px 6px #14141455}
-.engine-notification-icon{display:grid;place-items:center;width:23px;aspect-ratio:1;flex:none;border-radius:6px;background:#e6e6e3;color:#171717;font-size:1rem;font-weight:750}
-.engine-notification-copy{display:grid;gap:.13rem;overflow-wrap:anywhere}
-.engine-notification-copy strong{font-size:.7rem}
-.engine-notification-copy small{color:#cecece;font-size:.67rem}
-.engine-notification-amount{min-width:3.75rem;font-size:.91rem;font-weight:750;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;text-align:center}
-@container(max-width:335px){
-.engine-notification{grid-template-columns:auto minmax(0,1fr)}
-.engine-notification-amount{grid-column:2;min-width:0;text-align:left}
-}
 .engine-idle-photo{display:block;width:100%;height:auto}
-.engine:not([data-audit-complete]) .engine-notification{visibility:hidden}
 .engine-window{position:absolute;inset:46.7% 39.4% 28.9% 29.5%;clip-path:polygon(8% 0,91% 0,100% 18%,100% 84%,94% 100%,25% 100%,18% 88%,3% 87%,0 79%,0 17%);background:linear-gradient(130deg,#72727255 0%,transparent 40%),radial-gradient(ellipse at 38% 90%,#393939,#1b1b1b 65%,#0a0a0a)}
 .engine-wheel{position:absolute;display:grid;place-items:center;width:15%;aspect-ratio:1;left:33.2%;top:46.9%;transform:rotate(9deg)}
 .engine-wheel-small{width:10.6%;left:47.8%;top:52.7%;transform:rotate(24deg)}
@@ -127,30 +120,33 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-wheel-small::before{background:repeating-conic-gradient(#ac8955 0deg 14deg,transparent 14deg 27.69deg)}
 .engine-wheel::after{width:84%;background:repeating-radial-gradient(circle,transparent 0 1px,#fff1 1px 2px),conic-gradient(from 24deg,#493b29,#bd9f69,#89724e,#382e21,#a98956,#493b29);border:1px solid #be9d68;box-shadow:0 0 4px #000;box-sizing:border-box}
 .engine-wheel i{z-index:1;width:34%;background:conic-gradient(from 15deg,#503e28,#b99b6c,#654f31,#ab8958,#503e28);border:1px solid #8e744c;box-shadow:0 0 0 2px #272727}
-.engine-reader-pulse{position:absolute;top:36.9%;left:29.4%;width:11.2%;height:4.5%;border:1px solid #eaeaea;border-radius:25%;box-shadow:0 0 7px #fff7;opacity:0;pointer-events:none}
+.engine-slot-pulse{position:absolute;top:38.25%;left:32.5%;width:5.5%;height:1.24%;border:1px solid #eaeaea;border-radius:25%;box-shadow:0 0 7px #fff7;opacity:0;pointer-events:none}
 .engine-motion-clip,.engine-motion-still{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
 .engine[data-running] .engine-motion-clip{opacity:1}
 .engine[data-clip-fallback][data-running] .engine-motion-still{animation:engine-payment-arrive .35s ease-out 3.65s both}
-.engine-multiplier{display:flex;align-items:center;justify-self:end;gap:.55rem;padding-inline-end:1rem;opacity:0;color:#f5e4c9;font-weight:750;font-variant-numeric:tabular-nums}
-.engine-multiplier-gear{position:relative;display:grid;place-items:center;isolation:isolate;width:2.85rem;aspect-ratio:1}
+.engine-multiplier{display:flex;align-items:center;justify-content:center;gap:.27rem;color:#f5e4c9;font-weight:750;font-variant-numeric:tabular-nums}
+.engine-multiplier-gear{position:relative;display:grid;place-items:center;isolation:isolate;width:2.55rem;aspect-ratio:1}
 .engine-multiplier-gear::before,.engine-multiplier-gear::after{content:"";position:absolute;z-index:-1;border-radius:50%}
 .engine-multiplier-gear::before{inset:0;background:repeating-conic-gradient(#90764c 0deg 12deg,transparent 12deg 30deg);mask-image:radial-gradient(circle,#000 68%,transparent 71%)}
 .engine-multiplier-gear::after{inset:9%;border:1px solid #9d8257;background:#352f25}
+.engine-multiplier-today{color:#d5d5d5}
+.engine-multiplier-today .engine-multiplier-symbol{color:#bfbfbf}
+.engine-multiplier-today .engine-multiplier-gear::before{background:repeating-conic-gradient(#777 0deg 12deg,transparent 12deg 30deg)}
+.engine-multiplier-today .engine-multiplier-gear::after{border-color:#777;background:#2b2b2b}
 .engine-multiplier-value{line-height:1;text-align:center;white-space:nowrap;font-size:.75rem}
 .engine-multiplier-symbol{font-size:1.03rem;line-height:1;color:#dfbc83}
 @media(prefers-reduced-motion:no-preference){
-.engine[data-sequence-ready] .engine-notification{opacity:0}
-.engine[data-running] .engine-input-band .engine-notification{animation:engine-payment-arrive .3s ease-out .99s both}
-.engine[data-running] .engine-reader-pulse{animation:engine-reader-scan .56s ease-out .71s both}
+.engine[data-running] .engine-slot-pulse{animation:engine-slot-scan .42s ease-out .96s both}
 .engine[data-running] .engine-wheel{animation:engine-turn 1.82s ease-in-out 1.4s both}
 .engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 1.82s ease-in-out 1.4s both}
-.engine[data-running] .engine-multiplier{animation:engine-payment-arrive .27s ease-out 1.75s both}
-.engine[data-running] .engine-output-band .engine-notification{animation:engine-payment-arrive .3s ease-out 3.72s both}
+.engine[data-running] #engine-multiplier{animation:engine-stat-highlight .38s ease-out 1.75s both}
+.engine[data-running] [data-engine-value="after-revenue"] .engine-stat{animation:engine-stat-highlight .38s ease-out 3.72s both}
 }
 @media(prefers-reduced-motion:reduce){
-.engine[data-audit-complete] :is(.engine-multiplier,.engine-motion-still){opacity:1}
+.engine[data-audit-complete] .engine-motion-still{opacity:1}
 }
-@keyframes engine-reader-scan{0%,100%{opacity:0}42%{opacity:.66}}
+@keyframes engine-slot-scan{0%,100%{opacity:0}42%{opacity:.66}}
+@keyframes engine-stat-highlight{from{opacity:.55;transform:scale(.94)}to{opacity:1;transform:none}}
 @keyframes engine-turn{from{transform:rotate(9deg)}to{transform:rotate(149deg)}}
 @keyframes engine-turn-reverse{from{transform:rotate(24deg)}to{transform:rotate(-170deg)}}
 @keyframes engine-payment-arrive{from{opacity:0;transform:translateY(4px) scale(.98)}to{opacity:1;transform:none}}
@@ -256,40 +252,32 @@ dialog p{color:var(--muted)}
         </form>
       </div>
       <div class="engine-machine">
-        <div class="engine-band engine-input-band">
-          <div class="engine-band-copy"><span class="engine-label">Input</span><strong>Marketing spend</strong></div>
-          <div class="engine-notification" role="img" aria-label="Monthly marketing spend">
-            <span class="engine-notification-icon" aria-hidden="true">−</span>
-            <div class="engine-notification-copy"><strong>Marketing spend</strong><small>Your monthly budget</small></div>
-            <span class="engine-notification-amount"></span>
-          </div>
-        </div>
-        <div class="engine-band engine-multiplier-band">
-          <div class="engine-band-copy"><span class="engine-label">Engine</span><strong>Multiplier</strong></div>
-          <span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value"></span></span></span>
-        </div>
-        <div class="engine-band engine-output-band">
-          <div class="engine-band-copy"><span class="engine-label">Output</span><strong>Projected revenue</strong></div>
-          <div class="engine-notification" role="img" aria-label="Projected total lifetime revenue">
-            <span class="engine-notification-icon" aria-hidden="true">+</span>
-            <div class="engine-notification-copy"><strong>Projected revenue</strong><small>Lifetime total</small></div>
-            <span class="engine-notification-amount"></span>
-          </div>
-        </div>
+        <table class="engine-comparison" aria-label="Revenue engine before and after">
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col">Today</th><th scope="col">After six months<small>Projected</small></th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Marketing spend</th><td data-engine-value="spend"><span class="engine-stat">—</span></td><td data-engine-value="spend"><span class="engine-stat">—</span></td></tr>
+            <tr><th scope="row">Multiplier</th>
+              <td><span class="engine-multiplier engine-multiplier-today" role="img" aria-label="Current revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
+              <td><span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
+            </tr>
+            <tr><th scope="row">Lifetime revenue</th><td data-engine-value="today-revenue"><span class="engine-stat">—</span></td><td data-engine-value="after-revenue"><span class="engine-stat">—</span></td></tr>
+          </tbody>
+        </table>
         <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-labelledby="audit-result-title" hidden>
-          <h3 id="audit-result-title"><span><strong id="audit-current-ratio"></strong> today</span> <span class="audit-result-arrow">→</span> <span><strong id="audit-projected-ratio"></strong> projected in six months</span></h3>
-          <p><strong id="audit-lift"></strong> <span id="audit-lift-copy"></span></p>
+          <h3 id="audit-result-title"><strong id="audit-lift"></strong> <span id="audit-lift-copy"></span></h3>
           <p class="audit-gain" id="audit-gain"></p>
         </section>
         <div class="engine-scene">
           <div class="engine-art">
-            <img class="engine-idle-photo" src="silent-engine-left-tray.webp" width="1120" height="747" fetchpriority="high" alt="A compact engine with two gears, a contactless reader, and a coin tray.">
-            <span class="engine-reader-pulse" aria-hidden="true"></span>
+            <img class="engine-idle-photo" src="engine-coin-slot.webp" width="1120" height="747" fetchpriority="high" alt="A compact engine with two gears, a coin slot, and a payout tray.">
+            <span class="engine-slot-pulse" aria-hidden="true"></span>
             <div class="engine-window" aria-hidden="true"></div>
             <span class="engine-wheel" aria-hidden="true"><i></i></span>
             <span class="engine-wheel engine-wheel-small" aria-hidden="true"><i></i></span>
-            <img class="engine-motion-clip" data-src="engine-left-tray-clip.webp" alt="">
-            <img class="engine-motion-still" src="engine-left-tray-catch.webp" width="560" height="374" alt="">
+            <img class="engine-motion-clip" data-src="engine-coin-clip.webp" alt="">
+            <img class="engine-motion-still" src="engine-coin-catch.webp" width="560" height="374" alt="">
           </div>
         </div>
       </div>
@@ -439,7 +427,6 @@ dialog p{color:var(--muted)}
     delete engineCard.dataset.running;
     delete engineCard.dataset.clipFallback;
     const ready = engineCard.hasAttribute('data-audit-complete') && engineMotion.matches;
-    engineCard.toggleAttribute('data-sequence-ready', ready);
     if (ready) {
       prepareEngineClip();
       engineObserver.observe(engineScene);
@@ -450,7 +437,6 @@ dialog p{color:var(--muted)}
 
   const auditForm = document.querySelector('#mini-audit-form');
   const auditResult = document.querySelector('#audit-result');
-  const outputNotice = engineCard.querySelector('.engine-output-band .engine-notification');
   const auditSpend = document.querySelector('#audit-spend');
   const auditCustomers = document.querySelector('#audit-customers');
   const auditValue = document.querySelector('#audit-value');
@@ -479,19 +465,25 @@ dialog p{color:var(--muted)}
     return (ratio >= 100 ? compactRatio : auditRatio).format(ratio);
   }
 
-  function updateEngineAmounts(spend, projectedRevenue, projectedRatio) {
-    const spendLabel = engineCard.querySelector('.engine-input-band .engine-notification');
+  function updateEngineAmounts(spend, currentRevenue, projectedRevenue) {
+    const amounts = {spend, 'today-revenue': currentRevenue, 'after-revenue': projectedRevenue};
+    engineCard.querySelectorAll('[data-engine-value]').forEach(cell => {
+      const amount = amounts[cell.dataset.engineValue];
+      cell.querySelector('.engine-stat').textContent = auditCompactCurrency.format(amount);
+      cell.title = auditMoney(amount);
+    });
 
-    spendLabel.querySelector('.engine-notification-amount').textContent = auditCompactCurrency.format(spend);
-    spendLabel.setAttribute('aria-label', `Monthly marketing spend: ${auditCurrency.format(spend)}`);
-    outputNotice.querySelector('.engine-notification-amount').textContent = auditCompactCurrency.format(projectedRevenue);
-    outputNotice.setAttribute('aria-label', `Projected total lifetime revenue: ${auditMoney(projectedRevenue)}`);
-    const multiplierValue = document.querySelector('.engine-multiplier-value');
-    multiplierValue.textContent = formatMultiplier(projectedRatio);
-    const multiplier = multiplierValue.closest('.engine-multiplier');
-    const description = `Projected revenue per euro: ${auditRatio.format(projectedRatio)}×`;
-    multiplier.setAttribute('aria-label', description);
-    multiplier.title = description;
+    const multipliers = [
+      [engineCard.querySelector('.engine-multiplier-today'), currentRevenue / spend, 'Current'],
+      [engineCard.querySelector('#engine-multiplier'), projectedRevenue / spend, 'Projected'],
+    ];
+    for (const [badge, ratio, label] of multipliers) {
+      badge.querySelector('.engine-multiplier-value').textContent = formatMultiplier(ratio);
+      const description = `${label} revenue per euro: ${auditRatio.format(ratio)}×`;
+      badge.setAttribute('aria-label', description);
+      badge.title = description;
+    }
+
     engineCard.dataset.auditComplete = '';
     configureEngineMotion();
   }
@@ -505,13 +497,8 @@ dialog p{color:var(--muted)}
     const sectorTarget = sectorTargets.get(auditSector.value) ?? 0;
     const sectorGap = customerRevenue > 0 ? Math.max(0, spend * sectorTarget - lifetimeRevenue) : 0;
     const extraRevenue = lifetimeRevenue * baseUplift + sectorGap;
-    const currentRatio = lifetimeRevenue / spend;
     const projectedRevenue = lifetimeRevenue + extraRevenue;
-    const projectedRatio = projectedRevenue / spend;
     const canCompare = lifetimeRevenue > 0;
-
-    document.querySelector('#audit-current-ratio').textContent = `${formatMultiplier(currentRatio)}×`;
-    document.querySelector('#audit-projected-ratio').textContent = `${formatMultiplier(projectedRatio)}×`;
 
     document.querySelector('#audit-lift').textContent = canCompare
       ? auditPercent.format(extraRevenue / lifetimeRevenue)
@@ -526,7 +513,7 @@ dialog p{color:var(--muted)}
       ? 'Six-month scenario with a 10% lift and the gap to the modeled sector target closed.'
       : 'Six-month scenario with a 10% lift.';
     auditResult.hidden = false;
-    updateEngineAmounts(spend, projectedRevenue, projectedRatio);
+    updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
     auditResult.focus({preventScroll: true});
   }
 
