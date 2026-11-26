@@ -145,16 +145,16 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-multiplier-value{line-height:1;text-align:center;white-space:nowrap;font-size:.75rem}
 .engine-multiplier-symbol{font-size:1.03rem;line-height:1;color:#dfbc83}
 @media(prefers-reduced-motion:no-preference){
-.engine[data-running] .engine-slot-pulse{animation:engine-slot-scan 9s linear infinite}
-.engine[data-running] .engine-wheel{animation:engine-turn 9s linear infinite}
-.engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 9s linear infinite}
+.engine[data-running] .engine-slot-pulse{animation:engine-slot-scan 7.3s linear infinite}
+.engine[data-running] .engine-wheel{animation:engine-turn 7.3s linear infinite}
+.engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 7.3s linear infinite}
 }
 @media(prefers-reduced-motion:reduce){
 .engine[data-audit-complete] .engine-motion-still{opacity:1}
 }
-@keyframes engine-slot-scan{0%,17.3%,22%,100%{opacity:0}19.3%{opacity:.66}}
-@keyframes engine-turn{0%,22.22%{transform:rotate(9deg);animation-timing-function:ease-in-out}42.44%,100%{transform:rotate(149deg)}}
-@keyframes engine-turn-reverse{0%,22.22%{transform:rotate(24deg);animation-timing-function:ease-in-out}42.44%,100%{transform:rotate(-169.83deg)}}
+@keyframes engine-slot-scan{0%,21.37%,27.12%,100%{opacity:0}23.78%{opacity:.66}}
+@keyframes engine-turn{0%,27.4%{transform:rotate(9deg);animation-timing-function:ease-in-out}57.53%,100%{transform:rotate(369deg)}}
+@keyframes engine-turn-reverse{0%,27.4%{transform:rotate(24deg);animation-timing-function:ease-in-out}57.53%,100%{transform:rotate(-336deg)}}
 .fit{border-block:1px solid var(--rule);background:#efefed}
 .fit .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.2rem;padding-block:1.25rem;align-items:baseline}
 .fit .eyebrow,.fit p{margin:0}
@@ -275,7 +275,7 @@ dialog p{color:var(--muted)}
             <div class="engine-window" aria-hidden="true"></div>
             <span class="engine-wheel" aria-hidden="true"><i></i></span>
             <span class="engine-wheel engine-wheel-small" aria-hidden="true"><i></i></span>
-            <img class="engine-motion-clip" data-src="engine-reinvestment-loop.webp" alt="">
+            <img class="engine-motion-clip" data-src="engine-reinvestment-loop-v2.webp" alt="">
             <img class="engine-motion-still" src="engine-five-coin-catch.webp" width="560" height="374" alt="">
           </div>
           <button class="engine-motion-control" type="button" aria-label="Pause engine animation" title="Pause animation" hidden></button>
