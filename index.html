@@ -84,9 +84,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-currency{position:relative;display:block}
 .audit-currency > span{position:absolute;left:.62rem;top:50%;transform:translateY(-50%);color:#ddd;pointer-events:none}
 .audit-field :is(input,select){width:100%;min-height:34px;font:inherit;font-size:.91rem;padding:.28rem .45rem;background:#242424;color:#f8f8f6;border:1px solid #777;border-radius:5px;color-scheme:dark}
+.audit-field input[type="number"],.audit-currency > span{font:500 .85rem/1.3 ui-monospace,monospace}
 .audit-currency input{padding-left:1.7rem}
 .audit-field input::placeholder{color:#a9a9a9}
-.audit-currency > .audit-example{left:1.7rem;color:#a9a9a9;font:500 .85rem/1.3 ui-monospace,monospace;white-space:nowrap}
+.audit-currency > .audit-example{left:1.7rem;color:#a9a9a9;white-space:nowrap}
 .audit-example > span:not(:first-child){display:none}
 #audit-spend:not(:placeholder-shown) + .audit-example,#audit-spend:focus + .audit-example{visibility:hidden}
 @media(prefers-reduced-motion:no-preference){
