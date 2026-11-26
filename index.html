@@ -103,13 +103,17 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 }
 .mini-audit .btn{min-height:37px;padding:.34rem .72rem;font-size:.83rem}
 .mini-audit :is(input,select,button):focus-visible,.audit-result:focus-visible{outline-color:#f0f0ee}
-.audit-result{margin:0;padding:.58rem .65rem;border-top:1px solid #635137;background:#29251e;color:#f3ece0}
-.audit-result :is(h3,p){display:flex;align-items:baseline;flex-wrap:wrap;gap:.05rem .4rem;font-size:.86rem;margin:0;line-height:1.3;letter-spacing:-.015em}
-.audit-result h3{font-weight:650}
-.audit-result .audit-gain{margin-top:.2rem;font-size:.79rem;font-weight:500;color:#e1d6c6}
-.audit-result .audit-assumption{margin-top:.26rem;font-size:.71rem;color:#c8bca8}
+.audit-result{margin:0;padding:.5rem .65rem;border-top:1px solid #635137;background:#29251e;color:#f3ece0}
+.audit-result h3{display:flex;align-items:baseline;flex-wrap:wrap;gap:.05rem .35rem;margin:0;font-size:.83rem;font-weight:650;line-height:1.25;letter-spacing:-.015em}
+.audit-result h3 strong,.audit-totals dd{color:#e8bf7d;font-weight:750;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.audit-result h3 strong{font-size:1.06rem}
+.audit-totals-label{margin:.32rem 0 .06rem;color:#e1d6c6;font-size:.72rem;font-weight:600}
+.audit-totals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.52rem;margin:0}
+.audit-totals div{display:grid;align-content:start}
+.audit-totals div + div{padding-inline-start:.62rem;border-inline-start:1px solid #554834}
+.audit-totals dt{grid-row:2;color:#d7cbb5;font-size:.7rem;line-height:1.3}
+.audit-totals dd{grid-row:1;margin:0;font-size:clamp(1.05rem,4.6cqw,1.3rem);line-height:1.1;letter-spacing:-.035em}
 .audit-result:focus-visible{outline:2px solid #a78755;outline-offset:-2px}
-.audit-result strong{color:#e8bf7d;font-size:1.18rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .engine-scene{overflow:hidden;background:#242424;border-top:1px solid #393939}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
 .engine-idle-photo{display:block;width:100%;height:auto}
@@ -202,6 +206,16 @@ dialog p{color:var(--muted)}
 [hidden]{display:none!important}
 @media(max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{width:calc(100% - 48px)}.hero{gap:2rem}.card{padding:1.15rem}}
 @media(max-width:690px){.wrap{width:calc(100% - 36px)}.top{min-height:68px;gap:.75rem}nav{gap:.7rem}nav>a{display:none}.hero,.intro,.fit .wrap,.steps,.packages,.team-grid{grid-template-columns:1fr}.hero{padding-top:2rem}.hero > div:first-child{margin-top:0}.intro,.fit .wrap{gap:.75rem}.engine{margin-top:.5rem}.step{padding-top:1rem}.booking .wrap{align-items:flex-start;flex-direction:column;gap:1.35rem}footer .wrap{align-items:flex-start;flex-direction:column}}
+@media(min-width:861px) and (max-height:900px){
+.top{min-height:68px}
+.hero{padding-block:1.35rem}
+.engine{padding:.97rem}
+.engine figcaption h2{margin-bottom:.45rem}
+.mini-audit{padding:.48rem .62rem;margin-bottom:.48rem}
+.audit-fields{gap:.34rem .6rem;margin:.36rem 0}
+.engine-comparison :is(th,td){padding-block:.33rem}
+.engine-art{margin-top:-.56rem}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -268,9 +282,11 @@ dialog p{color:var(--muted)}
         </table>
         <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-labelledby="audit-result-title" hidden>
           <h3 id="audit-result-title"><strong id="audit-lift"></strong> <span id="audit-lift-copy"></span></h3>
-          <p class="audit-gain" id="audit-gain"></p>
-          <p class="audit-gain" id="audit-annual-gain"></p>
-          <p class="audit-assumption">Assumes the same spend and acquisition results each month.</p>
+          <p class="audit-totals-label" id="audit-totals-label">Extra lifetime revenue</p>
+          <dl class="audit-totals" aria-labelledby="audit-totals-label">
+            <div><dt>1 month of spend</dt><dd id="audit-gain"></dd></div>
+            <div title="Assumes the same spend and acquisition results each month."><dt>12 months at the same spend</dt><dd id="audit-annual-gain"></dd></div>
+          </dl>
         </section>
         <div class="engine-scene">
           <div class="engine-art">
@@ -279,8 +295,8 @@ dialog p{color:var(--muted)}
             <div class="engine-window" aria-hidden="true"></div>
             <span class="engine-wheel" aria-hidden="true"><i></i></span>
             <span class="engine-wheel engine-wheel-small" aria-hidden="true"><i></i></span>
-            <img class="engine-motion-clip" data-src="engine-coin-clip.webp" alt="">
-            <img class="engine-motion-still" src="engine-coin-catch.webp" width="560" height="374" alt="">
+            <img class="engine-motion-clip" data-src="engine-five-coin-clip.webp" alt="">
+            <img class="engine-motion-still" src="engine-five-coin-catch.webp" width="560" height="374" alt="">
           </div>
         </div>
       </div>
@@ -448,7 +464,7 @@ dialog p{color:var(--muted)}
   const auditCompactCurrency = new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR', notation: 'compact', maximumFractionDigits: 1});
   const auditRatio = new Intl.NumberFormat('en', {minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false});
   const compactRatio = new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: 0});
-  const auditPercent = new Intl.NumberFormat('en', {style: 'percent', maximumFractionDigits: 1, signDisplay: 'exceptZero'});
+  const auditPercent = new Intl.NumberFormat('en', {style: 'percent', maximumFractionDigits: 0, signDisplay: 'exceptZero'});
   const baseUplift = 0.10;
   // Illustrative targets for lifetime revenue per euro of marketing spend.
   const sectorTargets = new Map([
@@ -503,23 +519,26 @@ dialog p{color:var(--muted)}
     const projectedRevenue = lifetimeRevenue + extraRevenue;
     const canCompare = lifetimeRevenue > 0;
 
-    document.querySelector('#audit-lift').textContent = canCompare
-      ? auditPercent.format(extraRevenue / lifetimeRevenue)
-      : auditMoney(extraRevenue);
+    const lift = document.querySelector('#audit-lift');
+    lift.textContent = canCompare ? auditPercent.format(extraRevenue / lifetimeRevenue) : '';
+    lift.hidden = !canCompare;
     document.querySelector('#audit-lift-copy').textContent = canCompare
       ? 'revenue per euro spent with Silent Engine'
-      : 'extra lifetime revenue from one month’s spend';
-    const gain = document.querySelector('#audit-gain');
-    gain.textContent = `${auditMoney(extraRevenue)} extra lifetime revenue from one month’s spend`;
-    gain.hidden = !canCompare;
-    document.querySelector('#audit-annual-gain').textContent =
-      `${auditMoney(extraRevenue * 12)} extra lifetime revenue from a year of new customers`;
+      : 'Estimated revenue lift with Silent Engine';
+    document.querySelector('#audit-gain').textContent = auditMoney(extraRevenue);
+    document.querySelector('#audit-annual-gain').textContent = auditMoney(extraRevenue * 12);
     auditResult.title = sectorGap > 0
       ? 'Six-month scenario with a 10% lift and the gap to the modeled sector target closed.'
       : 'Six-month scenario with a 10% lift.';
     auditResult.hidden = false;
     updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
     auditResult.focus({preventScroll: true});
+
+    const bounds = engineCard.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    if (bounds.height <= viewportHeight && (bounds.bottom > viewportHeight || bounds.top < 0)) {
+      engineCard.scrollIntoView({block: 'nearest', behavior: engineMotion.matches ? 'smooth' : 'instant'});
+    }
   }
 
   auditForm.addEventListener('submit', event => {
