@@ -47,13 +47,12 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .hero-eyebrow{display:flex;align-items:center;gap:.55rem}
 .hubspot-mark{width:27px;height:27px;flex:none;border-radius:4px}
 .actions{display:grid;grid-template-columns:max-content minmax(0,max-content);align-items:center;column-gap:1rem}
-@media(max-width:390px){.actions{grid-template-columns:max-content;justify-items:start}.expert-profile{grid-row:3;margin-top:.35rem}}
+@media(max-width:390px){.actions{grid-template-columns:max-content;justify-items:start}.expert-profile{margin-top:.55rem}}
 .expert-profile{display:flex;gap:.58rem;align-items:center;line-height:1.2}
 .expert-profile img{width:42px;height:42px;flex:none;object-fit:cover;border-radius:50%}
 .expert-profile-copy{display:grid;gap:.19rem}
 .expert-name{font:700 1.04rem/1.1 Georgia,serif}
 .expert-role{font-size:.77rem;color:var(--muted)}
-.actions .text-link{grid-column:1;justify-self:center;padding:.43rem 0;font-weight:450;color:var(--muted)}
 .text-link{font-size:.92rem;font-weight:700;text-decoration:none;padding:.7rem .25rem}
 .engine{container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:clamp(.95rem,2.4vw,1.7rem)}
 .engine figcaption h2{font-size:1rem;font-weight:750;letter-spacing:-.025em;margin:0 0 .62rem}
@@ -144,8 +143,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine[data-running] .engine-reader-pulse{animation:engine-reader-scan .56s ease-out .71s both}
 .engine[data-running] .engine-wheel{animation:engine-turn 1.82s ease-in-out 1.4s both}
 .engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 1.82s ease-in-out 1.4s both}
-.engine[data-running] .engine-multiplier{animation:engine-payment-arrive .27s ease-out 3.24s both}
-.engine[data-running] .engine-output-band .engine-notification{animation:engine-payment-arrive .38s ease-out 4.38s both}
+.engine[data-running] .engine-multiplier{animation:engine-payment-arrive .27s ease-out 1.75s both}
+.engine[data-running] .engine-output-band .engine-notification{animation:engine-payment-arrive .3s ease-out 3.72s both}
 }
 @media(prefers-reduced-motion:reduce){
 .engine[data-audit-complete] :is(.engine-multiplier,.engine-motion-still){opacity:1}
@@ -155,7 +154,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @keyframes engine-turn-reverse{from{transform:rotate(24deg)}to{transform:rotate(-170deg)}}
 @keyframes engine-payment-arrive{from{opacity:0;transform:translateY(4px) scale(.98)}to{opacity:1;transform:none}}
 .fit{border-block:1px solid var(--rule);background:#efefed}
-.fit .wrap{display:grid;grid-template-columns:1fr 2fr;gap:1.75rem;padding-block:1.5rem;align-items:baseline}
+.fit .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.2rem;padding-block:1.25rem;align-items:baseline}
 .fit .eyebrow,.fit p{margin:0}
 .section{padding-block:clamp(3.75rem,7vw,6.15rem)}
 .intro{display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:end;margin-bottom:2.1rem}
@@ -176,7 +175,9 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .card .eyebrow{margin-bottom:.75rem;font-size:.73rem}
 .card .price{color:var(--ink);font-size:1.9rem;font-weight:750;letter-spacing:-.055em;line-height:1.2;margin:.65rem 0 .15rem}
 .card .term{font-size:.88rem;margin-bottom:1rem}
-.card ul{padding:1rem 0 0 1.15rem;margin:1.15rem 0 1.5rem;border-top:1px solid var(--rule);font-size:.95rem}
+.packages .card ul{list-style:none;padding:1rem 0 0;margin:1.15rem 0 1.5rem;border-top:1px solid var(--rule);font-size:.95rem}
+.packages .card li{display:grid;grid-template-columns:1rem minmax(0,1fr);align-items:baseline;gap:.52rem}
+.packages .card li::before{content:"";width:.63rem;height:.37rem;margin-inline:.08rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.14rem) rotate(-45deg)}
 .card li+li{margin-top:.45rem}
 .card .btn{margin-top:auto;align-self:flex-start}
 .terms{margin:1rem 0 0;color:var(--muted);font-size:.94rem}
@@ -186,7 +187,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .founder-portrait{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;clip-path:circle(48%)}
 .founder h3{margin-bottom:.35rem}
 .founder p{margin:0;color:var(--muted);font-size:.93rem}
-.team .text-link{display:inline-block;padding:.6rem 0 0}
+.team .text-link{display:inline-flex;align-items:center;gap:.42rem;padding:.6rem 0 0}
+.linkedin-mark{display:grid;place-items:center;width:1.03rem;aspect-ratio:1;border-radius:2px;background:var(--ink);color:#fff;font:700 .74rem/1 Arial,sans-serif;letter-spacing:-.055em}
 .booking{background:var(--black);color:#f4f4f2}
 .booking .wrap{display:flex;align-items:center;justify-content:space-between;gap:2rem}
 .booking h2{max-width:17ch}
@@ -226,21 +228,20 @@ dialog p{color:var(--muted)}
         <li>Streamline your pipeline</li>
         <li>Win more customers</li>
       </ul>
-      <p class="lead">We help B2B SaaS teams streamline marketing and sales with HubSpot.</p>
+      <p class="lead">We help B2B SaaS companies streamline marketing and sales with HubSpot.</p>
       <div class="actions">
         <button class="btn" type="button" data-book aria-describedby="expert-cta-person">Talk to an expert</button>
         <div class="expert-profile" id="expert-cta-person">
-          <img src="camila.jpeg" width="42" height="42" alt="">
+          <img src="camilla-office.webp" width="42" height="42" alt="">
           <div class="expert-profile-copy">
             <strong class="expert-name">Camilla de Casteja</strong>
             <span class="expert-role">Co-founder, Silent Engine</span>
           </div>
         </div>
-        <a class="text-link" href="#packages">Explore packages</a>
       </div>
     </div>
     <figure class="engine">
-      <figcaption><h2 id="mini-audit-title">Run a mini audit on your engine</h2></figcaption>
+      <figcaption><h2 id="mini-audit-title">Audit your growth engine</h2></figcaption>
       <div class="mini-audit">
         <form id="mini-audit-form" aria-labelledby="mini-audit-title">
           <div class="audit-fields">
@@ -294,48 +295,48 @@ dialog p{color:var(--muted)}
   <aside class="fit" aria-label="Who we work with">
     <div class="wrap">
       <p class="eyebrow">Who it’s for</p>
-      <p>You use HubSpot or are getting started with it. You want to see what it costs to win a customer, where buyers drop off, and which campaigns bring them in.</p>
+      <p>For companies using or adopting HubSpot that want to track acquisition costs, find where buyers drop off, and scale profitably.</p>
     </div>
   </aside>
   <section class="section wrap" id="approach" aria-labelledby="approach-title">
     <div class="intro">
-      <div><p class="eyebrow">Our approach</p><h2 id="approach-title">One engine for<br>marketing and sales.</h2></div>
-      <p>Marketing and sales use one Lead-to-Pipeline Map in HubSpot. Both teams agree on what qualifies as a deal, who owns each handoff, and what to measure before deciding where to invest more.</p>
+      <div><p class="eyebrow">Our approach</p><h2 id="approach-title">The Lead-to-Pipeline Map.</h2></div>
+      <p>We trace one path to purchase in HubSpot. Marketing and sales see which sources create deals, who owns each handoff, and where buyers stall.</p>
     </div>
     <ol class="steps" role="list" aria-label="How the engine works">
-      <li class="step"><h3>Capture demand</h3><p>Reach the right buyers and turn their interest into qualified conversations.</p></li>
-      <li class="step"><h3>Track pipeline</h3><p>Connect campaign sources to leads, deals, and revenue in HubSpot.</p></li>
-      <li class="step"><h3>Spot friction</h3><p>Find slow follow-up, weak conversion, or gaps in reporting.</p></li>
-      <li class="step"><h3>Implement fixes</h3><p>Fix the biggest issue first and measure what changes.</p></li>
-      <li class="step"><h3>Scale up</h3><p>Put more budget and time into the channels and workflows that bring in customers.</p></li>
+      <li class="step"><h3>Capture demand</h3><p>Turn buyer interest into qualified conversations.</p></li>
+      <li class="step"><h3>Track pipeline</h3><p>Link campaign sources to deals and revenue.</p></li>
+      <li class="step"><h3>Spot friction</h3><p>Find slow follow-up and conversion gaps.</p></li>
+      <li class="step"><h3>Implement fixes</h3><p>Fix the priority issue and measure the change.</p></li>
+      <li class="step"><h3>Scale up</h3><p>Invest more in what brings in customers.</p></li>
     </ol>
   </section>
   <section class="section offers" id="packages" aria-labelledby="packages-title">
     <div class="wrap">
       <div class="intro">
-        <div><p class="eyebrow">Packages &amp; pricing</p><h2 id="packages-title">Find the right starting point.</h2></div>
-        <p>The read-only Pipeline Audit checks tracking and finds bottlenecks in one conversion path, such as a demo or self-serve signup. The Engine Sprint implements the priority fix, and Engine Partner helps you scale what works.</p>
+        <div><p class="eyebrow">Packages &amp; pricing</p><h2 id="packages-title">Optimize your growth engine.</h2></div>
+        <p>Find the biggest opportunity, fix it, then keep improving conversion.</p>
       </div>
       <div class="packages">
         <article class="card">
           <p class="eyebrow">Diagnose</p><h3 id="pipeline-audit">Pipeline Audit</h3>
           <p class="price">€1,500</p><p class="term">Fixed fee · 2 weeks</p>
           <p>Find where buyers drop off and decide what to fix first.</p>
-          <ul><li>Review one HubSpot portal and one conversion path</li><li>Check source tracking and how buyers progress toward purchase</li><li>Get a pipeline map, up to three prioritized fixes, and a readout</li></ul>
+          <ul role="list"><li>Read-only review of one HubSpot portal and one conversion path</li><li>Check source tracking and deal progression</li><li>Pipeline map, up to three ranked fixes, and a readout</li></ul>
           <button class="btn btn-outline" type="button" data-book="Pipeline Audit">Discuss the audit</button>
         </article>
         <article class="card featured">
           <p class="eyebrow">Implement</p><h3>Engine Sprint</h3>
           <p class="price">€6,000</p><p class="term">Fixed fee · 6 weeks</p>
-          <p>Improve and measure one priority workflow on the path to purchase.</p>
-          <ul><li>Agree on qualification and follow-up with both teams</li><li>Implement one workflow and test the handoff</li><li>Build a shared baseline report and walk both teams through it</li></ul>
+          <p>Fix and measure one priority workflow on the path to purchase.</p>
+          <ul role="list"><li>Agree on qualification and follow-up</li><li>Build one workflow and test the handoff</li><li>Shared baseline report and team walkthrough</li></ul>
           <button class="btn" type="button" data-book="Engine Sprint">Discuss the sprint</button>
         </article>
         <article class="card">
           <p class="eyebrow">Optimize</p><h3>Engine Partner</h3>
           <p class="price">€3,500</p><p class="term">Per month · 3-month initial term</p>
           <p>Keep improving conversion once the foundations are in place.</p>
-          <ul><li>Review pipeline and campaign performance monthly</li><li>Run one demand generation experiment per month</li><li>Refine workflows and reporting as you learn</li></ul>
+          <ul role="list"><li>Monthly pipeline and campaign review</li><li>One demand generation experiment per month</li><li>Ongoing workflow and reporting improvements</li></ul>
           <button class="btn btn-outline" type="button" data-book="Engine Partner">Discuss the partnership</button>
         </article>
       </div>
@@ -354,15 +355,15 @@ dialog p{color:var(--muted)}
           <div>
             <h3>Dennis Kroon</h3>
             <p>Co-founder · Ecommerce and lifecycle marketing</p>
-            <a class="text-link" href="https://www.linkedin.com/in/klaviyo-specialist/">Dennis on LinkedIn</a>
+            <a class="text-link" href="https://www.linkedin.com/in/klaviyo-specialist/" aria-label="Dennis Kroon on LinkedIn"><span class="linkedin-mark" aria-hidden="true">in</span> LinkedIn</a>
           </div>
         </article>
         <article class="card founder">
-          <img class="founder-portrait" src="camila.jpeg" width="400" height="400" loading="lazy" decoding="async" alt="">
+          <img class="founder-portrait" src="camilla-office.webp" width="400" height="400" loading="lazy" decoding="async" alt="">
           <div>
             <h3>Camilla de Casteja</h3>
             <p>Co-founder, Silent Engine</p>
-            <a class="text-link" href="https://www.linkedin.com/in/growth-marketing-expert/">Camilla on LinkedIn</a>
+            <a class="text-link" href="https://www.linkedin.com/in/growth-marketing-expert/" aria-label="Camilla de Casteja on LinkedIn"><span class="linkedin-mark" aria-hidden="true">in</span> LinkedIn</a>
           </div>
         </article>
       </div>
