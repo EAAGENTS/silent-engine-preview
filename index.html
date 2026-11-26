@@ -107,6 +107,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-result :is(h3,p){display:flex;align-items:baseline;flex-wrap:wrap;gap:.05rem .4rem;font-size:.86rem;margin:0;line-height:1.3;letter-spacing:-.015em}
 .audit-result h3{font-weight:650}
 .audit-result .audit-gain{margin-top:.2rem;font-size:.79rem;font-weight:500;color:#e1d6c6}
+.audit-result .audit-assumption{margin-top:.26rem;font-size:.71rem;color:#c8bca8}
 .audit-result:focus-visible{outline:2px solid #a78755;outline-offset:-2px}
 .audit-result strong{color:#e8bf7d;font-size:1.18rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .engine-scene{overflow:hidden;background:#242424;border-top:1px solid #393939}
@@ -268,6 +269,8 @@ dialog p{color:var(--muted)}
         <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-labelledby="audit-result-title" hidden>
           <h3 id="audit-result-title"><strong id="audit-lift"></strong> <span id="audit-lift-copy"></span></h3>
           <p class="audit-gain" id="audit-gain"></p>
+          <p class="audit-gain" id="audit-annual-gain"></p>
+          <p class="audit-assumption">Assumes the same spend and acquisition results each month.</p>
         </section>
         <div class="engine-scene">
           <div class="engine-art">
@@ -441,7 +444,7 @@ dialog p{color:var(--muted)}
   const auditCustomers = document.querySelector('#audit-customers');
   const auditValue = document.querySelector('#audit-value');
   const auditSector = document.querySelector('#audit-sector');
-  const auditCurrency = new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR'});
+  const auditCurrency = new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR', maximumFractionDigits: 0});
   const auditCompactCurrency = new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR', notation: 'compact', maximumFractionDigits: 1});
   const auditRatio = new Intl.NumberFormat('en', {minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false});
   const compactRatio = new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: 0});
@@ -458,7 +461,7 @@ dialog p{color:var(--muted)}
   ]);
 
   function auditMoney(amount) {
-    return amount > 0 && amount < 0.01 ? '<€0,01' : auditCurrency.format(amount);
+    return amount > 0 && amount < 1 ? '<€1' : auditCurrency.format(amount);
   }
 
   function formatMultiplier(ratio) {
@@ -469,7 +472,7 @@ dialog p{color:var(--muted)}
     const amounts = {spend, 'today-revenue': currentRevenue, 'after-revenue': projectedRevenue};
     engineCard.querySelectorAll('[data-engine-value]').forEach(cell => {
       const amount = amounts[cell.dataset.engineValue];
-      cell.querySelector('.engine-stat').textContent = auditCompactCurrency.format(amount);
+      cell.querySelector('.engine-stat').textContent = amount < 1000 ? auditMoney(amount) : auditCompactCurrency.format(amount);
       cell.title = auditMoney(amount);
     });
 
@@ -504,11 +507,13 @@ dialog p{color:var(--muted)}
       ? auditPercent.format(extraRevenue / lifetimeRevenue)
       : auditMoney(extraRevenue);
     document.querySelector('#audit-lift-copy').textContent = canCompare
-      ? 'revenue per euro with Silent Engine'
-      : 'extra revenue at the same spend';
+      ? 'revenue per euro spent with Silent Engine'
+      : 'extra lifetime revenue from one month’s spend';
     const gain = document.querySelector('#audit-gain');
-    gain.textContent = `${auditMoney(extraRevenue)} extra lifetime revenue at the same spend`;
+    gain.textContent = `${auditMoney(extraRevenue)} extra lifetime revenue from one month’s spend`;
     gain.hidden = !canCompare;
+    document.querySelector('#audit-annual-gain').textContent =
+      `${auditMoney(extraRevenue * 12)} extra lifetime revenue from a year of new customers`;
     auditResult.title = sectorGap > 0
       ? 'Six-month scenario with a 10% lift and the gap to the modeled sector target closed.'
       : 'Six-month scenario with a 10% lift.';
