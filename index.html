@@ -114,7 +114,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-result p + p{margin-top:.14rem}
 .audit-result strong{color:#e8bf7d;font-size:.98rem;font-weight:750;font-variant-numeric:tabular-nums}
 .audit-result:focus-visible{outline:2px solid #a78755;outline-offset:2px}
-.engine-scene{overflow:hidden;background:#242424}
+.engine-scene{position:relative;overflow:hidden;background:#242424}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
 .engine-idle-photo{display:block;width:100%;height:auto}
 .engine-window{position:absolute;inset:46.7% 39.4% 28.9% 29.5%;clip-path:polygon(8% 0,91% 0,100% 18%,100% 84%,94% 100%,25% 100%,18% 88%,3% 87%,0 79%,0 17%);background:linear-gradient(130deg,#72727255 0%,transparent 40%),radial-gradient(ellipse at 38% 90%,#393939,#1b1b1b 65%,#0a0a0a)}
@@ -128,7 +128,11 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-slot-pulse{position:absolute;top:38.25%;left:32.5%;width:5.5%;height:1.24%;border:1px solid #eaeaea;border-radius:25%;box-shadow:0 0 7px #fff7;opacity:0;pointer-events:none}
 .engine-motion-clip,.engine-motion-still{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
 .engine[data-running] .engine-motion-clip{opacity:1}
-.engine[data-clip-fallback][data-running] .engine-motion-still{animation:engine-payment-arrive .35s ease-out 3.65s both}
+.engine[data-clip-fallback][data-audit-complete] .engine-motion-still{opacity:1}
+.engine-motion-control{position:absolute;z-index:1;top:.5rem;right:.5rem;display:grid;place-items:center;width:1.8rem;height:1.8rem;padding:0;border:1px solid #777;border-radius:50%;background:#202020;color:#ddd}
+.engine-motion-control:hover{color:#fff;border-color:#aaa}
+.engine-motion-control::before{content:"";width:.46rem;height:.62rem;border-inline:2px solid currentColor}
+.engine-motion-control[data-paused]::before{width:0;height:0;border:0;border-block:.32rem solid transparent;border-inline-start:.5rem solid currentColor;margin-inline-start:.1rem}
 .engine-multiplier{display:flex;align-items:center;justify-content:center;gap:.27rem;color:#f5e4c9;font-weight:750;font-variant-numeric:tabular-nums}
 .engine-multiplier-gear{position:relative;display:grid;place-items:center;isolation:isolate;width:2.55rem;aspect-ratio:1}
 .engine-multiplier-gear::before,.engine-multiplier-gear::after{content:"";position:absolute;z-index:-1;border-radius:50%}
@@ -141,20 +145,16 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-multiplier-value{line-height:1;text-align:center;white-space:nowrap;font-size:.75rem}
 .engine-multiplier-symbol{font-size:1.03rem;line-height:1;color:#dfbc83}
 @media(prefers-reduced-motion:no-preference){
-.engine[data-running] .engine-slot-pulse{animation:engine-slot-scan .42s ease-out .96s both}
-.engine[data-running] .engine-wheel{animation:engine-turn 1.82s ease-in-out 1.4s both}
-.engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 1.82s ease-in-out 1.4s both}
-.engine[data-running] #engine-multiplier{animation:engine-stat-highlight .38s ease-out 1.75s both}
-.engine[data-running] [data-engine-value="after-revenue"] .engine-stat{animation:engine-stat-highlight .38s ease-out 3.72s both}
+.engine[data-running] .engine-slot-pulse{animation:engine-slot-scan 9s linear infinite}
+.engine[data-running] .engine-wheel{animation:engine-turn 9s linear infinite}
+.engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 9s linear infinite}
 }
 @media(prefers-reduced-motion:reduce){
 .engine[data-audit-complete] .engine-motion-still{opacity:1}
 }
-@keyframes engine-slot-scan{0%,100%{opacity:0}42%{opacity:.66}}
-@keyframes engine-stat-highlight{from{opacity:.55;transform:scale(.94)}to{opacity:1;transform:none}}
-@keyframes engine-turn{from{transform:rotate(9deg)}to{transform:rotate(149deg)}}
-@keyframes engine-turn-reverse{from{transform:rotate(24deg)}to{transform:rotate(-170deg)}}
-@keyframes engine-payment-arrive{from{opacity:0;transform:translateY(4px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes engine-slot-scan{0%,17.3%,22%,100%{opacity:0}19.3%{opacity:.66}}
+@keyframes engine-turn{0%,22.22%{transform:rotate(9deg);animation-timing-function:ease-in-out}42.44%,100%{transform:rotate(149deg)}}
+@keyframes engine-turn-reverse{0%,22.22%{transform:rotate(24deg);animation-timing-function:ease-in-out}42.44%,100%{transform:rotate(-169.83deg)}}
 .fit{border-block:1px solid var(--rule);background:#efefed}
 .fit .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.2rem;padding-block:1.25rem;align-items:baseline}
 .fit .eyebrow,.fit p{margin:0}
@@ -275,9 +275,10 @@ dialog p{color:var(--muted)}
             <div class="engine-window" aria-hidden="true"></div>
             <span class="engine-wheel" aria-hidden="true"><i></i></span>
             <span class="engine-wheel engine-wheel-small" aria-hidden="true"><i></i></span>
-            <img class="engine-motion-clip" data-src="engine-five-coin-clip.webp" alt="">
+            <img class="engine-motion-clip" data-src="engine-reinvestment-loop.webp" alt="">
             <img class="engine-motion-still" src="engine-five-coin-catch.webp" width="560" height="374" alt="">
           </div>
+          <button class="engine-motion-control" type="button" aria-label="Pause engine animation" title="Pause animation" hidden></button>
         </div>
         <table class="engine-comparison" aria-label="Revenue engine before and after" hidden>
           <thead>
@@ -407,55 +408,67 @@ dialog p{color:var(--muted)}
   const engineCard = engineScene.closest('.engine');
   const engineMotion = window.matchMedia('(prefers-reduced-motion: no-preference)');
   const engineClip = engineScene.querySelector('.engine-motion-clip');
+  const motionControl = engineScene.querySelector('.engine-motion-control');
   let clipRequest;
   let clipUrl;
-  let auditRun = 0;
+  let clipFailed = false;
+  let sceneVisible = false;
+  let motionPaused = false;
+  let playback = 0;
 
-  function prepareEngineClip() {
+  function stopEngineMotion() {
+    playback += 1;
+    delete engineCard.dataset.running;
+    engineClip.removeAttribute('src');
+    if (clipUrl) URL.revokeObjectURL(clipUrl);
+    clipUrl = undefined;
+  }
+
+  async function updateEngineMotion() {
+    const available = engineMotion.matches && !clipFailed;
+    motionControl.hidden = !available;
+    if (!available || motionPaused || !sceneVisible || document.hidden) {
+      stopEngineMotion();
+      return;
+    }
+
+    const currentPlayback = ++playback;
     clipRequest ??= fetch(engineClip.dataset.src)
       .then(response => response.ok ? response.blob() : null)
       .catch(() => null);
-  }
-
-  const engineObserver = new IntersectionObserver(([entry]) => {
-    if (entry.intersectionRatio >= 0.8) playEngine();
-  }, {threshold: 0.8});
-
-  async function playEngine() {
-    engineObserver.disconnect();
-    if (!engineMotion.matches || !engineCard.hasAttribute('data-audit-complete')) return;
-    const currentRun = auditRun;
-    prepareEngineClip();
     const clip = await clipRequest;
-    if (currentRun !== auditRun) return;
-    if (clip) {
+    if (currentPlayback !== playback) return;
+    if (clip && !clipUrl) {
       clipUrl = URL.createObjectURL(clip);
       engineClip.src = clipUrl;
-      const loaded = await engineClip.decode().then(() => true, () => false);
-      if (currentRun !== auditRun) return;
-      engineCard.toggleAttribute('data-clip-fallback', !loaded);
-    } else {
+    }
+    const loaded = clip && await engineClip.decode().then(() => true, () => false);
+    if (currentPlayback !== playback) return;
+    if (!loaded) {
+      clipFailed = true;
       engineCard.dataset.clipFallback = '';
+      motionControl.hidden = true;
+      stopEngineMotion();
+      return;
     }
     engineCard.dataset.running = '';
   }
 
-  function configureEngineMotion() {
-    auditRun += 1;
-    engineObserver.disconnect();
-    engineClip.removeAttribute('src');
-    if (clipUrl) URL.revokeObjectURL(clipUrl);
-    clipUrl = undefined;
-    delete engineCard.dataset.running;
-    delete engineCard.dataset.clipFallback;
-    const ready = engineCard.hasAttribute('data-audit-complete') && engineMotion.matches;
-    if (ready) {
-      prepareEngineClip();
-      engineObserver.observe(engineScene);
-    }
-  }
+  const engineObserver = new IntersectionObserver(([entry]) => {
+    sceneVisible = entry.intersectionRatio >= 0.5;
+    updateEngineMotion();
+  }, {threshold: 0.5});
+  engineObserver.observe(engineScene);
 
-  engineMotion.addEventListener('change', configureEngineMotion);
+  motionControl.addEventListener('click', () => {
+    motionPaused = !motionPaused;
+    motionControl.toggleAttribute('data-paused', motionPaused);
+    motionControl.setAttribute('aria-label', motionPaused ? 'Play engine animation' : 'Pause engine animation');
+    motionControl.title = motionPaused ? 'Play animation' : 'Pause animation';
+    updateEngineMotion();
+  });
+  engineMotion.addEventListener('change', updateEngineMotion);
+  document.addEventListener('visibilitychange', updateEngineMotion);
 
   const auditForm = document.querySelector('#mini-audit-form');
   const auditResult = document.querySelector('#audit-result');
@@ -507,7 +520,6 @@ dialog p{color:var(--muted)}
     }
 
     engineCard.dataset.auditComplete = '';
-    configureEngineMotion();
   }
 
   function showAuditResult() {
