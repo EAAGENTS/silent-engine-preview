@@ -100,6 +100,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-result h3{font-weight:500;color:#e1d6c6}
 .audit-result h3 strong{color:#f3ece0;font-size:.92rem}
 .audit-result p{margin-top:.22rem;font-weight:650}
+.audit-result .audit-gain{font-size:.79rem;font-weight:500;color:#e1d6c6}
 .audit-result-arrow{color:#c69b62}
 .audit-result:focus-visible{outline:2px solid #a78755;outline-offset:-2px}
 .audit-result strong{color:#e8bf7d;font-size:1.18rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
@@ -111,10 +112,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-notification-copy{display:grid;gap:.13rem;overflow-wrap:anywhere}
 .engine-notification-copy strong{font-size:.7rem}
 .engine-notification-copy small{color:#cecece;font-size:.67rem}
-.engine-notification-amount{font-size:.91rem;font-weight:750;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;text-align:right}
+.engine-notification-amount{min-width:3.75rem;font-size:.91rem;font-weight:750;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;text-align:center}
 @container(max-width:335px){
 .engine-notification{grid-template-columns:auto minmax(0,1fr)}
-.engine-notification-amount{grid-column:2;text-align:left}
+.engine-notification-amount{grid-column:2;min-width:0;text-align:left}
 }
 .engine-idle-photo{display:block;width:100%;height:auto}
 .engine:not([data-audit-complete]) .engine-notification{visibility:hidden}
@@ -130,7 +131,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-motion-clip,.engine-motion-still{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
 .engine[data-running] .engine-motion-clip{opacity:1}
 .engine[data-clip-fallback][data-running] .engine-motion-still{animation:engine-payment-arrive .35s ease-out 3.65s both}
-.engine-multiplier{display:flex;align-items:center;justify-self:end;gap:.55rem;padding-inline-end:.55rem;opacity:0;color:#f5e4c9;font-weight:750;font-variant-numeric:tabular-nums}
+.engine-multiplier{display:flex;align-items:center;justify-self:end;gap:.55rem;padding-inline-end:1rem;opacity:0;color:#f5e4c9;font-weight:750;font-variant-numeric:tabular-nums}
 .engine-multiplier-gear{position:relative;display:grid;place-items:center;isolation:isolate;width:2.85rem;aspect-ratio:1}
 .engine-multiplier-gear::before,.engine-multiplier-gear::after{content:"";position:absolute;z-index:-1;border-radius:50%}
 .engine-multiplier-gear::before{inset:0;background:repeating-conic-gradient(#90764c 0deg 12deg,transparent 12deg 30deg);mask-image:radial-gradient(circle,#000 68%,transparent 71%)}
@@ -159,6 +160,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .section{padding-block:clamp(3.75rem,7vw,6.15rem)}
 .intro{display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:end;margin-bottom:2.1rem}
 .intro h2{margin-bottom:0}
+:is(.offers,.team) .intro{display:block}
+:is(.offers,.team) .intro>p{margin-top:.66rem;max-width:58ch}
 .intro>p,.section-copy{margin:0;color:var(--muted);max-width:48ch}
 .steps,.packages{display:grid;gap:1rem}
 .steps{grid-template-columns:repeat(5,minmax(0,1fr));padding:0;margin:0;list-style:none}
@@ -180,7 +183,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .packages .card li::before{content:"";width:.63rem;height:.37rem;margin-inline:.08rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.14rem) rotate(-45deg)}
 .card li+li{margin-top:.45rem}
 .card .btn{margin-top:auto;align-self:flex-start}
-.terms{margin:1rem 0 0;color:var(--muted);font-size:.94rem}
 .team{border-top:1px solid var(--rule)}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .founder{display:grid;grid-template-columns:clamp(64px,8vw,96px) minmax(0,1fr);align-items:center;gap:clamp(.85rem,2.2vw,1.5rem)}
@@ -232,7 +234,7 @@ dialog p{color:var(--muted)}
       <div class="actions">
         <button class="btn" type="button" data-book aria-describedby="expert-cta-person">Talk to an expert</button>
         <div class="expert-profile" id="expert-cta-person">
-          <img src="camilla-office.webp" width="42" height="42" alt="">
+          <img src="camilla-office-slate.webp" width="42" height="42" alt="">
           <div class="expert-profile-copy">
             <strong class="expert-name">Camilla de Casteja</strong>
             <span class="expert-role">Co-founder, Silent Engine</span>
@@ -264,19 +266,20 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-band engine-multiplier-band">
           <div class="engine-band-copy"><span class="engine-label">Engine</span><strong>Multiplier</strong></div>
-          <span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-gear"><span class="engine-multiplier-value"></span></span><span class="engine-multiplier-symbol" aria-hidden="true">×</span></span>
+          <span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value"></span></span></span>
         </div>
         <div class="engine-band engine-output-band">
-          <div class="engine-band-copy"><span class="engine-label">Output</span><strong>Extra revenue</strong></div>
-          <div class="engine-notification" role="img" aria-label="Estimated extra lifetime revenue">
+          <div class="engine-band-copy"><span class="engine-label">Output</span><strong>Projected revenue</strong></div>
+          <div class="engine-notification" role="img" aria-label="Projected total lifetime revenue">
             <span class="engine-notification-icon" aria-hidden="true">+</span>
-            <div class="engine-notification-copy"><strong>Extra revenue</strong><small>At the same spend</small></div>
+            <div class="engine-notification-copy"><strong>Projected revenue</strong><small>Lifetime total</small></div>
             <span class="engine-notification-amount"></span>
           </div>
         </div>
         <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-labelledby="audit-result-title" hidden>
           <h3 id="audit-result-title"><span><strong id="audit-current-ratio"></strong> today</span> <span class="audit-result-arrow">→</span> <span><strong id="audit-projected-ratio"></strong> projected in six months</span></h3>
           <p><strong id="audit-lift"></strong> <span id="audit-lift-copy"></span></p>
+          <p class="audit-gain" id="audit-gain"></p>
         </section>
         <div class="engine-scene">
           <div class="engine-art">
@@ -340,14 +343,13 @@ dialog p{color:var(--muted)}
           <button class="btn btn-outline" type="button" data-book="Engine Partner">Discuss the partnership</button>
         </article>
       </div>
-      <p class="terms">Fees exclude applicable taxes, HubSpot subscriptions, and media spend. Timing starts once we have the required access and inputs.</p>
     </div>
   </section>
   <section class="section team" id="founders" aria-labelledby="team-title">
     <div class="wrap">
       <div class="intro">
-        <div><p class="eyebrow">The team</p><h2 id="team-title">Meet the founders.</h2></div>
-        <p>Work directly with the two people reviewing your funnel and planning the next fix.</p>
+        <div><p class="eyebrow">Founder-led</p><h2 id="team-title">Meet the founders.</h2></div>
+        <p>Work directly with the founders, from the first audit through implementation.</p>
       </div>
       <div class="team-grid">
         <article class="card founder">
@@ -359,7 +361,7 @@ dialog p{color:var(--muted)}
           </div>
         </article>
         <article class="card founder">
-          <img class="founder-portrait" src="camilla-office.webp" width="400" height="400" loading="lazy" decoding="async" alt="">
+          <img class="founder-portrait" src="camilla-office-slate.webp" width="400" height="400" loading="lazy" decoding="async" alt="">
           <div>
             <h3>Camilla de Casteja</h3>
             <p>Co-founder, Silent Engine</p>
@@ -477,13 +479,13 @@ dialog p{color:var(--muted)}
     return (ratio >= 100 ? compactRatio : auditRatio).format(ratio);
   }
 
-  function updateEngineAmounts(spend, extraRevenue, projectedRatio) {
+  function updateEngineAmounts(spend, projectedRevenue, projectedRatio) {
     const spendLabel = engineCard.querySelector('.engine-input-band .engine-notification');
 
     spendLabel.querySelector('.engine-notification-amount').textContent = auditCompactCurrency.format(spend);
     spendLabel.setAttribute('aria-label', `Monthly marketing spend: ${auditCurrency.format(spend)}`);
-    outputNotice.querySelector('.engine-notification-amount').textContent = auditCompactCurrency.format(extraRevenue);
-    outputNotice.setAttribute('aria-label', `Estimated extra lifetime revenue at the same marketing spend: ${auditMoney(extraRevenue)}`);
+    outputNotice.querySelector('.engine-notification-amount').textContent = auditCompactCurrency.format(projectedRevenue);
+    outputNotice.setAttribute('aria-label', `Projected total lifetime revenue: ${auditMoney(projectedRevenue)}`);
     const multiplierValue = document.querySelector('.engine-multiplier-value');
     multiplierValue.textContent = formatMultiplier(projectedRatio);
     const multiplier = multiplierValue.closest('.engine-multiplier');
@@ -504,7 +506,8 @@ dialog p{color:var(--muted)}
     const sectorGap = customerRevenue > 0 ? Math.max(0, spend * sectorTarget - lifetimeRevenue) : 0;
     const extraRevenue = lifetimeRevenue * baseUplift + sectorGap;
     const currentRatio = lifetimeRevenue / spend;
-    const projectedRatio = (lifetimeRevenue + extraRevenue) / spend;
+    const projectedRevenue = lifetimeRevenue + extraRevenue;
+    const projectedRatio = projectedRevenue / spend;
     const canCompare = lifetimeRevenue > 0;
 
     document.querySelector('#audit-current-ratio').textContent = `${formatMultiplier(currentRatio)}×`;
@@ -516,11 +519,14 @@ dialog p{color:var(--muted)}
     document.querySelector('#audit-lift-copy').textContent = canCompare
       ? 'revenue per euro with Silent Engine'
       : 'extra revenue at the same spend';
+    const gain = document.querySelector('#audit-gain');
+    gain.textContent = `${auditMoney(extraRevenue)} extra lifetime revenue at the same spend`;
+    gain.hidden = !canCompare;
     auditResult.title = sectorGap > 0
       ? 'Six-month scenario with a 10% lift and the gap to the modeled sector target closed.'
       : 'Six-month scenario with a 10% lift.';
     auditResult.hidden = false;
-    updateEngineAmounts(spend, extraRevenue, projectedRatio);
+    updateEngineAmounts(spend, projectedRevenue, projectedRatio);
     auditResult.focus({preventScroll: true});
   }
 
