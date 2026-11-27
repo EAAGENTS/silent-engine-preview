@@ -147,14 +147,50 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @container(max-width:380px){.engine-scene{min-height:25rem}}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
 .engine-idle-photo{display:block;width:100%;height:auto}
-.engine-window{position:absolute;inset:46.7% 39.4% 28.9% 29.5%;clip-path:polygon(8% 0,91% 0,100% 18%,100% 84%,94% 100%,25% 100%,18% 88%,3% 87%,0 79%,0 17%);background:linear-gradient(130deg,#72727255 0%,transparent 40%),radial-gradient(ellipse at 38% 90%,#393939,#1b1b1b 65%,#0a0a0a)}
+.engine-window,.engine-glass{position:absolute;inset:46.7% 39.4% 28.9% 29.5%;clip-path:polygon(8% 0,91% 0,100% 18%,100% 84%,94% 100%,25% 100%,18% 88%,3% 87%,0 79%,0 17%);pointer-events:none}
+.engine-window{
+  background:
+    radial-gradient(ellipse at 39% 53%,#000 8%,transparent 46%),
+    radial-gradient(ellipse at 79% 81%,#000 8%,transparent 34%),
+    repeating-linear-gradient(90deg,transparent 0 18%,#ffffff09 19%,transparent 21%),
+    linear-gradient(147deg,#52534f 0%,#242625 47%,#0e0f0f 70%);
+  box-shadow:inset 0 4px 9px #000d,inset 0 -2px 6px #000a
+}
+.engine-glass{
+  background:
+    linear-gradient(124deg,transparent 12%,#eef5ed16 13%,#dfe9e80a 31%,transparent 46%),
+    linear-gradient(130deg,transparent 58%,#070a0b33 75%,#06070760 100%),
+    linear-gradient(176deg,#fff1 0%,transparent 23%);
+  box-shadow:inset 0 2px 2px #0009,inset 0 -1px 2px #d5ddd222
+}
 .engine-wheel{position:absolute;display:grid;place-items:center;width:15%;aspect-ratio:1;left:33.2%;top:46.9%;transform:rotate(9deg)}
 .engine-wheel-small{width:10.6%;left:47.8%;top:52.7%;transform:rotate(24deg)}
 .engine-wheel::before,.engine-wheel::after,.engine-wheel i{content:"";position:absolute;aspect-ratio:1;border-radius:50%}
-.engine-wheel::before{width:100%;background:repeating-conic-gradient(#a28352 0deg 11deg,transparent 11deg 20deg);mask-image:radial-gradient(circle,#000 68%,transparent 71%);filter:drop-shadow(0 0 1px #111)}
-.engine-wheel-small::before{background:repeating-conic-gradient(#ac8955 0deg 14deg,transparent 14deg 27.69deg)}
-.engine-wheel::after{width:84%;background:repeating-radial-gradient(circle,transparent 0 1px,#fff1 1px 2px),conic-gradient(from 24deg,#493b29,#bd9f69,#89724e,#382e21,#a98956,#493b29);border:1px solid #be9d68;box-shadow:0 0 4px #000;box-sizing:border-box}
-.engine-wheel i{z-index:1;width:34%;background:conic-gradient(from 15deg,#503e28,#b99b6c,#654f31,#ab8958,#503e28);border:1px solid #8e744c;box-shadow:0 0 0 2px #272727}
+.engine-wheel::before{
+  width:100%;
+  background:repeating-conic-gradient(#c5a36b 0deg 2deg,#7a603b 3deg 5deg,#b09867 6deg 10deg,#4e3e29 11deg 12deg,transparent 13deg 20deg);
+  mask-image:radial-gradient(circle,#000 67%,transparent 71%);
+  filter:drop-shadow(0 1px 1px #000)
+}
+.engine-wheel-small::before{background:repeating-conic-gradient(#c5a36b 0deg 2deg,#7a603b 3deg 6deg,#b09867 7deg 14deg,#4e3e29 15deg 16deg,transparent 17deg 27.69deg)}
+.engine-wheel::after{
+  width:84%;
+  background:
+    radial-gradient(circle,transparent 62%,#29221a88 70%,transparent 72%),
+    repeating-radial-gradient(circle,transparent 0 .65px,#f9e9bf19 .95px,#0002 1.3px,transparent 1.75px),
+    conic-gradient(from 19deg,#3a3023,#b99a62 16%,#e2c794 20%,#756043 34%,#4a3928 50%,#ad8c55 72%,#cdb588 76%,#3a3023);
+  border:1px solid #9b8058;
+  box-shadow:inset 0 0 0 1px #e2c69766,0 1px 3px 1px #000a;
+  box-sizing:border-box
+}
+.engine-wheel i{
+  z-index:1;width:34%;
+  background:
+    radial-gradient(circle,transparent 60%,#221c14a8 72%),
+    conic-gradient(from 15deg,#403327,#d0b180 23%,#64513a 42%,#483827 55%,#b59664 76%,#403327);
+  border:1px solid #8e744c;
+  box-shadow:0 0 0 2px #26221b,0 1px 3px 2px #0009
+}
 .engine-slot-pulse{position:absolute;top:38.25%;left:32.5%;width:5.5%;height:1.24%;border:1px solid #eaeaea;border-radius:25%;box-shadow:0 0 7px #fff7;opacity:0;pointer-events:none}
 .engine-motion-ready,.engine-motion-clip,.engine-motion-still{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
 .engine-motion-ready{opacity:1}
@@ -324,6 +360,7 @@ dialog p{color:var(--muted)}
             <div class="engine-window" aria-hidden="true"></div>
             <span class="engine-wheel" aria-hidden="true"><i></i></span>
             <span class="engine-wheel engine-wheel-small" aria-hidden="true"><i></i></span>
+            <span class="engine-glass" aria-hidden="true"></span>
             <img class="engine-motion-ready" src="engine-coin-ready.webp" width="560" height="374" alt="">
             <img class="engine-motion-clip" data-src="engine-audit-from-ready.webp" alt="">
             <img class="engine-motion-still" src="engine-five-coin-catch.webp" width="560" height="374" alt="">
