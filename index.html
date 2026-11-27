@@ -147,12 +147,12 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-next-step{display:flex;align-items:center;justify-content:space-between;gap:.4rem .75rem}
 .audit-next-step .audit-package{color:#ede5d7}
 @container(max-width:335px){.audit-next-step{align-items:flex-start;flex-direction:column}}
-.audit-call{--audit-call-highlight:#2fa05c;display:inline-block;flex:none;min-height:1.75rem;padding:.25rem .6rem;border:1px solid #eae7de;border-radius:5px;background:#eae7de;color:#222019;font-size:.77rem;font-weight:700;text-align:left}
-.audit-call:hover{--audit-call-highlight:#46b773;background:#fff;border-color:#fff}
+.audit-call{--audit-call-highlight:#8dd7a7;display:inline-block;flex:none;min-height:1.75rem;padding:.25rem .6rem;border:1px solid #eae7de;border-radius:5px;background:#eae7de;color:#000;font-size:.77rem;font-weight:800;text-align:left}
+.audit-call:hover{--audit-call-highlight:#a3e4b9;background:#fff;border-color:#fff}
 .audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
 .engine[data-results] .audit-call{animation:audit-call-highlight .9s ease-out 10s forwards}
 @keyframes audit-call-highlight{
-  45%,100%{background:var(--audit-call-highlight);border-color:#8dd7a7;color:#000}
+  45%,100%{background:var(--audit-call-highlight);border-color:#8dd7a7}
   45%{box-shadow:0 0 0 4px rgb(141 215 167 / .6),0 0 14px rgb(47 160 92 / .75)}
   100%{box-shadow:none}
 }
