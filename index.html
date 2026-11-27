@@ -230,6 +230,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @media(max-width:600px){#approach-title{font-size:clamp(1.125rem,5.5vw,1.85rem)}}
 :is(#approach,.offers,.team) .intro{display:block}
 :is(#approach,.offers,.team) .intro>p{margin-top:.66rem;max-width:58ch}
+:is(#approach,.offers) .intro>p{max-width:90ch}
 .intro>p,.section-copy{margin:0;color:var(--muted);max-width:48ch}
 .steps,.packages{display:grid;gap:1rem}
 .steps{grid-template-columns:repeat(5,minmax(0,1fr));padding:0;margin:0;list-style:none}
@@ -244,12 +245,13 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .offers{border-top:1px solid var(--rule)}
 .card{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:10px;padding:1.45rem;background:#ffffff}
 .card.featured{background:#eeefed;border-color:#939393}
+.packages .card{padding:clamp(.95rem,1.5vw,1.45rem)}
 .card .eyebrow{margin-bottom:.75rem;font-size:.73rem}
 .card .price{color:var(--ink);font-size:1.9rem;font-weight:750;letter-spacing:-.055em;line-height:1.2;margin:.65rem 0 .15rem}
 .card .term{font-size:.88rem;margin-bottom:1rem}
 .card .partner-cost-note{display:flex;align-items:flex-start;gap:.4rem;margin-top:.65rem;font-size:.875rem;line-height:1.35}
 .partner-cost-note svg{flex:none;margin-top:.08rem}
-.packages .card ul{list-style:none;padding:1rem 0 0;margin:1.15rem 0 1.5rem;border-top:1px solid var(--rule);font-size:.95rem}
+.packages .card ul{list-style:none;padding:1rem 0 0;margin:1.15rem 0 1.5rem;border-top:1px solid var(--rule);font-size:.875rem}
 .packages .card li{display:grid;grid-template-columns:1rem minmax(0,1fr);align-items:baseline;gap:.52rem}
 .packages .card li::before{content:"";width:.63rem;height:.37rem;margin-inline:.08rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.14rem) rotate(-45deg)}
 .card li+li{margin-top:.45rem}
@@ -468,7 +470,7 @@ dialog p{color:var(--muted)}
   <section class="section wrap" id="approach" aria-labelledby="approach-title">
     <div class="intro">
       <div><p class="eyebrow">Our approach</p><h2 id="approach-title">Five optimization steps</h2></div>
-      <p>We review your data and interview your team to map how traffic turns into revenue. Then we identify and implement the changes most likely to increase revenue from your existing marketing spend.</p>
+      <p>We review your data and interview your team to find where you can turn more traffic into revenue.</p>
     </div>
     <ol class="steps" role="list" aria-label="How the engine works">
       <li class="step"><span class="step-number" aria-hidden="true">1</span><h3>Capture demand</h3><p>Turn traffic into qualified leads.</p></li>
@@ -481,35 +483,35 @@ dialog p{color:var(--muted)}
   <section class="section offers" id="packages" aria-labelledby="packages-title">
     <div class="wrap">
       <div class="intro">
-        <div><p class="eyebrow">Packages &amp; pricing</p><h2 id="packages-title">Optimize your growth engine.</h2></div>
-        <p>Find the biggest opportunities, fix them, then keep improving conversions and scale revenue.</p>
+        <div><p class="eyebrow">Packages &amp; pricing</p><h2 id="packages-title">Build a better growth engine</h2></div>
+        <p>Find what’s costing you deals, fix it, and scale what works.</p>
       </div>
       <div class="packages">
         <article class="card">
           <p class="eyebrow">Diagnose</p><h3 id="pipeline-audit">Engine Audit</h3>
           <p class="price">€1.440</p><p class="term">Fixed fee · 2 weeks</p>
-          <p>Find where buyers drop off and decide what to fix first.</p>
-          <ul role="list"><li>Read-only review of one HubSpot portal and one conversion path</li><li>Check source tracking and deal progression</li><li>Pipeline map, up to three ranked fixes, and a readout</li></ul>
+          <p>Find where buyers drop off and what to fix first.</p>
+          <ul role="list"><li>1 HubSpot portal, 1 path (read-only)</li><li>Source tracking &amp; deal progression</li><li>Map, up to 3 ranked fixes &amp; readout</li></ul>
           <button class="btn btn-outline" type="button" data-book="Engine Audit">Discuss the audit</button>
         </article>
         <article class="card featured">
           <p class="eyebrow">Implement</p><h3 id="engine-sprint">Engine Sprint</h3>
           <p class="price">€5.940</p><p class="term">Fixed fee · 6 weeks</p>
-          <p>Fix and measure one priority workflow on the path to purchase.</p>
-          <ul role="list"><li>Agree on qualification and follow-up</li><li>Build one workflow and test the handoff</li><li>Shared baseline report and team walkthrough</li></ul>
+          <p>Fix one priority workflow and measure the impact.</p>
+          <ul role="list"><li>Lead qualification &amp; follow-up</li><li>One workflow &amp; handoff test</li><li>Baseline report &amp; walkthrough</li></ul>
           <button class="btn" type="button" data-book="Engine Sprint">Discuss the sprint</button>
         </article>
         <article class="card">
           <p class="eyebrow">Optimize</p><h3>Engine Partner</h3>
           <p class="price">€3.420</p><p class="term">Per month · 3-month initial term</p>
-          <p>Keep improving conversions and scaling revenue once the foundations are in place.</p>
+          <p>Build on the foundations to convert more and grow revenue.</p>
           <p class="partner-cost-note" title="Compared with an estimated €10.000 in monthly employer costs using a Dutch benchmark.">
             <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12H4a2 2 0 1 1 0-4M19 8V4l-4.5 2H12a7 7 0 0 0-4 12.7V21h3v-1.5h5V21h3v-3a7 7 0 0 0 1.5-2H23v-4h-2a7 7 0 0 0-2-4ZM10 9h4M18 11h.01"/>
             </svg>
-            <span><strong>~66% less</strong> than a full-time senior RevOps hire.</span>
+            <span>~66% less than a full-time senior RevOps hire.</span>
           </p>
-          <ul role="list"><li>Monthly pipeline and campaign review</li><li>One demand generation experiment per month</li><li>Ongoing workflow and reporting improvements</li></ul>
+          <ul role="list"><li>Monthly pipeline &amp; campaign review</li><li>1 demand generation test/month</li><li>Improve workflows &amp; reporting</li></ul>
           <button class="btn btn-outline" type="button" data-book="Engine Partner">Discuss the partnership</button>
         </article>
       </div>
