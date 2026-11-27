@@ -66,6 +66,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-comparison :is(thead,tbody) tr > :last-child{background:#2d281f;border-left:1px solid #524835}
 .engine-comparison thead th:last-child,.engine-comparison [data-engine-value="after-revenue"]{color:#f1cc91}
 .engine-comparison .engine-stat{display:inline-block}
+.audit-scale{display:grid;justify-items:center;gap:.02rem;margin-top:.1rem}
+.audit-scale label,.audit-scale output{color:#ddd0b8;font-size:.68rem;font-weight:500;line-height:1.18}
+.audit-scale input{width:100%;height:1.25rem;margin:0;accent-color:#bbc7b6;color-scheme:dark}
+.audit-scale input:focus-visible{outline:1px solid #bbc7b6;outline-offset:1px}
 .engine-comparison .engine-current{position:relative}
 .engine-comparison .engine-direction{position:absolute;z-index:1;left:100%;top:50%;width:1.35rem;transform:translate(-50%,-50%);background:#292620;border:1px solid #524835;border-radius:1rem;color:#e8bf7d;font-size:.76rem;line-height:1.1}
 @container(max-width:315px){
@@ -130,6 +134,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-result{margin:0;color:#f3ece0;font-size:.8rem;font-weight:400;line-height:1.3}
 .audit-result p{margin:0}
 .audit-result p + p{margin-top:.14rem}
+.audit-result .audit-method{color:#d6cdbf;font-size:.71rem;margin-top:.25rem}
 .audit-result .audit-package{margin-top:.32rem;color:#ded4c4}
 .audit-package a{text-underline-offset:.17em}
 .audit-result strong{color:#e8bf7d;font-size:.98rem;font-weight:750;font-variant-numeric:tabular-nums}
@@ -288,13 +293,13 @@ dialog p{color:var(--muted)}
               <span class="audit-select">
                 <select id="audit-annual-revenue">
                   <option value="">Select a range (optional)</option>
-                  <option value="under-10k" data-max="10000">Below €10k</option>
-                  <option value="10k-100k" data-min="10000" data-max="100000">€10k–€100k</option>
-                  <option value="100k-1m" data-min="100000" data-max="1000000">€100k–€1m</option>
-                  <option value="1m-5m" data-min="1000000" data-max="5000000">€1m–€5m</option>
-                  <option value="5m-10m" data-min="5000000" data-max="10000000">€5m–€10m</option>
-                  <option value="10m-100m" data-min="10000000" data-max="100000000">€10m–€100m</option>
-                  <option value="100m-plus" data-min="100000000">€100m or more</option>
+                  <option value="under-10k">Below €10k</option>
+                  <option value="10k-100k" data-min="10000">€10k–€100k</option>
+                  <option value="100k-1m" data-min="100000">€100k–€1m</option>
+                  <option value="1m-5m" data-min="1000000">€1m–€5m</option>
+                  <option value="5m-10m" data-min="5000000">€5m–€10m</option>
+                  <option value="10m-100m" data-min="10000000">€10m–€100m</option>
+                  <option value="100m-plus">€100m or more</option>
                 </select>
               </span>
             </label>
@@ -324,7 +329,18 @@ dialog p{color:var(--muted)}
             <tr><th scope="col" aria-label="Metric"></th><th scope="col" class="engine-current">Current<span class="engine-direction" aria-hidden="true">→</span></th><th scope="col">Potential</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row">Marketing spend</th><td data-engine-value="spend"><span class="engine-stat">—</span></td><td data-engine-value="spend"><span class="engine-stat">—</span></td></tr>
+            <tr>
+              <th scope="row">Marketing spend</th>
+              <td data-engine-value="spend"><span class="engine-stat">—</span></td>
+              <td data-engine-value="spend">
+                <span class="engine-stat">—</span>
+                <div class="audit-scale">
+                  <label for="audit-budget-scale">Try a larger budget</label>
+                  <input id="audit-budget-scale" type="range" min="1" max="10" step="0.1" value="1" aria-describedby="audit-budget-assumption">
+                  <output id="audit-budget-value" for="audit-budget-scale">1×</output>
+                </div>
+              </td>
+            </tr>
             <tr><th scope="row">Multiplier</th>
               <td><span class="engine-multiplier engine-multiplier-today" role="img" aria-label="Current revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
               <td><span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
@@ -337,7 +353,9 @@ dialog p{color:var(--muted)}
                 <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
                   <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
                   <p title="Assumes the same spend and acquisition results each month."><strong id="audit-annual-gain"></strong> extra lifetime revenue at the same annual spend</p>
-                  <p id="audit-spend-share" hidden></p>
+                  <p id="audit-scaled-gain" hidden><strong id="audit-scaled-amount"></strong> lifetime revenue from a year of added spend</p>
+                  <p class="audit-method" id="audit-budget-assumption">Added spend uses the same potential multiplier.</p>
+                  <p class="audit-method" id="audit-estimate-basis"></p>
                   <p class="audit-package">Find what to fix first with a <a href="#pipeline-audit">Pipeline Audit</a>.</p>
                 </section>
               </td>
@@ -505,8 +523,12 @@ dialog p{color:var(--muted)}
   const auditCustomers = document.querySelector('#audit-customers');
   const auditValue = document.querySelector('#audit-value');
   const auditSector = document.querySelector('#audit-sector');
-  const auditAnnualRevenue = document.querySelector('#audit-annual-revenue');
-  const auditSpendShare = document.querySelector('#audit-spend-share');
+  const auditBudgetScale = document.querySelector('#audit-budget-scale');
+  const auditBudgetValue = document.querySelector('#audit-budget-value');
+  const auditScaledGain = document.querySelector('#audit-scaled-gain');
+  const auditScaledAmount = document.querySelector('#audit-scaled-amount');
+  const auditEstimateBasis = document.querySelector('#audit-estimate-basis');
+  let budgetScenario;
   const auditSteps = [...auditForm.querySelectorAll('[data-audit-step]')];
   const auditInputs = auditSteps.map(step => step.querySelector('input, select'));
   const auditAction = auditForm.querySelector('.audit-action');
@@ -519,7 +541,7 @@ dialog p{color:var(--muted)}
   const auditRatio = new Intl.NumberFormat('en', {minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false});
   const compactRatio = new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: 0});
   const auditPercent = new Intl.NumberFormat('en', {style: 'percent', maximumFractionDigits: 0, useGrouping: false, signDisplay: 'exceptZero'});
-  const spendSharePercent = new Intl.NumberFormat('en', {style: 'percent', maximumFractionDigits: 1});
+  const budgetScaleFormat = new Intl.NumberFormat('en', {maximumFractionDigits: 1});
   const baseUplift = 0.10;
   // Illustrative targets for lifetime revenue per euro of marketing spend.
   const sectorTargets = new Map([
@@ -562,6 +584,24 @@ dialog p{color:var(--muted)}
     configureEngineMotion();
   }
 
+  function updateBudgetScenario() {
+    const scale = auditBudgetScale.valueAsNumber;
+    const {spend, projectedRevenue} = budgetScenario;
+    const monthlyBudget = spend * scale;
+    const addedLifetimeRevenue = projectedRevenue * (scale - 1) * 12;
+    const scaleLabel = `${budgetScaleFormat.format(scale)}×`;
+    const budgetLabel = monthlyBudget < 1000 ? auditMoney(monthlyBudget) : auditCompactCurrency.format(monthlyBudget);
+    auditBudgetScale.setAttribute('aria-valuetext', `${auditMoney(monthlyBudget)} per month, ${scaleLabel} current spend`);
+    auditBudgetValue.textContent = scale > 1 ? `${budgetLabel} · ${scaleLabel}` : scaleLabel;
+    auditBudgetValue.title = `${auditMoney(monthlyBudget)} per month`;
+    auditScaledGain.hidden = scale === 1;
+    auditScaledAmount.textContent = addedLifetimeRevenue >= 1
+      ? `+${auditMoney(addedLifetimeRevenue)}`
+      : auditMoney(addedLifetimeRevenue);
+  }
+
+  auditBudgetScale.addEventListener('input', updateBudgetScenario);
+
   function showAuditResult() {
     const spend = auditSpend.valueAsNumber;
     const customers = auditCustomers.valueAsNumber;
@@ -581,20 +621,12 @@ dialog p{color:var(--muted)}
     document.querySelector('#audit-annual-gain').textContent = annualGain >= 1
       ? `+${auditMoney(annualGain)}`
       : auditMoney(annualGain);
-    const annualRevenueBand = auditAnnualRevenue.selectedOptions[0];
-    auditSpendShare.hidden = !annualRevenueBand.value;
-    if (annualRevenueBand.value) {
-      const {min, max} = annualRevenueBand.dataset;
-      const annualSpend = spend * 12;
-      const low = max && spendSharePercent.format(annualSpend / Number(max));
-      const high = min && spendSharePercent.format(annualSpend / Number(min));
-      const share = low && high ? (low === high ? `about ${low}` : `roughly ${low}–${high}`)
-        : low ? `at least ${low}` : `up to ${high}`;
-      auditSpendShare.textContent = `At this pace, marketing spend is ${share} of annual company revenue.`;
-    }
-    auditResult.title = sectorGap > 0
-      ? 'This scenario combines a 10% lift with closing the gap to the modeled sector target.'
-      : 'This scenario assumes a 10% lift.';
+    budgetScenario = {spend, projectedRevenue};
+    auditBudgetScale.value = 1;
+    updateBudgetScenario();
+    auditEstimateBasis.textContent = sectorGap > 0
+      ? 'Estimate assumes a 10% lift and closes the gap to the modeled sector target.'
+      : 'Estimate assumes a 10% improvement at the same spend.';
     auditComparison.hidden = false;
     updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
     auditResult.focus({preventScroll: true});
