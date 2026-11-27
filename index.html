@@ -62,7 +62,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-results{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;overflow:auto}
 .engine[data-results] .engine-scene{visibility:hidden}
 .engine-comparison{width:100%;table-layout:fixed;border-collapse:collapse;border-top:1px solid #393939;font-variant-numeric:tabular-nums}
-.engine-comparison :is(th,td){padding:.43rem .56rem;text-align:center;border-bottom:1px solid #393939;line-height:1.26}
+.engine-comparison :is(th,td){padding:.33rem .56rem;text-align:center;border-bottom:1px solid #393939;line-height:1.26}
 .engine-comparison thead th{background:#262626;font-size:.8rem}
 .engine-comparison thead th:first-child{width:35%;color:#c5c5c5;text-align:left;font-weight:500}
 .engine-comparison tbody th{text-align:left;color:#ddd;font-size:.77rem;font-weight:600}
@@ -137,7 +137,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @media(forced-colors:active){
 .audit-select::after,.audit-sector-menu summary::after{border-color:ButtonText}
 }
-.audit-result,.audit-next-step{padding:.55rem .68rem;background:#2d281f;color:#f3ece0;font-size:.8rem;line-height:1.3;overflow-wrap:anywhere}
+.audit-result,.audit-next-step{padding:.46rem .68rem;background:#2d281f;color:#f3ece0;font-size:.8rem;line-height:1.3;overflow-wrap:anywhere}
 .audit-result p,.audit-next-step p{margin:0}
 .audit-result:focus{outline:none}
 .audit-result .audit-total{display:block;color:#e8bf7d;font-size:clamp(1.35rem,6.1cqw,1.95rem);line-height:1.05;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
@@ -147,8 +147,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-takeaways li::marker{color:#d7bd8c;font-size:.72em}
 .audit-result #audit-lift{color:#e8bf7d;font-weight:750}
 .audit-result .audit-method{margin-top:.2rem;color:#d6cdbf;font-size:.7rem}
+.audit-next-step{display:flex;align-items:center;justify-content:space-between;gap:.4rem .75rem}
 .audit-next-step .audit-package{color:#ede5d7}
-.audit-call{display:inline-block;margin-top:.34rem;min-height:1.75rem;padding:.25rem .6rem;border:1px solid #eae7de;border-radius:5px;background:#eae7de;color:#222019;font-size:.77rem;font-weight:700;text-align:left}
+@container(max-width:335px){.audit-next-step{align-items:flex-start;flex-direction:column}}
+.audit-call{display:inline-block;flex:none;min-height:1.75rem;padding:.25rem .6rem;border:1px solid #eae7de;border-radius:5px;background:#eae7de;color:#222019;font-size:.77rem;font-weight:700;text-align:left}
 .audit-call:hover{background:#fff;border-color:#fff}
 .audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
 .engine-scene{position:relative;display:grid;align-content:center;min-height:19.75rem;overflow:hidden;background:#242424}
@@ -251,7 +253,6 @@ dialog p{color:var(--muted)}
 .engine{padding:.97rem}
 .engine figcaption{margin-bottom:.68rem}
 .mini-audit{padding:.48rem .62rem;margin-bottom:.48rem}
-.engine-comparison :is(th,td){padding-block:.33rem}
 .engine-scene{background:#181818}
 .engine-art{width:min(100%,clamp(21rem,calc(150svh - 790px),24rem));margin:0 auto;transform:none;mask-image:linear-gradient(to right,transparent,#000 7% 93%,transparent)}
 }
@@ -354,7 +355,7 @@ dialog p{color:var(--muted)}
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
             <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> <span class="audit-total-unit">annual revenue</span></strong></p>
             <ul class="audit-takeaways">
-              <li>Estimated lifetime revenue at the same annual marketing spend.</li>
+              <li>Extra lifetime revenue at the same annual marketing spend.</li>
               <li id="audit-uplift">That’s <strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</li>
             </ul>
             <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customers’ results.</p>
@@ -377,7 +378,7 @@ dialog p{color:var(--muted)}
             </tbody>
           </table>
           <div class="audit-next-step">
-            <p class="audit-package">Find what to fix first in a two-week Pipeline Audit.</p>
+            <p class="audit-package">Find what to fix first<br>in a two-week Pipeline Audit.</p>
             <button class="audit-call" type="button" data-book data-book-discovery aria-describedby="expert-cta-person">Free discovery call</button>
           </div>
         </div>
