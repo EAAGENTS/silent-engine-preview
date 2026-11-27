@@ -350,7 +350,7 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-results" hidden>
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-            <p title="Assumes the same spend and acquisition results each month."><strong class="audit-total"><span id="audit-annual-gain"></span> revenue</strong><span class="audit-total-label">Extra lifetime revenue at the same annual marketing spend.</span></p>
+            <p title="Assumes the same marketing spend and improvement each month."><strong class="audit-total" id="audit-annual-gain"></strong><span class="audit-total-label">Extra lifetime revenue from 12 months of current marketing spend.</span></p>
             <p id="audit-uplift"><strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</p>
             <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customers’ results.</p>
           </section>
@@ -373,7 +373,7 @@ dialog p{color:var(--muted)}
           </table>
           <div class="audit-next-step">
             <p class="audit-package">Find what to fix first in a two-week Pipeline Audit.</p>
-            <button class="audit-call" type="button" data-book aria-describedby="expert-cta-person">Book a free discovery call</button>
+            <button class="audit-call" type="button" data-book data-book-discovery aria-describedby="expert-cta-person">Book a free discovery call</button>
           </div>
         </div>
       </div>
@@ -836,10 +836,12 @@ dialog p{color:var(--muted)}
   auditArrowLayout.observe(auditTitle);
 
   const bookingDialog = document.querySelector('dialog');
+  const bookingTitle = document.querySelector('#dialog-title');
   const packageNote = document.querySelector('#dialog-package');
   document.querySelectorAll('[data-book]').forEach((button) => {
     button.addEventListener('click', () => {
       const packageName = button.dataset.book;
+      bookingTitle.textContent = button.hasAttribute('data-book-discovery') ? button.textContent : 'Book a call';
       packageNote.hidden = !packageName;
       packageNote.textContent = packageName ? `Interested in ${packageName}? Mention it in your reply.` : '';
       bookingDialog.showModal();
