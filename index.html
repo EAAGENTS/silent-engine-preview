@@ -54,11 +54,17 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .expert-name{font:700 1.04rem/1.1 Georgia,serif}
 .expert-role{font-size:.77rem;color:var(--muted)}
 .text-link{font-size:.92rem;font-weight:700;text-decoration:none;padding:.7rem .25rem}
-.engine{container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:clamp(.95rem,2.4vw,1.7rem)}
-.engine figcaption h2{font-size:1rem;font-weight:750;letter-spacing:-.025em;margin:0 0 .62rem}
+.engine{position:relative;container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:clamp(.95rem,2.4vw,1.7rem)}
+.engine figcaption{margin-bottom:.8rem}
+.engine figcaption h2{font-size:1.16rem;font-weight:750;letter-spacing:-.025em;line-height:1.25;margin:0}
+.engine figcaption p{margin:.15rem 0 0;color:#c5c5c5;font-size:.77rem}
+@media(min-width:1200px){
+.engine::before,.engine::after{content:"";position:absolute;pointer-events:none}
+.engine::before{width:3.35rem;height:1.25rem;inset-inline-start:-3.85rem;top:1.28rem;border-bottom:1.5px solid #7e9078;border-radius:0 0 0 100%}
+.engine::after{width:.43rem;height:.43rem;inset-inline-start:-.82rem;top:2.31rem;border:solid #7e9078;border-width:1.5px 1.5px 0 0;transform:rotate(45deg)}
+}
 .engine-machine{position:relative;overflow:hidden;margin:0;border:1px solid #393939;border-radius:8px;background:#202020}
-.engine-results{position:absolute;inset:0;overflow:auto}
-.engine-results .engine-comparison{height:100%;border-top:0}
+.engine-results{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;overflow:auto}
 .engine[data-results] .engine-scene{visibility:hidden}
 .engine-comparison{width:100%;table-layout:fixed;border-collapse:collapse;border-top:1px solid #393939;font-variant-numeric:tabular-nums}
 .engine-comparison :is(th,td){padding:.43rem .56rem;text-align:center;border-bottom:1px solid #393939;line-height:1.26}
@@ -129,17 +135,19 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @media(forced-colors:active){
 .audit-select::after{border-color:ButtonText}
 }
-.engine-comparison tfoot td{padding:.52rem .65rem;background:#2d281f;text-align:left;border-bottom:0;overflow-wrap:anywhere}
-.audit-result{margin:0;color:#f3ece0;font-size:.8rem;font-weight:400;line-height:1.3}
-.audit-result p{margin:0}
-.audit-result p + p{margin-top:.14rem}
-.audit-result .audit-method{color:#d6cdbf;font-size:.71rem;margin-top:.25rem}
-.audit-result .audit-package{margin-top:.32rem;color:#ded4c4}
-.audit-package a{text-underline-offset:.17em}
-.audit-result strong{color:#e8bf7d;font-size:.98rem;font-weight:750;font-variant-numeric:tabular-nums}
-.audit-result:focus-visible{outline:2px solid #a78755;outline-offset:2px}
-.engine-scene{position:relative;display:grid;align-content:center;min-height:16.5rem;overflow:hidden;background:#242424}
-@container(max-width:380px){.engine-scene{min-height:22rem}}
+.audit-result,.audit-next-step{padding:.55rem .68rem;background:#2d281f;color:#f3ece0;font-size:.8rem;line-height:1.3;overflow-wrap:anywhere}
+.audit-result p,.audit-next-step p{margin:0}
+.audit-result:focus{outline:none}
+.audit-result .audit-total{display:block;color:#e8bf7d;font-size:clamp(1.65rem,7cqw,2.2rem);line-height:1.05;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.audit-result .audit-total-label{display:block;margin-top:.12rem}
+.audit-result #audit-uplift{margin-top:.25rem;color:#ded4c4;font-size:.75rem}
+.audit-result #audit-lift{color:#e8bf7d;font-weight:750}
+.audit-next-step .audit-method{color:#d6cdbf;font-size:.7rem}
+.audit-next-step .audit-package{margin-top:.28rem;color:#ede5d7}
+.audit-call{padding:.16rem 0 0;border:0;background:none;color:#c9d5c4;font-size:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:.17em;text-align:left}
+.audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
+.engine-scene{position:relative;display:grid;align-content:center;min-height:19.5rem;overflow:hidden;background:#242424}
+@container(max-width:380px){.engine-scene{min-height:25rem}}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
 .engine-idle-photo{display:block;width:100%;height:auto}
 .engine-window{position:absolute;inset:46.7% 39.4% 28.9% 29.5%;clip-path:polygon(8% 0,91% 0,100% 18%,100% 84%,94% 100%,25% 100%,18% 88%,3% 87%,0 79%,0 17%);background:linear-gradient(130deg,#72727255 0%,transparent 40%),radial-gradient(ellipse at 38% 90%,#393939,#1b1b1b 65%,#0a0a0a)}
@@ -236,7 +244,8 @@ dialog p{color:var(--muted)}
 .top{min-height:68px}
 .hero{padding-block:1.35rem}
 .engine{padding:.97rem}
-.engine figcaption h2{margin-bottom:.45rem}
+.engine figcaption{margin-bottom:.68rem}
+.engine::before,.engine::after{margin-top:-.46rem}
 .mini-audit{padding:.48rem .62rem;margin-bottom:.48rem}
 .engine-comparison :is(th,td){padding-block:.33rem}
 .engine-scene{background:#181818}
@@ -280,7 +289,7 @@ dialog p{color:var(--muted)}
       </div>
     </div>
     <figure class="engine">
-      <figcaption><h2 id="mini-audit-title">Audit your growth engine</h2></figcaption>
+      <figcaption><h2 id="mini-audit-title">Audit your growth engine</h2><p>5 questions · About 1 minute</p></figcaption>
       <div class="mini-audit">
         <form id="mini-audit-form" aria-labelledby="mini-audit-title" novalidate>
           <div class="audit-fields">
@@ -325,35 +334,32 @@ dialog p{color:var(--muted)}
           </div>
         </div>
         <div class="engine-results" hidden>
+          <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
+            <p title="Assumes the same spend and acquisition results each month."><strong class="audit-total" id="audit-annual-gain"></strong><span class="audit-total-label">extra lifetime revenue at the same annual spend</span></p>
+            <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
+          </section>
           <table class="engine-comparison" aria-label="Revenue engine before and after">
             <thead>
               <tr><th scope="col" aria-label="Metric"></th><th scope="col" class="engine-current">Current<span class="engine-direction" aria-hidden="true">→</span></th><th scope="col">Potential</th></tr>
             </thead>
             <tbody>
+              <tr><th scope="row">Engine multiplier</th>
+                <td><span class="engine-multiplier engine-multiplier-today" role="img" aria-label="Current revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
+                <td><span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
+              </tr>
               <tr>
                 <th scope="row">Marketing spend</th>
                 <td data-engine-value="spend"><span class="engine-stat">—</span></td>
                 <td data-engine-value="spend"><span class="engine-stat">—</span></td>
               </tr>
-              <tr><th scope="row">Multiplier</th>
-                <td><span class="engine-multiplier engine-multiplier-today" role="img" aria-label="Current revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
-                <td><span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
-              </tr>
               <tr><th scope="row">Lifetime revenue</th><td data-engine-value="today-revenue"><span class="engine-stat">—</span></td><td data-engine-value="after-revenue"><span class="engine-stat">—</span></td></tr>
             </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3">
-                  <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-                    <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
-                    <p title="Assumes the same spend and acquisition results each month."><strong id="audit-annual-gain"></strong> extra lifetime revenue at the same annual spend</p>
-                    <p class="audit-method" id="audit-estimate-basis"></p>
-                    <p class="audit-package">Find what to fix in a <a href="#pipeline-audit">two-week Pipeline Audit</a>. Implement it in a <a href="#engine-sprint">six-week Engine Sprint</a>.</p>
-                  </section>
-                </td>
-              </tr>
-            </tfoot>
           </table>
+          <div class="audit-next-step">
+            <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Draft wording · Based on sector benchmarks and our average customer results</p>
+            <p class="audit-package">Find what to fix first in a two-week Pipeline Audit.</p>
+            <button class="audit-call" type="button" data-book aria-describedby="expert-cta-person">Book a free discovery call</button>
+          </div>
         </div>
       </div>
     </figure>
@@ -510,7 +516,6 @@ dialog p{color:var(--muted)}
   const auditCustomers = document.querySelector('#audit-customers');
   const auditValue = document.querySelector('#audit-value');
   const auditSector = document.querySelector('#audit-sector');
-  const auditEstimateBasis = document.querySelector('#audit-estimate-basis');
   let auditPending = false;
   const auditSteps = [...auditForm.querySelectorAll('[data-audit-step]')];
   const auditInputs = auditSteps.map(step => step.querySelector('input, select'));
@@ -582,9 +587,6 @@ dialog p{color:var(--muted)}
     document.querySelector('#audit-annual-gain').textContent = annualGain >= 1
       ? `+${auditMoney(annualGain)}`
       : auditMoney(annualGain);
-    auditEstimateBasis.textContent = sectorTarget
-      ? 'Based on your inputs and a sector target.'
-      : 'Based on your inputs and an improvement scenario.';
     updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
 
     resetEngineMotion();
