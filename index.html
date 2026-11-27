@@ -42,9 +42,14 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .hero-benefits li::before{content:"";width:.63rem;height:.37rem;flex:none;margin-inline:.05rem .15rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.13rem) rotate(-45deg)}
 .hero{position:relative;display:grid;grid-template-columns:1.24fr 1fr;gap:clamp(2rem,6vw,5.4rem);align-items:start;padding-block:clamp(1.65rem,3vw,3rem)}
 .hero-audit{min-width:0}
-.client-project{margin-top:.75rem;padding:.85rem 1rem;border:1px solid var(--rule);border-radius:10px;background:#fff}
+@media(min-width:691px){
+.hero-copy,.hero-audit{display:flex;flex-direction:column;align-self:stretch}
+.hero-audit .engine{flex:1}
+.hero-copy .actions{margin-bottom:1rem}
+.hero-copy .client-project{margin-top:auto}
+}
+.client-project{margin-top:1rem;padding:.85rem 1rem;border:1px solid var(--rule);border-radius:10px;background:#fff}
 .client-project-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem .8rem}
-.client-project-heading .eyebrow{margin:0}
 .client-project-logo{display:block;width:110px;height:auto}
 .client-project>p{margin:.5rem 0 .65rem;font-size:.875rem;color:var(--muted)}
 .client-project-contact{display:flex;align-items:center;gap:.55rem;font-size:.81rem;line-height:1.3}
@@ -320,7 +325,7 @@ dialog p{color:var(--muted)}
 </header>
 <main id="main">
   <section class="wrap hero" aria-labelledby="headline">
-    <div>
+    <div class="hero-copy">
       <p class="eyebrow hero-eyebrow"><img class="hubspot-mark" src="hubspot-mark.png" width="27" height="27" alt="">HubSpot RevOps &amp; marketing agency</p>
       <h1 id="headline">Get more revenue from every euro spent on marketing.</h1>
       <ul class="hero-benefits" role="list">
@@ -338,6 +343,16 @@ dialog p{color:var(--muted)}
           </div>
         </div>
       </div>
+      <aside class="client-project" id="studytube-project" aria-label="Studytube project">
+        <div class="client-project-heading">
+          <img class="client-project-logo" src="studytube-logo.png" alt="Studytube" width="330" height="37">
+        </div>
+        <p>We’re working with Studytube to pinpoint which changes to its pipeline could increase revenue from its existing marketing budget and put those changes into practice.</p>
+        <div class="client-project-contact">
+          <img src="lennart-gijsen.jpeg" alt="" width="40" height="40">
+          <div><strong>Lennart Gijsen</strong><span>VP Marketing, <a href="https://www.studytube.com/">StudyTube.com</a></span></div>
+        </div>
+      </aside>
     </div>
     <div class="hero-audit">
     <figure class="engine">
@@ -448,17 +463,6 @@ dialog p{color:var(--muted)}
         </div>
       </div>
     </figure>
-    <aside class="client-project" aria-labelledby="studytube-project">
-      <div class="client-project-heading">
-        <h2 id="studytube-project" class="eyebrow">Client project</h2>
-        <img class="client-project-logo" src="studytube-logo.png" alt="Studytube" width="330" height="37">
-      </div>
-      <p>We’re auditing Studytube’s marketing to find where its existing spend could drive more revenue and build a plan for what to implement first.</p>
-      <div class="client-project-contact">
-        <img src="lennart-gijsen.jpeg" alt="" width="40" height="40">
-        <div><strong>Lennart Gijsen</strong><span>VP Marketing, Studytube</span></div>
-      </div>
-    </aside>
     </div>
   </section>
   <section class="audience-banner" aria-labelledby="audience-title">
