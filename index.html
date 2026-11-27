@@ -312,16 +312,29 @@ dialog p{color:var(--muted)}
       </div>
     </div>
     <figure class="engine">
-      <figcaption><h2 id="mini-audit-title">Audit your growth engine</h2><p>5 questions · About 1 minute</p></figcaption>
+      <figcaption><h2 id="mini-audit-title">Audit your growth engine</h2><p>6 questions · About 1 minute</p></figcaption>
       <div class="mini-audit">
         <form id="mini-audit-form" aria-labelledby="mini-audit-title" novalidate>
           <div class="audit-fields">
-            <label class="audit-field" data-audit-step><span>What’s your monthly marketing spend?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-spend" aria-label="What’s your monthly marketing spend in euros?" type="text" inputmode="decimal" data-audit-number data-min="0.01" data-max="1000000000" required placeholder=" "><span class="audit-example" aria-hidden="true"><span>5.000</span><span>10.000</span><span>20.000</span><span>50.000</span></span></span></label>
-            <label class="audit-field" data-audit-step hidden><span>How many new customers do you get from that spend?</span><input id="audit-customers" type="text" inputmode="numeric" data-audit-number data-min="0" data-max="10000000" required></label>
-            <label class="audit-field" data-audit-step hidden><span class="audit-lifetime-label">What’s your lifetime revenue per customer?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="What’s your lifetime revenue per customer in euros?" type="text" inputmode="decimal" data-audit-number data-min="0" data-max="1000000000" required></span></label>
+            <div class="audit-field" data-audit-step>
+              <span id="audit-product-question">What type of products do you sell?</span>
+              <details class="audit-sector-menu" id="audit-products" data-audit-choices data-placeholder="Select product types" data-choice-name="product types">
+                <summary aria-labelledby="audit-product-question audit-product-summary"><span id="audit-product-summary">Select product types</span></summary>
+                <div class="audit-sector-options" role="group" aria-labelledby="audit-product-question">
+                  <label><input type="checkbox" value="software"> <span>Software and SaaS</span></label>
+                  <label><input type="checkbox" value="digital"> <span>Digital content and downloads</span></label>
+                  <label><input type="checkbox" value="consumer-goods"> <span>Physical consumer goods</span></label>
+                  <label><input type="checkbox" value="equipment"> <span>Equipment and supplies</span></label>
+                  <label><input type="checkbox" value="professional-services"> <span>Consulting and professional services</span></label>
+                  <label><input type="checkbox" value="managed-services"> <span>Managed or outsourced services</span></label>
+                  <label><input type="checkbox" value="training"> <span>Training and education</span></label>
+                  <label><input type="checkbox" value="other"> <span>Other</span></label>
+                </div>
+              </details>
+            </div>
             <div class="audit-field" data-audit-step hidden>
               <span id="audit-sector-question">What sector do you sell to?</span>
-              <details class="audit-sector-menu" id="audit-sector">
+              <details class="audit-sector-menu" id="audit-sector" data-audit-choices data-placeholder="Select a sector" data-choice-name="sectors">
                 <summary aria-labelledby="audit-sector-question audit-sector-summary"><span id="audit-sector-summary">Select a sector</span></summary>
                 <div class="audit-sector-options" role="group" aria-labelledby="audit-sector-question">
                   <label><input type="checkbox" value="other"> <span>Other or mixed sectors</span></label>
@@ -330,10 +343,14 @@ dialog p{color:var(--muted)}
                   <label><input type="checkbox" value="financial"> <span>Financial services</span></label>
                   <label><input type="checkbox" value="healthcare"> <span>Healthcare</span></label>
                   <label><input type="checkbox" value="services"> <span>Professional services</span></label>
+                  <label><input type="checkbox" value="legal"> <span>Legal services</span></label>
                   <label><input type="checkbox" value="manufacturing"> <span>Manufacturing</span></label>
                 </div>
               </details>
             </div>
+            <label class="audit-field" data-audit-step hidden><span>What’s your monthly marketing spend?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-spend" aria-label="What’s your monthly marketing spend in euros?" type="text" inputmode="decimal" data-audit-number data-min="0.01" data-max="1000000000" required placeholder=" "><span class="audit-example" aria-hidden="true"><span>5.000</span><span>10.000</span><span>20.000</span><span>50.000</span></span></span></label>
+            <label class="audit-field" data-audit-step hidden><span>How many new customers do you get from that spend?</span><input id="audit-customers" type="text" inputmode="numeric" data-audit-number data-min="0" data-max="10000000" required></label>
+            <label class="audit-field" data-audit-step hidden><span class="audit-lifetime-label">What’s your lifetime revenue per customer?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="What’s your lifetime revenue per customer in euros?" type="text" inputmode="decimal" data-audit-number data-min="0" data-max="1000000000" required></span></label>
             <label class="audit-field" data-audit-step hidden>
               <span>What’s your monthly company revenue?</span>
               <span class="audit-select">
@@ -352,7 +369,7 @@ dialog p{color:var(--muted)}
             <button class="btn audit-action" type="submit" disabled>Next</button>
           </div>
           <div class="audit-progress">
-            <span id="audit-step-indicator" aria-live="polite">1 of 5</span>
+            <span id="audit-step-indicator" aria-live="polite">1 of 6</span>
             <button class="audit-back" type="button" hidden>Back</button>
           </div>
         </form>
@@ -579,8 +596,7 @@ dialog p{color:var(--muted)}
   const auditCustomers = document.querySelector('#audit-customers');
   const auditValue = document.querySelector('#audit-value');
   const auditSector = document.querySelector('#audit-sector');
-  const auditSectorSummary = document.querySelector('#audit-sector-summary');
-  const auditSectorChoices = [...auditSector.querySelectorAll('input')];
+  const auditChoiceMenus = [...auditForm.querySelectorAll('[data-audit-choices]')];
   const auditNumberInputs = [...auditForm.querySelectorAll('[data-audit-number]')];
   let auditPending = false;
   const auditSteps = [...auditForm.querySelectorAll('[data-audit-step]')];
@@ -603,6 +619,7 @@ dialog p{color:var(--muted)}
     ['financial', 3],
     ['healthcare', 2],
     ['services', 2.5],
+    ['legal', 2.5],
     ['manufacturing', 2],
   ]);
 
@@ -659,30 +676,29 @@ dialog p{color:var(--muted)}
     });
   });
 
-  function selectedSectors() {
-    return auditSectorChoices.filter(input => input.checked);
-  }
-
-  function updateSectorSummary() {
-    const selected = selectedSectors();
-    auditSectorSummary.textContent = selected.length > 1
-      ? `${selected.length} sectors selected`
-      : selected[0]?.nextElementSibling.textContent ?? 'Select a sector';
+  function updateAuditChoiceSummaries() {
+    for (const menu of auditChoiceMenus) {
+      const selected = menu.querySelectorAll('input:checked');
+      menu.querySelector('summary span').textContent = selected.length > 1
+        ? `${selected.length} ${menu.dataset.choiceName} selected`
+        : selected[0]?.nextElementSibling.textContent ?? menu.dataset.placeholder;
+    }
   }
 
   function auditStepIsValid(input) {
-    return input === auditSector.firstElementChild
-      ? selectedSectors().length > 0
-      : input.validity.valid;
+    const menu = input.closest('[data-audit-choices]');
+    return menu ? Boolean(menu.querySelector('input:checked')) : input.validity.valid;
   }
 
-  auditSector.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && auditSector.open) {
-      event.preventDefault();
-      auditSector.open = false;
-      auditSector.firstElementChild.focus();
-    }
-  });
+  for (const menu of auditChoiceMenus) {
+    menu.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.open) {
+        event.preventDefault();
+        menu.open = false;
+        menu.querySelector('summary').focus();
+      }
+    });
+  }
 
   function auditMoney(amount) {
     return amount > 0 && amount < 1 ? '<€1' : auditCurrency.format(amount);
@@ -718,7 +734,8 @@ dialog p{color:var(--muted)}
     const customerRevenue = readAuditNumber(auditValue);
 
     const lifetimeRevenue = customers * customerRevenue;
-    const selectedTargets = selectedSectors().map(input => sectorTargets.get(input.value)).filter(Boolean);
+    const selectedTargets = [...auditSector.querySelectorAll('input:checked')]
+      .map(input => sectorTargets.get(input.value)).filter(Boolean);
     const sectorTarget = selectedTargets.length
       ? selectedTargets.reduce((sum, target) => sum + target, 0) / selectedTargets.length
       : 0;
@@ -776,7 +793,7 @@ dialog p{color:var(--muted)}
   }
 
   function showAuditStep(index) {
-    auditSector.open = false;
+    for (const menu of auditChoiceMenus) menu.open = false;
     auditStep = index;
     auditSteps.forEach((step, position) => { step.hidden = position !== index; });
     auditStepIndicator.textContent = `${index + 1} of ${auditSteps.length}`;
@@ -794,7 +811,7 @@ dialog p{color:var(--muted)}
   }
 
   auditForm.addEventListener('input', () => {
-    updateSectorSummary();
+    updateAuditChoiceSummaries();
     if (engineCard.hasAttribute('data-audit-complete')) clearAuditResult();
     updateAuditAction();
   });
@@ -812,7 +829,7 @@ dialog p{color:var(--muted)}
     if (auditStep === auditSteps.length - 1 && !auditResults.hidden) {
       auditForm.reset();
       auditNumberInputs.forEach(input => input.setCustomValidity(''));
-      updateSectorSummary();
+      updateAuditChoiceSummaries();
       clearAuditResult();
       showAuditStep(0);
       auditForm.scrollIntoView({block: 'nearest'});
