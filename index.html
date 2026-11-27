@@ -41,8 +41,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .hero-benefits li{display:flex;align-items:center;gap:.65rem;font-size:1.08rem;font-weight:650}
 .hero-benefits li::before{content:"";width:.63rem;height:.37rem;flex:none;margin-inline:.05rem .15rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.13rem) rotate(-45deg)}
 .lead{color:var(--muted);font-size:1rem;max-width:52ch;margin-bottom:1.4rem}
-.hero-audit-arrow{display:none}
-@media(min-width:1200px){.hero-audit-arrow{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}}
 .hero{position:relative;display:grid;grid-template-columns:1.24fr 1fr;gap:clamp(2rem,6vw,5.4rem);align-items:center;padding-block:clamp(1.65rem,3vw,3rem)}
 .hero > div:first-child{align-self:start;margin-top:clamp(1rem,3.8vw,3.5rem)}
 .hero h1{font-size:clamp(2.55rem,5vw,4.3rem);text-wrap:balance}
@@ -143,6 +141,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-result p,.audit-next-step p{margin:0}
 .audit-result:focus{outline:none}
 .audit-result .audit-total{display:block;color:#e8bf7d;font-size:clamp(1.35rem,6.1cqw,1.95rem);line-height:1.05;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.audit-total-unit{font-size:.56em;letter-spacing:-.015em;font-weight:650;color:#f3ece0;white-space:nowrap}
 .audit-result .audit-total-label{display:block;margin-top:.12rem}
 .audit-result #audit-uplift{margin-top:.25rem;color:#ded4c4;font-size:.75rem}
 .audit-result #audit-lift{color:#e8bf7d;font-weight:750}
@@ -272,7 +271,7 @@ dialog p{color:var(--muted)}
   <section class="wrap hero" aria-labelledby="headline">
     <div>
       <p class="eyebrow hero-eyebrow"><img class="hubspot-mark" src="hubspot-mark.png" width="27" height="27" alt="">HubSpot RevOps &amp; marketing</p>
-      <h1 id="headline">Get more <span id="hero-revenue">revenue</span> from every euro spent on marketing.</h1>
+      <h1 id="headline">Get more revenue from every euro spent on marketing.</h1>
       <ul class="hero-benefits" role="list">
         <li>Capture demand</li>
         <li>Streamline your pipeline</li>
@@ -350,7 +349,7 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-results" hidden>
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-            <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> annualized revenue</strong><span class="audit-total-label">At the same annual marketing spend.</span></p>
+            <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> <span class="audit-total-unit">annual revenue</span></strong><span class="audit-total-label">Estimated lifetime revenue at the same annual marketing spend.</span></p>
             <p id="audit-uplift"><strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</p>
             <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customers’ results.</p>
           </section>
@@ -378,7 +377,6 @@ dialog p{color:var(--muted)}
         </div>
       </div>
     </figure>
-    <canvas class="hero-audit-arrow" aria-hidden="true"></canvas>
   </section>
   <section class="section wrap" id="approach" aria-labelledby="approach-title">
     <div class="intro">
@@ -784,56 +782,6 @@ dialog p{color:var(--muted)}
     showAuditResult();
   });
   updateAuditAction();
-
-  const hero = document.querySelector('.hero');
-  const revenueWord = document.querySelector('#hero-revenue');
-  const auditTitle = document.querySelector('#mini-audit-title');
-  const auditArrow = hero.querySelector('.hero-audit-arrow');
-
-  function drawAuditArrow() {
-    if (!auditArrow.offsetWidth) return;
-
-    const bounds = hero.getBoundingClientRect();
-    const word = revenueWord.getBoundingClientRect();
-    const heading = auditTitle.getBoundingClientRect();
-    const panel = engineCard.getBoundingClientRect();
-    const pixelRatio = window.devicePixelRatio || 1;
-    auditArrow.width = Math.round(bounds.width * pixelRatio);
-    auditArrow.height = Math.round(bounds.height * pixelRatio);
-    const ctx = auditArrow.getContext('2d');
-    if (!ctx) return;
-
-    ctx.scale(pixelRatio, pixelRatio);
-    ctx.strokeStyle = '#778472';
-    ctx.lineWidth = 1.6;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-
-    const startX = word.right - bounds.left - 5;
-    const startY = word.top - bounds.top + word.height * 0.14;
-    const endX = panel.left - bounds.left - 30;
-    const endY = heading.top - bounds.top + heading.height / 2;
-    const controlX = endX - 45;
-    const controlY = endY - 13;
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    ctx.bezierCurveTo(startX + 20, startY - 66, controlX, controlY, endX, endY);
-
-    const direction = Math.atan2(endY - controlY, endX - controlX);
-    const headLength = 10;
-    ctx.moveTo(endX - headLength * Math.cos(direction - 0.57), endY - headLength * Math.sin(direction - 0.57));
-    ctx.lineTo(endX, endY);
-    ctx.lineTo(endX - headLength * Math.cos(direction + 0.57), endY - headLength * Math.sin(direction + 0.57));
-    ctx.stroke();
-    ctx.strokeStyle = '#4e5c4a70';
-    ctx.lineWidth = .75;
-    ctx.setLineDash([.6, 1.8]);
-    ctx.stroke();
-  }
-
-  const auditArrowLayout = new ResizeObserver(drawAuditArrow);
-  auditArrowLayout.observe(hero);
-  auditArrowLayout.observe(auditTitle);
 
   const bookingDialog = document.querySelector('dialog');
   const bookingTitle = document.querySelector('#dialog-title');
