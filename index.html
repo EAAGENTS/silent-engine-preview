@@ -236,9 +236,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .intro{display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:end;margin-bottom:2.1rem}
 .intro h2{margin-bottom:0}
 #approach,.offers,.team{padding-top:0}
-.section-intro-band{background:#efefec;border-block:1px solid var(--rule);padding-block:clamp(1.35rem,2.8vw,2.4rem)}
+#approach{margin-top:clamp(.75rem,1.6vw,1.5rem)}
+.section-intro-band{background:#e6eae4;border-block:1px solid var(--rule);padding-block:clamp(1.75rem,3.2vw,2.8rem)}
 .section-intro-band .intro{margin-bottom:0}
-.section-intro-band+.wrap{margin-inline:auto;margin-top:clamp(1.4rem,3vw,2.2rem)}
+.section-intro-band+.wrap{margin-inline:auto;margin-top:clamp(1.75rem,3.4vw,2.65rem)}
 #approach-title{font-size:clamp(1.65rem,3.7vw,3.45rem)}
 @media(max-width:600px){#approach-title{font-size:clamp(1.125rem,5.5vw,1.85rem)}}
 :is(#approach,.offers,.team) .intro{display:block}
@@ -255,7 +256,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .steps .step:not(:last-child)::after{content:"";position:absolute;right:.08rem;top:3.25rem;width:6px;height:10px;background:#737373;clip-path:polygon(0 8%,15% 0,100% 50%,15% 100%,0 92%,80% 50%)}
 }
 .step p,.card>p{color:var(--muted);margin-bottom:0}
-.offers{margin-top:clamp(1.5rem,3.5vw,3rem)}
 .card{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:10px;padding:1.45rem;background:#ffffff}
 .card.featured{background:#eeefed;border-color:#939393}
 .packages .card{padding:clamp(.95rem,1.5vw,1.45rem)}
@@ -477,34 +477,6 @@ dialog p{color:var(--muted)}
       <li class="step"><span class="step-number" aria-hidden="true">5</span><h3>Scale revenue</h3><p>Double down on what wins customers.</p></li>
     </ol>
   </section>
-  <section class="audience-banner" aria-labelledby="audience-title">
-    <div class="wrap">
-      <div class="audience-logos">
-        <h2 id="audience-title" class="eyebrow">Meet Our Customers</h2>
-        <span class="audience-logo-note" id="sample-logos-label">Sample logos</span>
-      </div>
-      <div class="brand-strip" id="sample-logos">
-        <div class="brand-strip-track">
-          <ul class="brand-strip-group" aria-labelledby="sample-logos-label">
-            <li>Nivora</li>
-            <li>Ostra Vale</li>
-            <li>Brindle Lane</li>
-            <li>Vennridge</li>
-            <li>North Parcel</li>
-            <li>Grove Relay</li>
-          </ul>
-          <ul class="brand-strip-group brand-strip-copy" aria-hidden="true">
-            <li>Nivora</li>
-            <li>Ostra Vale</li>
-            <li>Brindle Lane</li>
-            <li>Vennridge</li>
-            <li>North Parcel</li>
-            <li>Grove Relay</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
   <section class="section offers" id="packages" aria-labelledby="packages-title">
     <div class="section-intro-band">
       <div class="wrap intro">
@@ -580,6 +552,34 @@ dialog p{color:var(--muted)}
         <p class="section-copy">Bring one recent campaign, demo flow, or signup path. We’ll talk through where buyers get stuck and whether the audit fits.</p>
       </div>
       <button class="btn btn-light" type="button" data-book>Book a call</button>
+    </div>
+  </section>
+  <section class="audience-banner" aria-labelledby="audience-title">
+    <div class="wrap">
+      <div class="audience-logos">
+        <h2 id="audience-title" class="eyebrow">Meet Our Customers</h2>
+        <span class="audience-logo-note" id="sample-logos-label">Sample logos</span>
+      </div>
+      <div class="brand-strip" id="sample-logos">
+        <div class="brand-strip-track">
+          <ul class="brand-strip-group" aria-labelledby="sample-logos-label">
+            <li>Nivora</li>
+            <li>Ostra Vale</li>
+            <li>Brindle Lane</li>
+            <li>Vennridge</li>
+            <li>North Parcel</li>
+            <li>Grove Relay</li>
+          </ul>
+          <ul class="brand-strip-group brand-strip-copy" aria-hidden="true">
+            <li>Nivora</li>
+            <li>Ostra Vale</li>
+            <li>Brindle Lane</li>
+            <li>Vennridge</li>
+            <li>North Parcel</li>
+            <li>Grove Relay</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </main>
