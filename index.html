@@ -55,6 +55,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine{position:relative;container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:clamp(.95rem,2.4vw,1.7rem)}
 .engine figcaption{margin-bottom:.8rem}
 .engine figcaption h2{font-size:1.16rem;font-weight:750;letter-spacing:-.025em;line-height:1.25;margin:0}
+.audit-time{color:#c5c5c5;font-size:.8em;font-weight:500;letter-spacing:normal;white-space:nowrap}
 .engine-machine{position:relative;overflow:hidden;margin:0;border:1px solid #393939;border-radius:8px;background:#202020}
 .engine-results{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;overflow:auto}
 .engine[data-results] .engine-scene{visibility:hidden}
@@ -326,7 +327,7 @@ dialog p{color:var(--muted)}
       </div>
     </div>
     <figure class="engine">
-      <figcaption><h2 id="mini-audit-title">Audit your growth engine in one minute</h2></figcaption>
+      <figcaption><h2 id="mini-audit-title">Your revenue potential <span class="audit-time"><span aria-hidden="true">·</span> In one minute</span></h2></figcaption>
       <div class="mini-audit">
         <form id="mini-audit-form" aria-labelledby="mini-audit-title" novalidate>
           <div class="audit-fields">
