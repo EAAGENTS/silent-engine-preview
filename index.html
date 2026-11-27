@@ -112,8 +112,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 }
 .mini-audit .audit-action{min-width:6.3rem;min-height:34px;padding:.28rem .65rem;font-size:.82rem;line-height:1.16;background:#3a3a37;border-color:#777;color:#f4f4f2}
 .mini-audit .audit-action:hover{background:#4a4a46}
-.mini-audit .audit-action[data-ready]{background:#2fa05c;border-color:#2fa05c;color:#101b14}
-.mini-audit .audit-action[data-ready]:hover{background:#38aa66}
+.mini-audit .audit-action[data-ready]{background:#bbc7b6;border-color:#bbc7b6;color:#101b14}
+.mini-audit .audit-action[data-ready]:hover{background:#c7d1c3}
 .mini-audit .audit-action:disabled{background:#292929;border-color:#535353;color:#b2b2b0;cursor:default}
 .mini-audit :is(input,select,button):focus-visible,.audit-result:focus-visible{outline-color:#f0f0ee}
 .engine-comparison tfoot td{padding:.52rem .65rem;background:#2d281f;text-align:left;border-bottom:0;overflow-wrap:anywhere}
@@ -136,7 +136,9 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-wheel::after{width:84%;background:repeating-radial-gradient(circle,transparent 0 1px,#fff1 1px 2px),conic-gradient(from 24deg,#493b29,#bd9f69,#89724e,#382e21,#a98956,#493b29);border:1px solid #be9d68;box-shadow:0 0 4px #000;box-sizing:border-box}
 .engine-wheel i{z-index:1;width:34%;background:conic-gradient(from 15deg,#503e28,#b99b6c,#654f31,#ab8958,#503e28);border:1px solid #8e744c;box-shadow:0 0 0 2px #272727}
 .engine-slot-pulse{position:absolute;top:38.25%;left:32.5%;width:5.5%;height:1.24%;border:1px solid #eaeaea;border-radius:25%;box-shadow:0 0 7px #fff7;opacity:0;pointer-events:none}
-.engine-motion-clip,.engine-motion-still{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
+.engine-motion-ready,.engine-motion-clip,.engine-motion-still{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
+.engine-motion-ready{opacity:1}
+.engine[data-running] .engine-motion-ready,.engine[data-clip-fallback] .engine-motion-ready{visibility:hidden}
 .engine[data-running] .engine-motion-clip{opacity:1}
 .engine[data-clip-fallback][data-audit-complete] .engine-motion-still{opacity:1}
 .engine-multiplier{display:flex;align-items:center;justify-content:center;gap:.27rem;color:#f5e4c9;font-weight:750;font-variant-numeric:tabular-nums}
@@ -151,13 +153,16 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-multiplier-value{line-height:1;text-align:center;white-space:nowrap;font-size:.75rem}
 .engine-multiplier-symbol{font-size:1.03rem;line-height:1;color:#dfbc83}
 @media(prefers-reduced-motion:no-preference){
-.engine[data-running] .engine-slot-pulse{animation:engine-slot-scan .42s ease-out 1.56s both}
-.engine[data-running] .engine-wheel{animation:engine-turn 2.2s ease-in-out 2s both}
-.engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 2.2s ease-in-out 2s both}
+.engine-motion-ready{animation:engine-ready-arrive .65s ease-out 2s both}
+.engine[data-running] .engine-slot-pulse{animation:engine-slot-scan .42s ease-out .40s both}
+.engine[data-running] .engine-wheel{animation:engine-turn 2.2s ease-in-out .84s both}
+.engine[data-running] .engine-wheel-small{animation:engine-turn-reverse 2.2s ease-in-out .84s both}
 }
 @media(prefers-reduced-motion:reduce){
+.engine[data-audit-complete] .engine-motion-ready{visibility:hidden}
 .engine[data-audit-complete] .engine-motion-still{opacity:1}
 }
+@keyframes engine-ready-arrive{from{opacity:0;transform:translate(-12%,-5%)}to{opacity:1;transform:none}}
 @keyframes engine-slot-scan{0%,100%{opacity:0}42%{opacity:.66}}
 @keyframes engine-turn{from{transform:rotate(9deg)}to{transform:rotate(369deg)}}
 @keyframes engine-turn-reverse{from{transform:rotate(24deg)}to{transform:rotate(-336deg)}}
@@ -267,7 +272,7 @@ dialog p{color:var(--muted)}
             <label class="audit-field" data-audit-step><span>Monthly marketing spend</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-spend" aria-label="Monthly marketing spend in euros" type="number" inputmode="decimal" required min="0.01" max="1000000000" step="0.01" placeholder=" "><span class="audit-example" aria-hidden="true"><span>5,000</span><span>10,000</span><span>20,000</span><span>50,000</span></span></span></label>
             <label class="audit-field" data-audit-step hidden><span>New customers from spend</span><input id="audit-customers" aria-label="New customers from spend" type="number" inputmode="numeric" required min="0" max="10000000" step="1"></label>
             <label class="audit-field" data-audit-step hidden><span class="audit-lifetime-label">Lifetime revenue per customer</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="Lifetime revenue per customer in euros" type="number" inputmode="decimal" required min="0" max="1000000000" step="0.01"></span></label>
-            <label class="audit-field" data-audit-step hidden><span>Your sector</span><select id="audit-sector"><option value="other" selected>Other or mixed sectors</option><option value="technology">Technology and SaaS</option><option value="retail">Retail and ecommerce</option><option value="financial">Financial services</option><option value="healthcare">Healthcare</option><option value="services">Professional services</option><option value="manufacturing">Manufacturing</option></select></label>
+            <label class="audit-field" data-audit-step hidden><span>What sector do you sell to?</span><select id="audit-sector"><option value="other" selected>Other or mixed sectors</option><option value="technology">Technology and SaaS</option><option value="retail">Retail and ecommerce</option><option value="financial">Financial services</option><option value="healthcare">Healthcare</option><option value="services">Professional services</option><option value="manufacturing">Manufacturing</option></select></label>
             <button class="btn audit-action" type="submit" disabled>Next</button>
           </div>
           <div class="audit-progress">
@@ -284,7 +289,8 @@ dialog p{color:var(--muted)}
             <div class="engine-window" aria-hidden="true"></div>
             <span class="engine-wheel" aria-hidden="true"><i></i></span>
             <span class="engine-wheel engine-wheel-small" aria-hidden="true"><i></i></span>
-            <img class="engine-motion-clip" data-src="engine-audit-once.webp" alt="">
+            <img class="engine-motion-ready" src="engine-coin-ready.webp" width="560" height="374" alt="">
+            <img class="engine-motion-clip" data-src="engine-audit-from-ready.webp" alt="">
             <img class="engine-motion-still" src="engine-five-coin-catch.webp" width="560" height="374" alt="">
           </div>
         </div>
@@ -304,7 +310,7 @@ dialog p{color:var(--muted)}
             <tr>
               <td colspan="3">
                 <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-                  <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per euro spent</p>
+                  <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
                   <p title="Assumes the same spend and acquisition results each month."><strong id="audit-annual-gain"></strong> extra lifetime revenue at the same annual spend</p>
                   <p class="audit-package">Find what to fix first with a <a href="#pipeline-audit">Pipeline Audit</a>.</p>
                 </section>
@@ -542,7 +548,10 @@ dialog p{color:var(--muted)}
     const lift = document.querySelector('#audit-lift');
     lift.textContent = canCompare ? auditPercent.format(extraRevenue / lifetimeRevenue) : '';
     document.querySelector('#audit-uplift').hidden = !canCompare;
-    document.querySelector('#audit-annual-gain').textContent = auditMoney(extraRevenue * 12);
+    const annualGain = extraRevenue * 12;
+    document.querySelector('#audit-annual-gain').textContent = annualGain >= 1
+      ? `+${auditMoney(annualGain)}`
+      : auditMoney(annualGain);
     auditResult.title = sectorGap > 0
       ? 'This scenario combines a 10% lift with closing the gap to the modeled sector target.'
       : 'This scenario assumes a 10% lift.';
