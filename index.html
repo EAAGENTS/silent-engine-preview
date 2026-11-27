@@ -395,9 +395,9 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-results" hidden>
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-            <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> <span class="audit-total-unit">annual revenue potential</span></strong></p>
+            <p title="Extra lifetime revenue from customers acquired with one month of marketing spend."><strong class="audit-total"><span id="audit-monthly-gain"></span> <span class="audit-total-unit">monthly revenue potential</span></strong></p>
             <ul class="audit-takeaways">
-              <li>That’s extra revenue at the same annual marketing spend.</li>
+              <li>That’s extra revenue at the same monthly marketing spend.</li>
               <li id="audit-uplift">That’s <strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</li>
               <li title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our customers’ results.</li>
             </ul>
@@ -754,9 +754,8 @@ dialog p{color:var(--muted)}
     const lift = document.querySelector('#audit-lift');
     lift.textContent = canCompare ? auditPercent.format(extraRevenue / lifetimeRevenue) : '';
     document.querySelector('#audit-uplift').hidden = !canCompare;
-    const annualGain = extraRevenue * 12;
-    const headlineAmount = auditMoney(annualGain).replace(/^€\s+/, '€');
-    document.querySelector('#audit-annual-gain').textContent = annualGain >= 1
+    const headlineAmount = auditMoney(extraRevenue).replace(/^€\s+/, '€');
+    document.querySelector('#audit-monthly-gain').textContent = extraRevenue >= 1
       ? `+ ${headlineAmount}`
       : headlineAmount;
     updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
