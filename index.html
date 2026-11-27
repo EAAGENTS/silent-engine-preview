@@ -195,10 +195,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @keyframes engine-turn{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes engine-turn-reverse{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 .audience-banner{border-block:1px solid var(--rule);background:#efefec;padding-block:1.1rem .92rem}
-.audience-intro{display:flex;align-items:baseline;flex-wrap:wrap;gap:.22rem 1.2rem}
-.audience-intro h2,.audience-intro p{margin:0}
-.audience-intro p{color:var(--muted);font-size:.93rem}
-.audience-logos{margin:.78rem 0 0;color:var(--muted);font-size:.75rem}
+.audience-logos{display:flex;flex-wrap:wrap;align-items:baseline}
+.audience-logos .eyebrow{margin:0}
 .audience-logo-note{margin-inline-start:.45rem;font-size:.72rem;color:#666}
 .brand-strip{container-type:inline-size;overflow:hidden;margin-top:.16rem}
 .brand-strip-track{display:flex}
@@ -407,11 +405,10 @@ dialog p{color:var(--muted)}
   </section>
   <section class="audience-banner" aria-labelledby="audience-title">
     <div class="wrap">
-      <div class="audience-intro">
-        <h2 id="audience-title" class="eyebrow">Who it’s for</h2>
-        <p>For marketing and sales teams using HubSpot or getting started with it.</p>
+      <div class="audience-logos">
+        <h2 id="audience-title" class="eyebrow">Meet Our Customers</h2>
+        <span class="audience-logo-note" id="sample-logos-label">Sample logos</span>
       </div>
-      <p class="audience-logos" id="sample-logos-label"><strong class="eyebrow">Customers we’ve worked with</strong> <span class="audience-logo-note">Sample logos</span></p>
       <div class="brand-strip" id="sample-logos">
         <div class="brand-strip-track">
           <ul class="brand-strip-group" aria-labelledby="sample-logos-label">
