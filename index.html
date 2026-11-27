@@ -45,8 +45,9 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @media(min-width:691px){
 .hero-copy,.hero-audit{display:flex;flex-direction:column;align-self:stretch}
 .hero-audit .engine{flex:1}
-.hero-copy .actions{margin-bottom:1rem}
-.hero-copy .client-project{margin-top:auto}
+.hero-contact{display:flex;flex:1;flex-direction:column;align-self:flex-start;width:fit-content;max-width:100%}
+.hero-contact .actions{margin-bottom:1rem}
+.hero-contact .client-project{margin-top:auto;contain:inline-size}
 }
 .client-project{margin-top:1rem;padding:.85rem 1rem;border:1px solid var(--rule);border-radius:10px;background:#fff}
 .client-project-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem .8rem}
@@ -334,27 +335,29 @@ dialog p{color:var(--muted)}
         <li>Streamline your pipeline</li>
         <li>Win more customers</li>
       </ul>
-      <div class="actions">
-        <button class="btn" type="button" data-book aria-describedby="expert-cta-person">Talk to an expert</button>
-        <div class="expert-profile" id="expert-cta-person">
-          <img src="camilla-office-slate.webp" width="42" height="42" alt="">
-          <div class="expert-profile-copy">
-            <strong class="expert-name">Camila de Casteja</strong>
-            <span class="expert-role">Co-founder, Silent Engine</span>
+      <div class="hero-contact">
+        <div class="actions">
+          <button class="btn" type="button" data-book aria-describedby="expert-cta-person">Talk to an expert</button>
+          <div class="expert-profile" id="expert-cta-person">
+            <img src="camilla-office-slate.webp" width="42" height="42" alt="">
+            <div class="expert-profile-copy">
+              <strong class="expert-name">Camila de Casteja</strong>
+              <span class="expert-role">Co-founder, Silent Engine</span>
+            </div>
           </div>
         </div>
+        <aside class="client-project" id="studytube-project" aria-label="Studytube client review">
+          <div class="client-project-heading">
+            <span class="review-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            <img class="client-project-logo" src="studytube-logo.png" alt="Studytube" width="330" height="37">
+          </div>
+          <blockquote class="review-quote">“Silent Engine showed us how to optimize our pipeline to increase revenue. I recommend them.”</blockquote>
+          <div class="client-project-contact">
+            <img src="lennart-gijsen.jpeg" alt="" width="40" height="40">
+            <div><strong>Lennart Gijsen</strong><span>VP Marketing, <a href="https://www.studytube.com/">StudyTube.com</a></span></div>
+          </div>
+        </aside>
       </div>
-      <aside class="client-project" id="studytube-project" aria-label="Studytube client review">
-        <div class="client-project-heading">
-          <span class="review-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
-          <img class="client-project-logo" src="studytube-logo.png" alt="Studytube" width="330" height="37">
-        </div>
-        <blockquote class="review-quote">“Silent Engine showed us what to fix in our pipeline to increase revenue. I recommend them.”</blockquote>
-        <div class="client-project-contact">
-          <img src="lennart-gijsen.jpeg" alt="" width="40" height="40">
-          <div><strong>Lennart Gijsen</strong><span>VP Marketing, <a href="https://www.studytube.com/">StudyTube.com</a></span></div>
-        </div>
-      </aside>
     </div>
     <div class="hero-audit">
     <figure class="engine">
