@@ -207,11 +207,12 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .intro>p,.section-copy{margin:0;color:var(--muted);max-width:48ch}
 .steps,.packages{display:grid;gap:1rem}
 .steps{grid-template-columns:repeat(5,minmax(0,1fr));padding:0;margin:0;list-style:none}
+.step-number{display:block;margin-bottom:.55rem;color:#666;font:600 .875rem/1 ui-monospace,monospace;font-variant-numeric:tabular-nums}
 .packages{grid-template-columns:repeat(3,minmax(0,1fr))}
 .step{border-top:1px solid var(--rule);padding:1.25rem 1rem 0 0}
 @media(min-width:861px){
 .steps .step{position:relative;padding-right:1.4rem}
-.steps .step:not(:last-child)::after{content:"";position:absolute;right:.08rem;top:1.85rem;width:6px;height:10px;background:#737373;clip-path:polygon(0 8%,15% 0,100% 50%,15% 100%,0 92%,80% 50%)}
+.steps .step:not(:last-child)::after{content:"";position:absolute;right:.08rem;top:3.25rem;width:6px;height:10px;background:#737373;clip-path:polygon(0 8%,15% 0,100% 50%,15% 100%,0 92%,80% 50%)}
 }
 .step p,.card>p{color:var(--muted);margin-bottom:0}
 .offers{border-top:1px solid var(--rule)}
@@ -391,11 +392,11 @@ dialog p{color:var(--muted)}
       <p>We look at your data and interview your team to map your current growth engine. Then we identify and implement the changes most likely to increase revenue from your existing marketing spend.</p>
     </div>
     <ol class="steps" role="list" aria-label="How the engine works">
-      <li class="step"><h3>Capture demand</h3><p>Turn buyer interest into qualified conversations.</p></li>
-      <li class="step"><h3>Track pipeline</h3><p>Link revenue to pipeline stages and traffic sources.</p></li>
-      <li class="step"><h3>Spot friction</h3><p>Find slow follow-up and conversion gaps.</p></li>
-      <li class="step"><h3>Implement fixes</h3><p>Fix the priority issue and measure the change.</p></li>
-      <li class="step"><h3>Scale up</h3><p>Invest more in what brings in customers.</p></li>
+      <li class="step"><span class="step-number" aria-hidden="true">1</span><h3>Capture demand</h3><p>Turn buyer interest into qualified conversations.</p></li>
+      <li class="step"><span class="step-number" aria-hidden="true">2</span><h3>Track pipeline</h3><p>Link revenue to pipeline stages and traffic sources.</p></li>
+      <li class="step"><span class="step-number" aria-hidden="true">3</span><h3>Spot friction</h3><p>Find slow follow-up and conversion gaps.</p></li>
+      <li class="step"><span class="step-number" aria-hidden="true">4</span><h3>Implement fixes</h3><p>Fix the priority issue and measure the change.</p></li>
+      <li class="step"><span class="step-number" aria-hidden="true">5</span><h3>Scale up</h3><p>Invest more in what brings in customers.</p></li>
     </ol>
   </section>
   <section class="section offers" id="packages" aria-labelledby="packages-title">
