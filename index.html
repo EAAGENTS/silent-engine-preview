@@ -67,9 +67,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-comparison thead th:last-child,.engine-comparison [data-engine-value="after-revenue"]{color:#f1cc91}
 .engine-comparison .engine-stat{display:inline-block}
 .audit-scale{display:grid;justify-items:center;gap:.02rem;margin-top:.1rem}
-.audit-scale label,.audit-scale output{color:#ddd0b8;font-size:.68rem;font-weight:500;line-height:1.18}
-.audit-scale input{width:100%;height:1.25rem;margin:0;accent-color:#bbc7b6;color-scheme:dark}
+.audit-scale label{color:#ddd0b8;font-size:.68rem;font-weight:500;line-height:1.18}
+.audit-scale input{width:100%;height:1.125rem;margin:0;accent-color:#bbc7b6;color-scheme:dark}
 .audit-scale input:focus-visible{outline:1px solid #bbc7b6;outline-offset:1px}
+.audit-baseline-note{display:block;color:#ddd0b8;font-size:.67rem;font-weight:400}
 .engine-comparison .engine-current{position:relative}
 .engine-comparison .engine-direction{position:absolute;z-index:1;left:100%;top:50%;width:1.35rem;transform:translate(-50%,-50%);background:#292620;border:1px solid #524835;border-radius:1rem;color:#e8bf7d;font-size:.76rem;line-height:1.1}
 @container(max-width:315px){
@@ -240,7 +241,7 @@ dialog p{color:var(--muted)}
 .mini-audit{padding:.48rem .62rem;margin-bottom:.48rem}
 .engine-comparison :is(th,td){padding-block:.33rem}
 .engine-scene{background:#181818}
-.engine-art{width:min(100%,clamp(19rem,calc(150svh - 850px),24rem));margin:0 auto;transform:none;mask-image:linear-gradient(to right,transparent,#000 7% 93%,transparent)}
+.engine-art{width:min(100%,clamp(18rem,calc(150svh - 870px),24rem));margin:0 auto;transform:none;mask-image:linear-gradient(to right,transparent,#000 7% 93%,transparent)}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -289,17 +290,17 @@ dialog p{color:var(--muted)}
             <label class="audit-field" data-audit-step hidden><span class="audit-lifetime-label">What’s your lifetime revenue per customer?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="What’s your lifetime revenue per customer in euros?" type="number" inputmode="decimal" required min="0" max="1000000000" step="0.01"></span></label>
             <label class="audit-field" data-audit-step hidden><span>What sector do you sell to?</span><span class="audit-select"><select id="audit-sector"><option value="other" selected>Other or mixed sectors</option><option value="technology">Technology and SaaS</option><option value="retail">Retail and ecommerce</option><option value="financial">Financial services</option><option value="healthcare">Healthcare</option><option value="services">Professional services</option><option value="manufacturing">Manufacturing</option></select></span></label>
             <label class="audit-field" data-audit-step hidden>
-              <span>What’s your annual company revenue?</span>
+              <span>What’s your monthly company revenue?</span>
               <span class="audit-select">
-                <select id="audit-annual-revenue">
-                  <option value="">Select a range (optional)</option>
+                <select id="audit-monthly-revenue" required>
+                  <option value="" selected disabled>Select a range</option>
                   <option value="under-10k">Below €10k</option>
-                  <option value="10k-100k" data-min="10000">€10k–€100k</option>
-                  <option value="100k-1m" data-min="100000">€100k–€1m</option>
-                  <option value="1m-5m" data-min="1000000">€1m–€5m</option>
-                  <option value="5m-10m" data-min="5000000">€5m–€10m</option>
-                  <option value="10m-100m" data-min="10000000">€10m–€100m</option>
-                  <option value="100m-plus">€100m or more</option>
+                  <option value="10k-50k">€10k–€50k</option>
+                  <option value="50k-100k">€50k–€100k</option>
+                  <option value="100k-500k">€100k–€500k</option>
+                  <option value="500k-1m">€500k–€1m</option>
+                  <option value="1m-10m">€1m–€10m</option>
+                  <option value="10m-plus">€10m or more</option>
                 </select>
               </span>
             </label>
@@ -332,12 +333,11 @@ dialog p{color:var(--muted)}
             <tr>
               <th scope="row">Marketing spend</th>
               <td data-engine-value="spend"><span class="engine-stat">—</span></td>
-              <td data-engine-value="spend">
-                <span class="engine-stat">—</span>
+              <td>
+                <output class="engine-stat" id="audit-budget-value" for="audit-budget-scale">—</output>
                 <div class="audit-scale">
                   <label for="audit-budget-scale">Try a larger budget</label>
-                  <input id="audit-budget-scale" type="range" min="1" max="10" step="0.1" value="1" aria-describedby="audit-budget-assumption">
-                  <output id="audit-budget-value" for="audit-budget-scale">1×</output>
+                  <input id="audit-budget-scale" type="range" min="1" max="10" step="0.1" value="1">
                 </div>
               </td>
             </tr>
@@ -345,7 +345,7 @@ dialog p{color:var(--muted)}
               <td><span class="engine-multiplier engine-multiplier-today" role="img" aria-label="Current revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
               <td><span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
             </tr>
-            <tr><th scope="row">Lifetime revenue</th><td data-engine-value="today-revenue"><span class="engine-stat">—</span></td><td data-engine-value="after-revenue"><span class="engine-stat">—</span></td></tr>
+            <tr><th scope="row">Lifetime revenue</th><td data-engine-value="today-revenue"><span class="engine-stat">—</span></td><td data-engine-value="after-revenue"><span class="engine-stat">—</span><small class="audit-baseline-note" hidden>At current spend</small></td></tr>
           </tbody>
           <tfoot>
             <tr>
@@ -353,9 +353,8 @@ dialog p{color:var(--muted)}
                 <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
                   <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
                   <p title="Assumes the same spend and acquisition results each month."><strong id="audit-annual-gain"></strong> extra lifetime revenue at the same annual spend</p>
-                  <p id="audit-scaled-gain" hidden><strong id="audit-scaled-amount"></strong> lifetime revenue from a year of added spend</p>
-                  <p class="audit-method" id="audit-budget-assumption">Added spend uses the same potential multiplier.</p>
-                  <p class="audit-method" id="audit-estimate-basis"></p>
+                  <p id="audit-scaled-gain" hidden><strong id="audit-scaled-total"></strong> total lifetime revenue from 12 months at this budget<br><strong id="audit-scaled-amount"></strong> from the added spend</p>
+                  <p class="audit-method">Modeled estimate using sector benchmarks where available.</p>
                   <p class="audit-package">Find what to fix first with a <a href="#pipeline-audit">Pipeline Audit</a>.</p>
                 </section>
               </td>
@@ -470,52 +469,46 @@ dialog p{color:var(--muted)}
   let clipRequest;
   let clipUrl;
   let auditRun = 0;
+  let revealTimer;
+  const engineClipDuration = 5040;
 
-  function prepareEngineClip() {
-    clipRequest ??= fetch(engineClip.dataset.src)
-      .then(response => response.ok ? response.blob() : null)
-      .catch(() => null);
-  }
-
-  const engineObserver = new IntersectionObserver(([entry]) => {
-    if (entry.intersectionRatio >= 0.8) playEngine();
-  }, {threshold: 0.8});
-
-  async function playEngine() {
-    engineObserver.disconnect();
-    if (!engineMotion.matches || !engineCard.hasAttribute('data-audit-complete')) return;
-    const currentRun = auditRun;
-    prepareEngineClip();
-    const clip = await clipRequest;
-    if (currentRun !== auditRun) return;
-    if (clip) {
-      clipUrl = URL.createObjectURL(clip);
-      engineClip.src = clipUrl;
-      const loaded = await engineClip.decode().then(() => true, () => false);
-      if (currentRun !== auditRun) return;
-      engineCard.toggleAttribute('data-clip-fallback', !loaded);
-    } else {
-      engineCard.dataset.clipFallback = '';
-    }
-    engineCard.dataset.running = '';
-  }
-
-  function configureEngineMotion() {
+  function resetEngineMotion() {
     auditRun += 1;
-    engineObserver.disconnect();
+    clearTimeout(revealTimer);
     engineClip.removeAttribute('src');
     if (clipUrl) URL.revokeObjectURL(clipUrl);
     clipUrl = undefined;
     delete engineCard.dataset.running;
     delete engineCard.dataset.clipFallback;
-    const ready = engineCard.hasAttribute('data-audit-complete') && engineMotion.matches;
-    if (ready) {
-      prepareEngineClip();
-      engineObserver.observe(engineScene);
-    }
   }
 
-  engineMotion.addEventListener('change', configureEngineMotion);
+  async function playEngine() {
+    const currentRun = auditRun;
+    if (!engineMotion.matches) {
+      revealAuditResult();
+      return;
+    }
+
+    clipRequest ??= fetch(engineClip.dataset.src)
+      .then(response => response.ok ? response.blob() : null)
+      .catch(() => null);
+    const clip = await clipRequest;
+    if (currentRun !== auditRun) return;
+
+    if (clip) {
+      clipUrl = URL.createObjectURL(clip);
+      engineClip.src = clipUrl;
+      const loaded = await engineClip.decode().then(() => true, () => false);
+      if (currentRun !== auditRun) return;
+      if (loaded) {
+        engineCard.dataset.running = '';
+        revealTimer = setTimeout(revealAuditResult, engineClipDuration);
+        return;
+      }
+    }
+    engineCard.dataset.clipFallback = '';
+    revealAuditResult();
+  }
 
   const auditForm = document.querySelector('#mini-audit-form');
   const auditResult = document.querySelector('#audit-result');
@@ -527,7 +520,9 @@ dialog p{color:var(--muted)}
   const auditBudgetValue = document.querySelector('#audit-budget-value');
   const auditScaledGain = document.querySelector('#audit-scaled-gain');
   const auditScaledAmount = document.querySelector('#audit-scaled-amount');
-  const auditEstimateBasis = document.querySelector('#audit-estimate-basis');
+  const auditScaledTotal = document.querySelector('#audit-scaled-total');
+  const auditBaselineNote = document.querySelector('.audit-baseline-note');
+  let auditPending = false;
   let budgetScenario;
   const auditSteps = [...auditForm.querySelectorAll('[data-audit-step]')];
   const auditInputs = auditSteps.map(step => step.querySelector('input, select'));
@@ -541,7 +536,6 @@ dialog p{color:var(--muted)}
   const auditRatio = new Intl.NumberFormat('en', {minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false});
   const compactRatio = new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: 0});
   const auditPercent = new Intl.NumberFormat('en', {style: 'percent', maximumFractionDigits: 0, useGrouping: false, signDisplay: 'exceptZero'});
-  const budgetScaleFormat = new Intl.NumberFormat('en', {maximumFractionDigits: 1});
   const baseUplift = 0.10;
   // Illustrative targets for lifetime revenue per euro of marketing spend.
   const sectorTargets = new Map([
@@ -579,9 +573,6 @@ dialog p{color:var(--muted)}
       badge.setAttribute('aria-label', description);
       badge.title = description;
     }
-
-    engineCard.dataset.auditComplete = '';
-    configureEngineMotion();
   }
 
   function updateBudgetScenario() {
@@ -589,12 +580,13 @@ dialog p{color:var(--muted)}
     const {spend, projectedRevenue} = budgetScenario;
     const monthlyBudget = spend * scale;
     const addedLifetimeRevenue = projectedRevenue * (scale - 1) * 12;
-    const scaleLabel = `${budgetScaleFormat.format(scale)}×`;
     const budgetLabel = monthlyBudget < 1000 ? auditMoney(monthlyBudget) : auditCompactCurrency.format(monthlyBudget);
-    auditBudgetScale.setAttribute('aria-valuetext', `${auditMoney(monthlyBudget)} per month, ${scaleLabel} current spend`);
-    auditBudgetValue.textContent = scale > 1 ? `${budgetLabel} · ${scaleLabel}` : scaleLabel;
+    auditBudgetScale.setAttribute('aria-valuetext', `${auditMoney(monthlyBudget)} per month`);
+    auditBudgetValue.textContent = budgetLabel;
     auditBudgetValue.title = `${auditMoney(monthlyBudget)} per month`;
     auditScaledGain.hidden = scale === 1;
+    auditBaselineNote.hidden = scale === 1;
+    auditScaledTotal.textContent = auditMoney(projectedRevenue * scale * 12);
     auditScaledAmount.textContent = addedLifetimeRevenue >= 1
       ? `+${auditMoney(addedLifetimeRevenue)}`
       : auditMoney(addedLifetimeRevenue);
@@ -624,11 +616,23 @@ dialog p{color:var(--muted)}
     budgetScenario = {spend, projectedRevenue};
     auditBudgetScale.value = 1;
     updateBudgetScenario();
-    auditEstimateBasis.textContent = sectorGap > 0
-      ? 'Estimate assumes a 10% lift and closes the gap to the modeled sector target.'
-      : 'Estimate assumes a 10% improvement at the same spend.';
-    auditComparison.hidden = false;
     updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
+
+    resetEngineMotion();
+    auditComparison.hidden = true;
+    engineCard.dataset.auditComplete = '';
+    auditPending = true;
+    updateAuditAction();
+    if (engineMotion.matches) {
+      engineScene.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+    }
+    playEngine();
+  }
+
+  function revealAuditResult() {
+    auditPending = false;
+    updateAuditAction();
+    auditComparison.hidden = false;
     auditResult.focus({preventScroll: true});
 
     const viewportHeight = window.innerHeight;
@@ -642,10 +646,11 @@ dialog p{color:var(--muted)}
 
   function updateAuditAction() {
     const finalStep = auditStep === auditSteps.length - 1;
-    auditAction.textContent = finalStep ? 'Start audit' : 'Next';
-    auditAction.disabled = finalStep
+    auditAction.textContent = auditPending ? 'Running…' : finalStep ? 'Start audit' : 'Next';
+    auditAction.disabled = auditPending || (finalStep
       ? auditInputs.some(input => !input.validity.valid)
-      : !auditInputs[auditStep].validity.valid;
+      : !auditInputs[auditStep].validity.valid);
+    auditBack.disabled = auditPending;
     auditAction.toggleAttribute('data-ready', finalStep && !auditAction.disabled);
   }
 
@@ -659,17 +664,25 @@ dialog p{color:var(--muted)}
   }
 
   auditForm.addEventListener('input', () => {
-    updateAuditAction();
-    if (!auditComparison.hidden) {
+    if (engineCard.hasAttribute('data-audit-complete')) {
+      auditPending = false;
       auditComparison.hidden = true;
       delete engineCard.dataset.auditComplete;
-      configureEngineMotion();
+      resetEngineMotion();
+    }
+    updateAuditAction();
+  });
+  engineMotion.addEventListener('change', () => {
+    if (!engineMotion.matches) {
+      resetEngineMotion();
+      if (auditPending) revealAuditResult();
     }
   });
+
   auditBack.addEventListener('click', () => showAuditStep(auditStep - 1));
   auditForm.addEventListener('submit', event => {
     event.preventDefault();
-    if (!auditInputs[auditStep].reportValidity()) return;
+    if (auditPending || !auditInputs[auditStep].reportValidity()) return;
     if (auditStep < auditSteps.length - 1) {
       showAuditStep(auditStep + 1);
       return;
