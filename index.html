@@ -41,7 +41,9 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .hero-benefits li{display:flex;align-items:center;gap:.65rem;font-size:1.08rem;font-weight:650}
 .hero-benefits li::before{content:"";width:.63rem;height:.37rem;flex:none;margin-inline:.05rem .15rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.13rem) rotate(-45deg)}
 .lead{color:var(--muted);font-size:1rem;max-width:52ch;margin-bottom:1.4rem}
-.hero{display:grid;grid-template-columns:1.24fr 1fr;gap:clamp(2rem,6vw,5.4rem);align-items:center;padding-block:clamp(1.65rem,3vw,3rem)}
+.hero-audit-arrow{display:none}
+@media(min-width:1200px){.hero-audit-arrow{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}}
+.hero{position:relative;display:grid;grid-template-columns:1.24fr 1fr;gap:clamp(2rem,6vw,5.4rem);align-items:center;padding-block:clamp(1.65rem,3vw,3rem)}
 .hero > div:first-child{align-self:start;margin-top:clamp(1rem,3.8vw,3.5rem)}
 .hero h1{font-size:clamp(2.55rem,5vw,4.3rem);text-wrap:balance}
 .hero-eyebrow{display:flex;align-items:center;gap:.55rem}
@@ -58,11 +60,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine figcaption{margin-bottom:.8rem}
 .engine figcaption h2{font-size:1.16rem;font-weight:750;letter-spacing:-.025em;line-height:1.25;margin:0}
 .engine figcaption p{margin:.15rem 0 0;color:#c5c5c5;font-size:.77rem}
-@media(min-width:1200px){
-.engine::before,.engine::after{content:"";position:absolute;pointer-events:none}
-.engine::before{width:3.35rem;height:1.25rem;inset-inline-start:-3.85rem;top:1.28rem;border-bottom:1.5px solid #7e9078;border-radius:0 0 0 100%}
-.engine::after{width:.43rem;height:.43rem;inset-inline-start:-.82rem;top:2.31rem;border:solid #7e9078;border-width:1.5px 1.5px 0 0;transform:rotate(45deg)}
-}
 .engine-machine{position:relative;overflow:hidden;margin:0;border:1px solid #393939;border-radius:8px;background:#202020}
 .engine-results{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;overflow:auto}
 .engine[data-results] .engine-scene{visibility:hidden}
@@ -144,7 +141,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-result #audit-lift{color:#e8bf7d;font-weight:750}
 .audit-next-step .audit-method{color:#d6cdbf;font-size:.7rem}
 .audit-next-step .audit-package{margin-top:.28rem;color:#ede5d7}
-.audit-call{padding:.16rem 0 0;border:0;background:none;color:#c9d5c4;font-size:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:.17em;text-align:left}
+.audit-call{padding:.16rem 0 0;border:0;background:none;color:#f4f4f2;font-size:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:.17em;text-align:left}
 .audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
 .engine-scene{position:relative;display:grid;align-content:center;min-height:19.5rem;overflow:hidden;background:#242424}
 @container(max-width:380px){.engine-scene{min-height:25rem}}
@@ -245,7 +242,6 @@ dialog p{color:var(--muted)}
 .hero{padding-block:1.35rem}
 .engine{padding:.97rem}
 .engine figcaption{margin-bottom:.68rem}
-.engine::before,.engine::after{margin-top:-.46rem}
 .mini-audit{padding:.48rem .62rem;margin-bottom:.48rem}
 .engine-comparison :is(th,td){padding-block:.33rem}
 .engine-scene{background:#181818}
@@ -270,7 +266,7 @@ dialog p{color:var(--muted)}
   <section class="wrap hero" aria-labelledby="headline">
     <div>
       <p class="eyebrow hero-eyebrow"><img class="hubspot-mark" src="hubspot-mark.png" width="27" height="27" alt="">HubSpot RevOps &amp; demand generation</p>
-      <h1 id="headline">Get more revenue from every euro spent on marketing.</h1>
+      <h1 id="headline">Get more <span id="hero-revenue">revenue</span> from every euro spent on marketing.</h1>
       <ul class="hero-benefits" role="list">
         <li>Reach decision-makers</li>
         <li>Streamline your pipeline</li>
@@ -335,8 +331,8 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-results" hidden>
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-            <p title="Assumes the same spend and acquisition results each month."><strong class="audit-total" id="audit-annual-gain"></strong><span class="audit-total-label">extra lifetime revenue at the same annual spend</span></p>
-            <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
+            <p title="Assumes the same spend and acquisition results each month."><strong class="audit-total" id="audit-annual-gain"></strong><span class="audit-total-label">Extra lifetime revenue at the same annual spend</span></p>
+            <p id="audit-uplift">You could earn <strong id="audit-lift"></strong> more revenue for every euro spent on marketing.</p>
           </section>
           <table class="engine-comparison" aria-label="Revenue engine before and after">
             <thead>
@@ -356,13 +352,14 @@ dialog p{color:var(--muted)}
             </tbody>
           </table>
           <div class="audit-next-step">
-            <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Draft wording · Based on sector benchmarks and our average customer results</p>
+            <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customer results</p>
             <p class="audit-package">Find what to fix first in a two-week Pipeline Audit.</p>
-            <button class="audit-call" type="button" data-book aria-describedby="expert-cta-person">Book a free discovery call</button>
+            <button class="audit-call" type="button" data-book aria-describedby="expert-cta-person">Book a discovery call</button>
           </div>
         </div>
       </div>
     </figure>
+    <canvas class="hero-audit-arrow" aria-hidden="true"></canvas>
   </section>
   <aside class="fit" aria-label="Who we work with">
     <div class="wrap">
@@ -603,8 +600,8 @@ dialog p{color:var(--muted)}
 
   function revealAuditResult() {
     auditPending = false;
-    updateAuditAction();
     auditResults.hidden = false;
+    updateAuditAction();
     engineCard.dataset.results = '';
     auditResult.focus({preventScroll: true});
 
@@ -619,12 +616,13 @@ dialog p{color:var(--muted)}
 
   function updateAuditAction() {
     const finalStep = auditStep === auditSteps.length - 1;
-    auditAction.textContent = auditPending ? 'Running…' : finalStep ? 'Start audit' : 'Next';
+    const hasResults = finalStep && !auditResults.hidden;
+    auditAction.textContent = auditPending ? 'Running…' : hasResults ? 'Reset' : finalStep ? 'Start audit' : 'Next';
     auditAction.disabled = auditPending || (finalStep
       ? auditInputs.some(input => !input.validity.valid)
       : !auditInputs[auditStep].validity.valid);
     auditBack.disabled = auditPending;
-    auditAction.toggleAttribute('data-ready', finalStep && !auditAction.disabled);
+    auditAction.toggleAttribute('data-ready', finalStep && !hasResults && !auditAction.disabled);
   }
 
   function showAuditStep(index) {
@@ -636,14 +634,16 @@ dialog p{color:var(--muted)}
     auditInputs[index].focus({preventScroll: true});
   }
 
+  function clearAuditResult() {
+    auditPending = false;
+    auditResults.hidden = true;
+    delete engineCard.dataset.results;
+    delete engineCard.dataset.auditComplete;
+    resetEngineMotion();
+  }
+
   auditForm.addEventListener('input', () => {
-    if (engineCard.hasAttribute('data-audit-complete')) {
-      auditPending = false;
-      auditResults.hidden = true;
-      delete engineCard.dataset.results;
-      delete engineCard.dataset.auditComplete;
-      resetEngineMotion();
-    }
+    if (engineCard.hasAttribute('data-audit-complete')) clearAuditResult();
     updateAuditAction();
   });
   engineMotion.addEventListener('change', () => {
@@ -656,7 +656,15 @@ dialog p{color:var(--muted)}
   auditBack.addEventListener('click', () => showAuditStep(auditStep - 1));
   auditForm.addEventListener('submit', event => {
     event.preventDefault();
-    if (auditPending || !auditInputs[auditStep].reportValidity()) return;
+    if (auditPending) return;
+    if (auditStep === auditSteps.length - 1 && !auditResults.hidden) {
+      auditForm.reset();
+      clearAuditResult();
+      showAuditStep(0);
+      auditForm.scrollIntoView({block: 'nearest'});
+      return;
+    }
+    if (!auditInputs[auditStep].reportValidity()) return;
     if (auditStep < auditSteps.length - 1) {
       showAuditStep(auditStep + 1);
       return;
@@ -670,6 +678,51 @@ dialog p{color:var(--muted)}
     showAuditResult();
   });
   updateAuditAction();
+
+  const hero = document.querySelector('.hero');
+  const revenueWord = document.querySelector('#hero-revenue');
+  const auditTitle = document.querySelector('#mini-audit-title');
+  const auditArrow = hero.querySelector('.hero-audit-arrow');
+
+  function drawAuditArrow() {
+    if (!auditArrow.offsetWidth) return;
+
+    const bounds = hero.getBoundingClientRect();
+    const word = revenueWord.getBoundingClientRect();
+    const heading = auditTitle.getBoundingClientRect();
+    const pixelRatio = window.devicePixelRatio || 1;
+    auditArrow.width = Math.round(bounds.width * pixelRatio);
+    auditArrow.height = Math.round(bounds.height * pixelRatio);
+    const ctx = auditArrow.getContext('2d');
+    if (!ctx) return;
+
+    ctx.scale(pixelRatio, pixelRatio);
+    ctx.strokeStyle = '#368653';
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    const startX = word.right - bounds.left - 5;
+    const startY = word.top - bounds.top + word.height * 0.14;
+    const endX = heading.left - bounds.left + Math.min(36, heading.width * 0.14);
+    const endY = heading.top - bounds.top - 7;
+    const controlX = endX - 45;
+    const controlY = endY - 22;
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.bezierCurveTo(startX + 47, startY - 59, controlX, controlY, endX, endY);
+
+    const direction = Math.atan2(endY - controlY, endX - controlX);
+    const headLength = 13;
+    ctx.moveTo(endX - headLength * Math.cos(direction - 0.57), endY - headLength * Math.sin(direction - 0.57));
+    ctx.lineTo(endX, endY);
+    ctx.lineTo(endX - headLength * Math.cos(direction + 0.57), endY - headLength * Math.sin(direction + 0.57));
+    ctx.stroke();
+  }
+
+  const auditArrowLayout = new ResizeObserver(drawAuditArrow);
+  auditArrowLayout.observe(hero);
+  auditArrowLayout.observe(auditTitle);
 
   const bookingDialog = document.querySelector('dialog');
   const packageNote = document.querySelector('#dialog-package');
