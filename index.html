@@ -154,8 +154,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine[data-results] .audit-call{animation:audit-call-pulse 1.3s ease-in-out 10s forwards}
 @keyframes audit-call-pulse{
   0%{box-shadow:0 0 0 0 rgb(187 199 182 / 0)}
-  45%{box-shadow:0 0 0 4px rgb(187 199 182 / .45)}
-  100%{box-shadow:0 0 0 2px rgb(187 199 182 / .32)}
+  45%{border-color:#bbc7b6;box-shadow:0 0 0 3px #bbc7b6,0 0 13px rgb(187 199 182 / .65)}
+  100%{border-color:#bbc7b6;box-shadow:0 0 0 2px #bbc7b6,0 0 8px rgb(187 199 182 / .45)}
 }
 }
 .engine-scene{position:relative;display:grid;align-content:center;min-height:19.75rem;overflow:hidden;background:#242424}
@@ -755,9 +755,10 @@ dialog p{color:var(--muted)}
     lift.textContent = canCompare ? auditPercent.format(extraRevenue / lifetimeRevenue) : '';
     document.querySelector('#audit-uplift').hidden = !canCompare;
     const annualGain = extraRevenue * 12;
+    const headlineAmount = auditMoney(annualGain).replace(/^€\s+/, '€');
     document.querySelector('#audit-annual-gain').textContent = annualGain >= 1
-      ? `+${auditMoney(annualGain)}`
-      : auditMoney(annualGain);
+      ? `+ ${headlineAmount}`
+      : headlineAmount;
     updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
 
     resetEngineMotion();
