@@ -62,11 +62,11 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .expert-name{font:700 1.04rem/1.1 Georgia,serif}
 .expert-role{font-size:.77rem;color:var(--muted)}
 .text-link{font-size:.92rem;font-weight:700;text-decoration:none;padding:.7rem .25rem}
-.engine{position:relative;container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:clamp(.95rem,2.4vw,1.7rem)}
+.engine{--engine-inset:clamp(.95rem,2.4vw,1.7rem);position:relative;container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:var(--engine-inset);padding-bottom:.3rem}
 .engine figcaption{margin-bottom:.8rem}
 .engine figcaption h2{font-size:1.16rem;font-weight:750;letter-spacing:-.025em;line-height:1.25;margin:0}
 .audit-time{color:#c5c5c5;font-size:.8em;font-weight:500;letter-spacing:normal;white-space:nowrap}
-.engine-machine{position:relative;overflow:hidden;margin:0;border:1px solid #393939;border-radius:8px;background:#202020}
+.engine-machine{position:relative;overflow:hidden;margin:0 calc(.3rem - var(--engine-inset));border:1px solid #393939;border-radius:8px;background:#202020}
 .engine-results{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;overflow:auto}
 .engine[data-results] .engine-scene{visibility:hidden}
 .engine-comparison{width:100%;table-layout:fixed;border-collapse:collapse;border-top:1px solid #393939;font-variant-numeric:tabular-nums}
@@ -300,11 +300,11 @@ dialog p{color:var(--muted)}
 :root{--site-header-height:69px}
 .top{min-height:68px}
 .hero{padding-block:1.35rem}
-.engine{padding:.97rem}
+.engine{--engine-inset:.97rem}
 .engine figcaption{margin-bottom:.68rem}
 .mini-audit{padding:.48rem .62rem;margin-bottom:.48rem}
-.engine-scene{background:#181818}
-.engine-art{width:min(100%,clamp(21rem,calc(150svh - 790px),24rem));margin:0 auto;transform:none;mask-image:linear-gradient(to right,transparent,#000 7% 93%,transparent)}
+.engine-scene{grid-template-columns:minmax(0,1fr);justify-items:center}
+.engine-art{width:max(100%,29.65rem);transform:none}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
