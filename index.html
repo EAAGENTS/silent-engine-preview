@@ -247,7 +247,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .card .eyebrow{margin-bottom:.75rem;font-size:.73rem}
 .card .price{color:var(--ink);font-size:1.9rem;font-weight:750;letter-spacing:-.055em;line-height:1.2;margin:.65rem 0 .15rem}
 .card .term{font-size:.88rem;margin-bottom:1rem}
-.card .partner-cost-note{display:flex;align-items:baseline;gap:.4rem;margin-top:.65rem;font-size:.875rem;line-height:1.35}
+.card .partner-cost-note{display:flex;align-items:flex-start;gap:.4rem;margin-top:.65rem;font-size:.875rem;line-height:1.35}
+.partner-cost-note svg{flex:none;margin-top:.08rem}
 .packages .card ul{list-style:none;padding:1rem 0 0;margin:1.15rem 0 1.5rem;border-top:1px solid var(--rule);font-size:.95rem}
 .packages .card li{display:grid;grid-template-columns:1rem minmax(0,1fr);align-items:baseline;gap:.52rem}
 .packages .card li::before{content:"";width:.63rem;height:.37rem;margin-inline:.08rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.14rem) rotate(-45deg)}
@@ -502,7 +503,12 @@ dialog p{color:var(--muted)}
           <p class="eyebrow">Optimize</p><h3>Engine Partner</h3>
           <p class="price">€3.420</p><p class="term">Per month · 3-month initial term</p>
           <p>Keep improving conversions and scaling revenue once the foundations are in place.</p>
-          <p class="partner-cost-note"><span aria-hidden="true">◎</span><span>About <strong>34%</strong> of the estimated monthly cost of a full-time senior RevOps hire in the Netherlands.</span></p>
+          <p class="partner-cost-note" title="Compared with an estimated €10.000 in monthly employer costs using a Dutch benchmark.">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12H4a2 2 0 1 1 0-4M19 8V4l-4.5 2H12a7 7 0 0 0-4 12.7V21h3v-1.5h5V21h3v-3a7 7 0 0 0 1.5-2H23v-4h-2a7 7 0 0 0-2-4ZM10 9h4M18 11h.01"/>
+            </svg>
+            <span><strong>About 66% less</strong> than a full-time senior RevOps hire.</span>
+          </p>
           <ul role="list"><li>Monthly pipeline and campaign review</li><li>One demand generation experiment per month</li><li>Ongoing workflow and reporting improvements</li></ul>
           <button class="btn btn-outline" type="button" data-book="Engine Partner">Discuss the partnership</button>
         </article>
