@@ -142,14 +142,16 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-result:focus{outline:none}
 .audit-result .audit-total{display:block;color:#e8bf7d;font-size:clamp(1.35rem,6.1cqw,1.95rem);line-height:1.05;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .audit-total-unit{font-size:.56em;letter-spacing:-.015em;font-weight:650;color:#f3ece0;white-space:nowrap}
-.audit-result .audit-total-label{display:block;margin-top:.12rem}
-.audit-result #audit-uplift{margin-top:.25rem;color:#ded4c4;font-size:.75rem}
+.audit-result .audit-takeaways{margin:.28rem 0 .22rem;padding-inline-start:.86rem}
+.audit-takeaways li + li{margin-top:.15rem}
+.audit-takeaways li::marker{color:#d7bd8c;font-size:.72em}
 .audit-result #audit-lift{color:#e8bf7d;font-weight:750}
 .audit-result .audit-method{margin-top:.2rem;color:#d6cdbf;font-size:.7rem}
 .audit-next-step .audit-package{color:#ede5d7}
-.audit-call{padding:.16rem 0 0;border:0;background:none;color:#f4f4f2;font-size:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:.17em;text-align:left}
+.audit-call{display:inline-block;margin-top:.34rem;min-height:1.75rem;padding:.25rem .6rem;border:1px solid #eae7de;border-radius:5px;background:#eae7de;color:#222019;font-size:.77rem;font-weight:700;text-align:left}
+.audit-call:hover{background:#fff;border-color:#fff}
 .audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
-.engine-scene{position:relative;display:grid;align-content:center;min-height:19.5rem;overflow:hidden;background:#242424}
+.engine-scene{position:relative;display:grid;align-content:center;min-height:19.75rem;overflow:hidden;background:#242424}
 @container(max-width:380px){.engine-scene{min-height:25rem}}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
 .engine-idle-photo{display:block;width:100%;height:auto}
@@ -350,8 +352,11 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-results" hidden>
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-            <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> <span class="audit-total-unit">annual revenue</span></strong><span class="audit-total-label">Estimated lifetime revenue at the same annual marketing spend.</span></p>
-            <p id="audit-uplift"><strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</p>
+            <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> <span class="audit-total-unit">annual revenue</span></strong></p>
+            <ul class="audit-takeaways">
+              <li>Estimated lifetime revenue at the same annual marketing spend.</li>
+              <li id="audit-uplift">That’s <strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</li>
+            </ul>
             <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customers’ results.</p>
           </section>
           <table class="engine-comparison" aria-label="Revenue engine before and after">
@@ -373,7 +378,7 @@ dialog p{color:var(--muted)}
           </table>
           <div class="audit-next-step">
             <p class="audit-package">Find what to fix first in a two-week Pipeline Audit.</p>
-            <button class="audit-call" type="button" data-book data-book-discovery aria-describedby="expert-cta-person">Book a free discovery call</button>
+            <button class="audit-call" type="button" data-book data-book-discovery aria-describedby="expert-cta-person">Free discovery call</button>
           </div>
         </div>
       </div>
@@ -542,7 +547,7 @@ dialog p{color:var(--muted)}
   const auditCompactCurrency = new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR', notation: 'compact', maximumFractionDigits: 1});
   const auditRatio = new Intl.NumberFormat('en', {minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false});
   const compactRatio = new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: 0});
-  const auditPercent = new Intl.NumberFormat('en', {style: 'percent', maximumFractionDigits: 0, useGrouping: false, signDisplay: 'exceptZero'});
+  const auditPercent = new Intl.NumberFormat('en', {style: 'percent', maximumFractionDigits: 0, useGrouping: false});
   const baseUplift = 0.10;
   // Illustrative targets for lifetime revenue per euro of marketing spend.
   const sectorTargets = new Map([
@@ -790,7 +795,7 @@ dialog p{color:var(--muted)}
   document.querySelectorAll('[data-book]').forEach((button) => {
     button.addEventListener('click', () => {
       const packageName = button.dataset.book;
-      bookingTitle.textContent = button.hasAttribute('data-book-discovery') ? button.textContent : 'Book a call';
+      bookingTitle.textContent = button.hasAttribute('data-book-discovery') ? 'Book a free discovery call' : 'Book a call';
       packageNote.hidden = !packageName;
       packageNote.textContent = packageName ? `Interested in ${packageName}? Mention it in your reply.` : '';
       bookingDialog.showModal();
