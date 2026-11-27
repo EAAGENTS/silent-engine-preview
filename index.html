@@ -41,6 +41,15 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .hero-benefits li{display:flex;align-items:center;gap:.65rem;font-size:1.08rem;font-weight:650}
 .hero-benefits li::before{content:"";width:.63rem;height:.37rem;flex:none;margin-inline:.05rem .15rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.13rem) rotate(-45deg)}
 .hero{position:relative;display:grid;grid-template-columns:1.24fr 1fr;gap:clamp(2rem,6vw,5.4rem);align-items:start;padding-block:clamp(1.65rem,3vw,3rem)}
+.hero-audit{min-width:0}
+.client-project{margin-top:.75rem;padding:.85rem 1rem;border:1px solid var(--rule);border-radius:10px;background:#fff}
+.client-project-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem .8rem}
+.client-project-heading .eyebrow{margin:0}
+.client-project-logo{display:block;width:110px;height:auto}
+.client-project>p{margin:.5rem 0 .65rem;font-size:.875rem;color:var(--muted)}
+.client-project-contact{display:flex;align-items:center;gap:.55rem;font-size:.81rem;line-height:1.3}
+.client-project-contact img{display:block;flex:none;object-fit:cover;border-radius:50%}
+.client-project-contact span{display:block;color:var(--muted);font-size:.75rem}
 .hero h1{font-size:clamp(2.55rem,5vw,4.3rem);text-wrap:balance}
 .hero-eyebrow{display:flex;align-items:center;gap:.55rem}
 .hubspot-mark{width:27px;height:27px;flex:none;border-radius:4px}
@@ -330,6 +339,7 @@ dialog p{color:var(--muted)}
         </div>
       </div>
     </div>
+    <div class="hero-audit">
     <figure class="engine">
       <figcaption><h2 id="mini-audit-title">Discover your revenue potential <span class="audit-time"><span aria-hidden="true">·</span> In one minute</span></h2></figcaption>
       <div class="mini-audit">
@@ -411,7 +421,7 @@ dialog p{color:var(--muted)}
             <ul class="audit-takeaways">
               <li>That’s extra revenue at the same monthly marketing spend.</li>
               <li id="audit-uplift">That’s <strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</li>
-              <li title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our customers’ results.</li>
+              <li title="Uses a 10% assumed uplift plus any gap to illustrative sector targets.">Illustrative scenario based on your inputs.</li>
             </ul>
           </section>
           <table class="engine-comparison" aria-label="Revenue engine before and after">
@@ -438,6 +448,18 @@ dialog p{color:var(--muted)}
         </div>
       </div>
     </figure>
+    <aside class="client-project" aria-labelledby="studytube-project">
+      <div class="client-project-heading">
+        <h2 id="studytube-project" class="eyebrow">Client project</h2>
+        <img class="client-project-logo" src="studytube-logo.png" alt="Studytube" width="330" height="37">
+      </div>
+      <p>We’re working with Studytube to identify opportunities to get more from its existing marketing spend and decide what to implement first.</p>
+      <div class="client-project-contact">
+        <img src="lennart-gijsen.jpeg" alt="" width="40" height="40">
+        <div><strong>Lennart Gijsen</strong><span>VP Marketing, Studytube</span></div>
+      </div>
+    </aside>
+    </div>
   </section>
   <section class="audience-banner" aria-labelledby="audience-title">
     <div class="wrap">
