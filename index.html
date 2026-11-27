@@ -144,13 +144,20 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-takeaways li + li{margin-top:.15rem}
 .audit-takeaways li::marker{color:#d7bd8c;font-size:.72em}
 .audit-result #audit-lift{color:#e8bf7d;font-weight:750}
-.audit-result .audit-method{margin-top:.2rem;color:#d6cdbf;font-size:.7rem}
+.audit-result .audit-method{color:#d6cdbf;font-size:.7rem}
 .audit-next-step{display:flex;align-items:center;justify-content:space-between;gap:.4rem .75rem}
 .audit-next-step .audit-package{color:#ede5d7}
 @container(max-width:335px){.audit-next-step{align-items:flex-start;flex-direction:column}}
 .audit-call{display:inline-block;flex:none;min-height:1.75rem;padding:.25rem .6rem;border:1px solid #eae7de;border-radius:5px;background:#eae7de;color:#222019;font-size:.77rem;font-weight:700;text-align:left}
 .audit-call:hover{background:#fff;border-color:#fff}
 .audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
+@media(prefers-reduced-motion:no-preference){
+.engine[data-results] .audit-call{animation:audit-call-pulse 1.3s ease-in-out 10s}
+@keyframes audit-call-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgb(187 199 182 / 0)}
+  45%{box-shadow:0 0 0 4px rgb(187 199 182 / .45)}
+}
+}
 .engine-scene{position:relative;display:grid;align-content:center;min-height:19.75rem;overflow:hidden;background:#242424}
 @container(max-width:380px){.engine-scene{min-height:25rem}}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
@@ -388,12 +395,12 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-results" hidden>
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-            <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> <span class="audit-total-unit">annual revenue</span></strong></p>
+            <p title="Annualized lifetime revenue assumes the same marketing spend and improvement each month."><strong class="audit-total"><span id="audit-annual-gain"></span> <span class="audit-total-unit">annual revenue potential</span></strong></p>
             <ul class="audit-takeaways">
               <li>Extra lifetime revenue at the same annual marketing spend.</li>
               <li id="audit-uplift">That’s <strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</li>
+              <li class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customers’ results.</li>
             </ul>
-            <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customers’ results.</p>
           </section>
           <table class="engine-comparison" aria-label="Revenue engine before and after">
             <thead>
