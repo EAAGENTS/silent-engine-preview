@@ -40,8 +40,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .hero-benefits{display:grid;gap:.38rem;list-style:none;margin:0 0 .95rem;padding:0}
 .hero-benefits li{display:flex;align-items:center;gap:.65rem;font-size:1.08rem;font-weight:650}
 .hero-benefits li::before{content:"";width:.63rem;height:.37rem;flex:none;margin-inline:.05rem .15rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.13rem) rotate(-45deg)}
-.hero{position:relative;display:grid;grid-template-columns:1.24fr 1fr;gap:clamp(2rem,6vw,5.4rem);align-items:center;padding-block:clamp(1.65rem,3vw,3rem)}
-.hero > div:first-child{align-self:start;margin-top:clamp(1rem,3.8vw,3.5rem)}
+.hero{position:relative;display:grid;grid-template-columns:1.24fr 1fr;gap:clamp(2rem,6vw,5.4rem);align-items:start;padding-block:clamp(1.65rem,3vw,3rem)}
 .hero h1{font-size:clamp(2.55rem,5vw,4.3rem);text-wrap:balance}
 .hero-eyebrow{display:flex;align-items:center;gap:.55rem}
 .hubspot-mark{width:27px;height:27px;flex:none;border-radius:4px}
@@ -197,11 +196,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 @keyframes engine-turn-reverse{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 .audience-banner{border-block:1px solid var(--rule);background:#efefec;padding-block:1.1rem .92rem}
 .audience-intro{display:flex;align-items:baseline;flex-wrap:wrap;gap:.22rem 1.2rem}
-.audience-intro h2,.audience-intro p,.audience-logos p{margin:0}
+.audience-intro h2,.audience-intro p{margin:0}
 .audience-intro p{color:var(--muted);font-size:.93rem}
-.audience-logos{display:flex;justify-content:space-between;align-items:center;gap:.75rem;margin-top:.78rem;color:var(--muted);font-size:.75rem}
+.audience-logos{margin:.78rem 0 0;color:var(--muted);font-size:.75rem}
 .audience-logo-note{margin-inline-start:.45rem;font-size:.72rem;color:#666}
-.brand-strip-control{display:none}
 .brand-strip{container-type:inline-size;overflow:hidden;margin-top:.16rem}
 .brand-strip-track{display:flex}
 .brand-strip-group{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.72rem 1.8rem;width:100%;margin:0;padding:.38rem 0 .65rem;list-style:none;color:#343432}
@@ -212,11 +210,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .brand-strip-group li:nth-child(6){font-weight:510;letter-spacing:-.025em}
 .brand-strip-copy{display:none}
 @media(prefers-reduced-motion:no-preference){
-.brand-strip-control{display:inline-block;padding:.06rem .3rem;border:1px solid #adada7;border-radius:4px;background:transparent;color:#444;font-size:.72rem}
-.brand-strip[data-motion] .brand-strip-track{width:max-content;animation:brand-scroll 29s linear infinite}
-.brand-strip[data-motion] .brand-strip-group{width:auto;min-width:100cqw;flex-wrap:nowrap;justify-content:space-around;gap:2.1rem;padding-inline:1rem}
-.brand-strip[data-motion] .brand-strip-copy{display:flex}
-.brand-strip[data-motion="paused"] .brand-strip-track,.brand-strip:hover .brand-strip-track{animation-play-state:paused}
+.brand-strip .brand-strip-track{width:max-content;animation:brand-scroll 29s linear infinite}
+.brand-strip .brand-strip-group{width:auto;min-width:100cqw;flex-wrap:nowrap;justify-content:space-around;gap:2.1rem;padding-inline:1rem}
+.brand-strip .brand-strip-copy{display:flex}
+.brand-strip:hover .brand-strip-track{animation-play-state:paused}
 }
 @keyframes brand-scroll{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .section{padding-block:clamp(3.75rem,7vw,6.15rem)}
@@ -270,7 +267,7 @@ dialog::backdrop{background:#101010c9}
 dialog p{color:var(--muted)}
 [hidden]{display:none!important}
 @media(max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{width:calc(100% - 48px)}.hero{gap:2rem}.card{padding:1.15rem}}
-@media(max-width:690px){.wrap{width:calc(100% - 36px)}.top{min-height:68px;gap:.75rem}nav{gap:.7rem}nav>a{display:none}.hero,.intro,.steps,.packages,.team-grid{grid-template-columns:1fr}.hero{padding-top:2rem}.hero > div:first-child{margin-top:0}.intro{gap:.75rem}.engine{margin-top:.5rem}.step{padding-top:1rem}.booking .wrap{align-items:flex-start;flex-direction:column;gap:1.35rem}footer .wrap{align-items:flex-start;flex-direction:column}}
+@media(max-width:690px){.wrap{width:calc(100% - 36px)}.top{min-height:68px;gap:.75rem}nav{gap:.7rem}nav>a{display:none}.hero,.intro,.steps,.packages,.team-grid{grid-template-columns:1fr}.hero{padding-top:2rem}.intro{gap:.75rem}.engine{margin-top:.5rem}.step{padding-top:1rem}.booking .wrap{align-items:flex-start;flex-direction:column;gap:1.35rem}footer .wrap{align-items:flex-start;flex-direction:column}}
 @media(min-width:861px) and (max-height:900px){
 .top{min-height:68px}
 .hero{padding-block:1.35rem}
@@ -414,10 +411,7 @@ dialog p{color:var(--muted)}
         <h2 id="audience-title" class="eyebrow">Who it’s for</h2>
         <p>For marketing and sales teams using HubSpot or getting started with it.</p>
       </div>
-      <div class="audience-logos">
-        <p id="sample-logos-label"><strong>Customers we’ve worked with</strong> <span class="audience-logo-note">Sample logos</span></p>
-        <button class="brand-strip-control" type="button" aria-controls="sample-logos" hidden>Pause</button>
-      </div>
+      <p class="audience-logos" id="sample-logos-label"><strong class="eyebrow">Customers we’ve worked with</strong> <span class="audience-logo-note">Sample logos</span></p>
       <div class="brand-strip" id="sample-logos">
         <div class="brand-strip-track">
           <ul class="brand-strip-group" aria-labelledby="sample-logos-label">
@@ -844,18 +838,6 @@ dialog p{color:var(--muted)}
     showAuditResult();
   });
   updateAuditAction();
-
-  const brandStrip = document.querySelector('.brand-strip');
-  const brandStripControl = document.querySelector('.brand-strip-control');
-  brandStrip.dataset.motion = 'playing';
-  brandStripControl.hidden = false;
-  brandStripControl.setAttribute('aria-label', 'Pause logo animation');
-  brandStripControl.addEventListener('click', () => {
-    const paused = brandStrip.dataset.motion !== 'paused';
-    brandStrip.dataset.motion = paused ? 'paused' : 'playing';
-    brandStripControl.textContent = paused ? 'Play' : 'Pause';
-    brandStripControl.setAttribute('aria-label', paused ? 'Play logo animation' : 'Pause logo animation');
-  });
 
   const bookingDialog = document.querySelector('dialog');
   const bookingTitle = document.querySelector('#dialog-title');
