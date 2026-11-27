@@ -56,7 +56,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .text-link{font-size:.92rem;font-weight:700;text-decoration:none;padding:.7rem .25rem}
 .engine{container-type:inline-size;margin:0;background:var(--black);color:#f4f4f2;border:1px solid #272727;border-radius:12px;padding:clamp(.95rem,2.4vw,1.7rem)}
 .engine figcaption h2{font-size:1rem;font-weight:750;letter-spacing:-.025em;margin:0 0 .62rem}
-.engine-machine{overflow:hidden;margin:0;border:1px solid #393939;border-radius:8px;background:#202020}
+.engine-machine{position:relative;overflow:hidden;margin:0;border:1px solid #393939;border-radius:8px;background:#202020}
+.engine-results{position:absolute;inset:0;overflow:auto}
+.engine-results .engine-comparison{height:100%;border-top:0}
+.engine[data-results] .engine-scene{visibility:hidden}
 .engine-comparison{width:100%;table-layout:fixed;border-collapse:collapse;border-top:1px solid #393939;font-variant-numeric:tabular-nums}
 .engine-comparison :is(th,td){padding:.43rem .56rem;text-align:center;border-bottom:1px solid #393939;line-height:1.26}
 .engine-comparison thead th{background:#262626;font-size:.8rem}
@@ -66,11 +69,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .engine-comparison :is(thead,tbody) tr > :last-child{background:#2d281f;border-left:1px solid #524835}
 .engine-comparison thead th:last-child,.engine-comparison [data-engine-value="after-revenue"]{color:#f1cc91}
 .engine-comparison .engine-stat{display:inline-block}
-.audit-scale{display:grid;justify-items:center;gap:.02rem;margin-top:.1rem}
-.audit-scale label{color:#ddd0b8;font-size:.68rem;font-weight:500;line-height:1.18}
-.audit-scale input{width:100%;height:1.125rem;margin:0;accent-color:#bbc7b6;color-scheme:dark}
-.audit-scale input:focus-visible{outline:1px solid #bbc7b6;outline-offset:1px}
-.audit-baseline-note{display:block;color:#ddd0b8;font-size:.67rem;font-weight:400}
 .engine-comparison .engine-current{position:relative}
 .engine-comparison .engine-direction{position:absolute;z-index:1;left:100%;top:50%;width:1.35rem;transform:translate(-50%,-50%);background:#292620;border:1px solid #524835;border-radius:1rem;color:#e8bf7d;font-size:.76rem;line-height:1.1}
 @container(max-width:315px){
@@ -140,7 +138,8 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-package a{text-underline-offset:.17em}
 .audit-result strong{color:#e8bf7d;font-size:.98rem;font-weight:750;font-variant-numeric:tabular-nums}
 .audit-result:focus-visible{outline:2px solid #a78755;outline-offset:2px}
-.engine-scene{position:relative;overflow:hidden;background:#242424}
+.engine-scene{position:relative;display:grid;align-content:center;min-height:16.5rem;overflow:hidden;background:#242424}
+@container(max-width:380px){.engine-scene{min-height:22rem}}
 .engine-art{position:relative;overflow:hidden;transform:scale(1.13);transform-origin:45% 72%}
 .engine-idle-photo{display:block;width:100%;height:auto}
 .engine-window{position:absolute;inset:46.7% 39.4% 28.9% 29.5%;clip-path:polygon(8% 0,91% 0,100% 18%,100% 84%,94% 100%,25% 100%,18% 88%,3% 87%,0 79%,0 17%);background:linear-gradient(130deg,#72727255 0%,transparent 40%),radial-gradient(ellipse at 38% 90%,#393939,#1b1b1b 65%,#0a0a0a)}
@@ -241,7 +240,7 @@ dialog p{color:var(--muted)}
 .mini-audit{padding:.48rem .62rem;margin-bottom:.48rem}
 .engine-comparison :is(th,td){padding-block:.33rem}
 .engine-scene{background:#181818}
-.engine-art{width:min(100%,clamp(18rem,calc(150svh - 870px),24rem));margin:0 auto;transform:none;mask-image:linear-gradient(to right,transparent,#000 7% 93%,transparent)}
+.engine-art{width:min(100%,clamp(21rem,calc(150svh - 790px),24rem));margin:0 auto;transform:none;mask-image:linear-gradient(to right,transparent,#000 7% 93%,transparent)}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -325,42 +324,37 @@ dialog p{color:var(--muted)}
             <img class="engine-motion-still" src="engine-five-coin-catch.webp" width="560" height="374" alt="">
           </div>
         </div>
-        <table class="engine-comparison" aria-label="Revenue engine before and after" hidden>
-          <thead>
-            <tr><th scope="col" aria-label="Metric"></th><th scope="col" class="engine-current">Current<span class="engine-direction" aria-hidden="true">→</span></th><th scope="col">Potential</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Marketing spend</th>
-              <td data-engine-value="spend"><span class="engine-stat">—</span></td>
-              <td>
-                <output class="engine-stat" id="audit-budget-value" for="audit-budget-scale">—</output>
-                <div class="audit-scale">
-                  <label for="audit-budget-scale">Try a larger budget</label>
-                  <input id="audit-budget-scale" type="range" min="1" max="10" step="0.1" value="1">
-                </div>
-              </td>
-            </tr>
-            <tr><th scope="row">Multiplier</th>
-              <td><span class="engine-multiplier engine-multiplier-today" role="img" aria-label="Current revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
-              <td><span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
-            </tr>
-            <tr><th scope="row">Lifetime revenue</th><td data-engine-value="today-revenue"><span class="engine-stat">—</span></td><td data-engine-value="after-revenue"><span class="engine-stat">—</span><small class="audit-baseline-note" hidden>At current spend</small></td></tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3">
-                <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-                  <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
-                  <p title="Assumes the same spend and acquisition results each month."><strong id="audit-annual-gain"></strong> extra lifetime revenue at the same annual spend</p>
-                  <p id="audit-scaled-gain" hidden><strong id="audit-scaled-total"></strong> total lifetime revenue from 12 months at this budget<br><strong id="audit-scaled-amount"></strong> from the added spend</p>
-                  <p class="audit-method">Modeled estimate using sector benchmarks where available.</p>
-                  <p class="audit-package">Find what to fix first with a <a href="#pipeline-audit">Pipeline Audit</a>.</p>
-                </section>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+        <div class="engine-results" hidden>
+          <table class="engine-comparison" aria-label="Revenue engine before and after">
+            <thead>
+              <tr><th scope="col" aria-label="Metric"></th><th scope="col" class="engine-current">Current<span class="engine-direction" aria-hidden="true">→</span></th><th scope="col">Potential</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Marketing spend</th>
+                <td data-engine-value="spend"><span class="engine-stat">—</span></td>
+                <td data-engine-value="spend"><span class="engine-stat">—</span></td>
+              </tr>
+              <tr><th scope="row">Multiplier</th>
+                <td><span class="engine-multiplier engine-multiplier-today" role="img" aria-label="Current revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
+                <td><span class="engine-multiplier" id="engine-multiplier" role="img" aria-label="Projected revenue per euro"><span class="engine-multiplier-symbol" aria-hidden="true">×</span><span class="engine-multiplier-gear"><span class="engine-multiplier-value">—</span></span></span></td>
+              </tr>
+              <tr><th scope="row">Lifetime revenue</th><td data-engine-value="today-revenue"><span class="engine-stat">—</span></td><td data-engine-value="after-revenue"><span class="engine-stat">—</span></td></tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
+                    <p id="audit-uplift"><strong id="audit-lift"></strong> revenue per marketing euro spent</p>
+                    <p title="Assumes the same spend and acquisition results each month."><strong id="audit-annual-gain"></strong> extra lifetime revenue at the same annual spend</p>
+                    <p class="audit-method" id="audit-estimate-basis"></p>
+                    <p class="audit-package">Find what to fix in a <a href="#pipeline-audit">two-week Pipeline Audit</a>. Implement it in a <a href="#engine-sprint">six-week Engine Sprint</a>.</p>
+                  </section>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </figure>
   </section>
@@ -398,7 +392,7 @@ dialog p{color:var(--muted)}
           <button class="btn btn-outline" type="button" data-book="Pipeline Audit">Discuss the audit</button>
         </article>
         <article class="card featured">
-          <p class="eyebrow">Implement</p><h3>Engine Sprint</h3>
+          <p class="eyebrow">Implement</p><h3 id="engine-sprint">Engine Sprint</h3>
           <p class="price">€6,000</p><p class="term">Fixed fee · 6 weeks</p>
           <p>Fix and measure one priority workflow on the path to purchase.</p>
           <ul role="list"><li>Agree on qualification and follow-up</li><li>Build one workflow and test the handoff</li><li>Shared baseline report and team walkthrough</li></ul>
@@ -516,20 +510,14 @@ dialog p{color:var(--muted)}
   const auditCustomers = document.querySelector('#audit-customers');
   const auditValue = document.querySelector('#audit-value');
   const auditSector = document.querySelector('#audit-sector');
-  const auditBudgetScale = document.querySelector('#audit-budget-scale');
-  const auditBudgetValue = document.querySelector('#audit-budget-value');
-  const auditScaledGain = document.querySelector('#audit-scaled-gain');
-  const auditScaledAmount = document.querySelector('#audit-scaled-amount');
-  const auditScaledTotal = document.querySelector('#audit-scaled-total');
-  const auditBaselineNote = document.querySelector('.audit-baseline-note');
+  const auditEstimateBasis = document.querySelector('#audit-estimate-basis');
   let auditPending = false;
-  let budgetScenario;
   const auditSteps = [...auditForm.querySelectorAll('[data-audit-step]')];
   const auditInputs = auditSteps.map(step => step.querySelector('input, select'));
   const auditAction = auditForm.querySelector('.audit-action');
   const auditBack = auditForm.querySelector('.audit-back');
   const auditStepIndicator = document.querySelector('#audit-step-indicator');
-  const auditComparison = document.querySelector('.engine-comparison');
+  const auditResults = document.querySelector('.engine-results');
   let auditStep = 0;
   const auditCurrency = new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR', maximumFractionDigits: 0});
   const auditCompactCurrency = new Intl.NumberFormat('nl-NL', {style: 'currency', currency: 'EUR', notation: 'compact', maximumFractionDigits: 1});
@@ -575,25 +563,6 @@ dialog p{color:var(--muted)}
     }
   }
 
-  function updateBudgetScenario() {
-    const scale = auditBudgetScale.valueAsNumber;
-    const {spend, projectedRevenue} = budgetScenario;
-    const monthlyBudget = spend * scale;
-    const addedLifetimeRevenue = projectedRevenue * (scale - 1) * 12;
-    const budgetLabel = monthlyBudget < 1000 ? auditMoney(monthlyBudget) : auditCompactCurrency.format(monthlyBudget);
-    auditBudgetScale.setAttribute('aria-valuetext', `${auditMoney(monthlyBudget)} per month`);
-    auditBudgetValue.textContent = budgetLabel;
-    auditBudgetValue.title = `${auditMoney(monthlyBudget)} per month`;
-    auditScaledGain.hidden = scale === 1;
-    auditBaselineNote.hidden = scale === 1;
-    auditScaledTotal.textContent = auditMoney(projectedRevenue * scale * 12);
-    auditScaledAmount.textContent = addedLifetimeRevenue >= 1
-      ? `+${auditMoney(addedLifetimeRevenue)}`
-      : auditMoney(addedLifetimeRevenue);
-  }
-
-  auditBudgetScale.addEventListener('input', updateBudgetScenario);
-
   function showAuditResult() {
     const spend = auditSpend.valueAsNumber;
     const customers = auditCustomers.valueAsNumber;
@@ -613,13 +582,14 @@ dialog p{color:var(--muted)}
     document.querySelector('#audit-annual-gain').textContent = annualGain >= 1
       ? `+${auditMoney(annualGain)}`
       : auditMoney(annualGain);
-    budgetScenario = {spend, projectedRevenue};
-    auditBudgetScale.value = 1;
-    updateBudgetScenario();
+    auditEstimateBasis.textContent = sectorTarget
+      ? 'Based on your inputs and a sector target.'
+      : 'Based on your inputs and an improvement scenario.';
     updateEngineAmounts(spend, lifetimeRevenue, projectedRevenue);
 
     resetEngineMotion();
-    auditComparison.hidden = true;
+    auditResults.hidden = true;
+    delete engineCard.dataset.results;
     engineCard.dataset.auditComplete = '';
     auditPending = true;
     updateAuditAction();
@@ -632,7 +602,8 @@ dialog p{color:var(--muted)}
   function revealAuditResult() {
     auditPending = false;
     updateAuditAction();
-    auditComparison.hidden = false;
+    auditResults.hidden = false;
+    engineCard.dataset.results = '';
     auditResult.focus({preventScroll: true});
 
     const viewportHeight = window.innerHeight;
@@ -666,7 +637,8 @@ dialog p{color:var(--muted)}
   auditForm.addEventListener('input', () => {
     if (engineCard.hasAttribute('data-audit-complete')) {
       auditPending = false;
-      auditComparison.hidden = true;
+      auditResults.hidden = true;
+      delete engineCard.dataset.results;
       delete engineCard.dataset.auditComplete;
       resetEngineMotion();
     }
