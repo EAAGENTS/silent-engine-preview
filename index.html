@@ -152,10 +152,11 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .audit-call:hover{background:#fff;border-color:#fff}
 .audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
 @media(prefers-reduced-motion:no-preference){
-.engine[data-results] .audit-call{animation:audit-call-pulse 1.3s ease-in-out 10s}
+.engine[data-results] .audit-call{animation:audit-call-pulse 1.3s ease-in-out 10s forwards}
 @keyframes audit-call-pulse{
-  0%,100%{box-shadow:0 0 0 0 rgb(187 199 182 / 0)}
+  0%{box-shadow:0 0 0 0 rgb(187 199 182 / 0)}
   45%{box-shadow:0 0 0 4px rgb(187 199 182 / .45)}
+  100%{box-shadow:0 0 0 2px rgb(187 199 182 / .32)}
 }
 }
 .engine-scene{position:relative;display:grid;align-content:center;min-height:19.75rem;overflow:hidden;background:#242424}
