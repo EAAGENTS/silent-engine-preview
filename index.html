@@ -235,10 +235,10 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .section{padding-block:clamp(3.75rem,7vw,6.15rem)}
 .intro{display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:end;margin-bottom:2.1rem}
 .intro h2{margin-bottom:0}
-#approach{padding-top:0}
-.approach-intro{background:#efefec;border-block:1px solid var(--rule);padding-block:clamp(1.35rem,2.8vw,2.4rem)}
-#approach .intro{margin-bottom:0}
-#approach .steps{margin-inline:auto;margin-top:clamp(1.4rem,3vw,2.2rem)}
+#approach,.offers,.team{padding-top:0}
+.section-intro-band{background:#efefec;border-block:1px solid var(--rule);padding-block:clamp(1.35rem,2.8vw,2.4rem)}
+.section-intro-band .intro{margin-bottom:0}
+.section-intro-band+.wrap{margin-inline:auto;margin-top:clamp(1.4rem,3vw,2.2rem)}
 #approach-title{font-size:clamp(1.65rem,3.7vw,3.45rem)}
 @media(max-width:600px){#approach-title{font-size:clamp(1.125rem,5.5vw,1.85rem)}}
 :is(#approach,.offers,.team) .intro{display:block}
@@ -255,7 +255,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .steps .step:not(:last-child)::after{content:"";position:absolute;right:.08rem;top:3.25rem;width:6px;height:10px;background:#737373;clip-path:polygon(0 8%,15% 0,100% 50%,15% 100%,0 92%,80% 50%)}
 }
 .step p,.card>p{color:var(--muted);margin-bottom:0}
-.offers{border-top:1px solid var(--rule)}
+.offers{margin-top:clamp(1.5rem,3.5vw,3rem)}
 .card{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:10px;padding:1.45rem;background:#ffffff}
 .card.featured{background:#eeefed;border-color:#939393}
 .packages .card{padding:clamp(.95rem,1.5vw,1.45rem)}
@@ -269,7 +269,6 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .packages .card li::before{content:"";width:.63rem;height:.37rem;margin-inline:.08rem;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.14rem) rotate(-45deg)}
 .card li+li{margin-top:.45rem}
 .card .btn{margin-top:auto;align-self:flex-start}
-.team{border-top:1px solid var(--rule)}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .founder{display:grid;grid-template-columns:clamp(64px,8vw,96px) minmax(0,1fr);align-items:center;gap:clamp(.85rem,2.2vw,1.5rem)}
 .founder-portrait{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;clip-path:circle(48%)}
@@ -464,7 +463,7 @@ dialog p{color:var(--muted)}
     </div>
   </section>
   <section class="section" id="approach" aria-labelledby="approach-title">
-    <div class="approach-intro">
+    <div class="section-intro-band">
       <div class="wrap intro">
         <div><p class="eyebrow">Our approach</p><h2 id="approach-title">Five optimization steps</h2></div>
         <p>We review your data and interview your team to find where you can turn more traffic into revenue.</p>
@@ -507,11 +506,13 @@ dialog p{color:var(--muted)}
     </div>
   </section>
   <section class="section offers" id="packages" aria-labelledby="packages-title">
-    <div class="wrap">
-      <div class="intro">
+    <div class="section-intro-band">
+      <div class="wrap intro">
         <div><p class="eyebrow">Packages &amp; pricing</p><h2 id="packages-title">Build a better growth engine</h2></div>
         <p>Find what’s costing you deals, fix it, and scale what works.</p>
       </div>
+    </div>
+    <div class="wrap">
       <div class="packages">
         <article class="card">
           <p class="eyebrow">Diagnose</p><h3 id="pipeline-audit">Engine Audit</h3>
@@ -544,11 +545,13 @@ dialog p{color:var(--muted)}
     </div>
   </section>
   <section class="section team" id="founders" aria-labelledby="team-title">
-    <div class="wrap">
-      <div class="intro">
+    <div class="section-intro-band">
+      <div class="wrap intro">
         <div><p class="eyebrow">Founder-led</p><h2 id="team-title">Meet the founders.</h2></div>
         <p>Work directly with the founders, from the first audit through implementation.</p>
       </div>
+    </div>
+    <div class="wrap">
       <div class="team-grid">
         <article class="card founder">
           <img class="founder-portrait" src="dennis-kroon.jpeg" width="400" height="400" loading="lazy" decoding="async" alt="">
