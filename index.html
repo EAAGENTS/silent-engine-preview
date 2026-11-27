@@ -96,13 +96,20 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 }
 .audit-currency{position:relative;display:block}
 .audit-currency > span{position:absolute;left:.62rem;top:50%;transform:translateY(-50%);color:#ddd;pointer-events:none}
-.audit-field :is(input,select){width:100%;min-height:34px;font:inherit;font-size:.91rem;padding:.28rem .45rem;background:#242424;color:#f8f8f6;border:1px solid #777;border-radius:5px;color-scheme:dark}
-.audit-field input[type="number"],.audit-currency > span{font:500 .85rem/1.3 ui-monospace,monospace}
+.audit-field :is(input:not([type="checkbox"]),select,.audit-sector-menu summary){width:100%;min-height:34px;font:inherit;font-size:.91rem;padding:.28rem .45rem;background:#242424;color:#f8f8f6;border:1px solid #777;border-radius:5px;color-scheme:dark}
+.audit-field input[data-audit-number],.audit-currency > span{font:500 .85rem/1.3 ui-monospace,monospace}
 .audit-currency input{padding-left:1.7rem}
 .audit-field input::placeholder{color:#a9a9a9}
 .audit-select{position:relative}
 .audit-select select{appearance:none;padding-inline-end:2rem}
-.audit-select::after{content:"";position:absolute;inset-inline-end:.88rem;top:50%;width:.38rem;height:.38rem;border:solid #e4e4e2;border-width:0 1.5px 1.5px 0;transform:translateY(-75%) rotate(45deg);pointer-events:none}
+.audit-sector-menu{position:relative;min-width:0}
+.audit-sector-menu summary{position:relative;display:block;cursor:pointer;list-style:none;padding-inline-end:2rem!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.audit-sector-menu summary::-webkit-details-marker{display:none}
+.audit-sector-menu[open] summary::after{transform:translateY(-25%) rotate(225deg)}
+.audit-sector-options{position:absolute;z-index:3;inset-inline:0;top:calc(100% + .22rem);display:grid;gap:.1rem;max-height:13rem;overflow:auto;padding:.32rem;border:1px solid #777;border-radius:6px;background:#242424;box-shadow:0 .35rem 1rem #0006}
+.audit-sector-options label{display:flex;align-items:center;gap:.45rem;padding:.26rem .24rem;color:#f4f4f2;font-size:.79rem;cursor:pointer}
+.audit-sector-options input{flex:none;margin:0;accent-color:#bbc7b6}
+.audit-select::after,.audit-sector-menu summary::after{content:"";position:absolute;inset-inline-end:.88rem;top:50%;width:.38rem;height:.38rem;border:solid #e4e4e2;border-width:0 1.5px 1.5px 0;transform:translateY(-75%) rotate(45deg);pointer-events:none}
 .audit-currency > .audit-example{left:1.7rem;color:#a9a9a9;white-space:nowrap}
 .audit-example > span:not(:first-child){display:none}
 #audit-spend:not(:placeholder-shown) + .audit-example,#audit-spend:focus + .audit-example{visibility:hidden}
@@ -128,19 +135,19 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .mini-audit .audit-action[data-ready]:hover{background:#c7d1c3}
 .mini-audit .audit-action:disabled{background:#292929;border-color:#535353;color:#b2b2b0;cursor:default}
 .mini-audit button:focus-visible{outline-color:#f0f0ee}
-.mini-audit .audit-field :is(input,select):focus{outline:none}
+.mini-audit .audit-field :is(input:not([type="checkbox"]),select):focus{outline:none}
 @media(forced-colors:active){
-.audit-select::after{border-color:ButtonText}
+.audit-select::after,.audit-sector-menu summary::after{border-color:ButtonText}
 }
 .audit-result,.audit-next-step{padding:.55rem .68rem;background:#2d281f;color:#f3ece0;font-size:.8rem;line-height:1.3;overflow-wrap:anywhere}
 .audit-result p,.audit-next-step p{margin:0}
 .audit-result:focus{outline:none}
-.audit-result .audit-total{display:block;color:#e8bf7d;font-size:clamp(1.65rem,7cqw,2.2rem);line-height:1.05;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.audit-result .audit-total{display:block;color:#e8bf7d;font-size:clamp(1.35rem,6.1cqw,1.95rem);line-height:1.05;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .audit-result .audit-total-label{display:block;margin-top:.12rem}
 .audit-result #audit-uplift{margin-top:.25rem;color:#ded4c4;font-size:.75rem}
 .audit-result #audit-lift{color:#e8bf7d;font-weight:750}
-.audit-next-step .audit-method{color:#d6cdbf;font-size:.7rem}
-.audit-next-step .audit-package{margin-top:.28rem;color:#ede5d7}
+.audit-result .audit-method{margin-top:.2rem;color:#d6cdbf;font-size:.7rem}
+.audit-next-step .audit-package{color:#ede5d7}
 .audit-call{padding:.16rem 0 0;border:0;background:none;color:#f4f4f2;font-size:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:.17em;text-align:left}
 .audit-call:focus-visible{outline:1px solid #bbc7b6;outline-offset:2px}
 .engine-scene{position:relative;display:grid;align-content:center;min-height:19.5rem;overflow:hidden;background:#242424}
@@ -151,7 +158,7 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
   position:absolute;aspect-ratio:1;width:11.60714%;left:34.86607%;top:49.59839%;background-size:861.53846% auto;background-position:39.44444% 60.04862%;
   border-radius:50%;mask-image:radial-gradient(circle,#000 64%,transparent 71%);
   background-image:var(--engine-photo);background-repeat:no-repeat;
-  background-color:#88847d;background-blend-mode:soft-light;
+  background-color:#8d826f;background-blend-mode:soft-light;
   transform:rotate(0deg);pointer-events:none
 }
 .engine-wheel-small{width:7.85714%;left:49.15179%;top:54.95315%;background-size:1272.72727% auto;background-position:53.34302% 62.29135%}
@@ -289,10 +296,24 @@ dialog p{color:var(--muted)}
       <div class="mini-audit">
         <form id="mini-audit-form" aria-labelledby="mini-audit-title" novalidate>
           <div class="audit-fields">
-            <label class="audit-field" data-audit-step><span>What’s your monthly marketing spend?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-spend" aria-label="What’s your monthly marketing spend in euros?" type="number" inputmode="decimal" required min="0.01" max="1000000000" step="0.01" placeholder=" "><span class="audit-example" aria-hidden="true"><span>5,000</span><span>10,000</span><span>20,000</span><span>50,000</span></span></span></label>
-            <label class="audit-field" data-audit-step hidden><span>How many new customers do you get from that spend?</span><input id="audit-customers" type="number" inputmode="numeric" required min="0" max="10000000" step="1"></label>
-            <label class="audit-field" data-audit-step hidden><span class="audit-lifetime-label">What’s your lifetime revenue per customer?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="What’s your lifetime revenue per customer in euros?" type="number" inputmode="decimal" required min="0" max="1000000000" step="0.01"></span></label>
-            <label class="audit-field" data-audit-step hidden><span>What sector do you sell to?</span><span class="audit-select"><select id="audit-sector"><option value="other" selected>Other or mixed sectors</option><option value="technology">Technology and SaaS</option><option value="retail">Retail and ecommerce</option><option value="financial">Financial services</option><option value="healthcare">Healthcare</option><option value="services">Professional services</option><option value="manufacturing">Manufacturing</option></select></span></label>
+            <label class="audit-field" data-audit-step><span>What’s your monthly marketing spend?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-spend" aria-label="What’s your monthly marketing spend in euros?" type="text" inputmode="decimal" data-audit-number data-min="0.01" data-max="1000000000" required placeholder=" "><span class="audit-example" aria-hidden="true"><span>5.000</span><span>10.000</span><span>20.000</span><span>50.000</span></span></span></label>
+            <label class="audit-field" data-audit-step hidden><span>How many new customers do you get from that spend?</span><input id="audit-customers" type="text" inputmode="numeric" data-audit-number data-min="0" data-max="10000000" required></label>
+            <label class="audit-field" data-audit-step hidden><span class="audit-lifetime-label">What’s your lifetime revenue per customer?</span><span class="audit-currency"><span aria-hidden="true">€</span><input id="audit-value" aria-label="What’s your lifetime revenue per customer in euros?" type="text" inputmode="decimal" data-audit-number data-min="0" data-max="1000000000" required></span></label>
+            <div class="audit-field" data-audit-step hidden>
+              <span id="audit-sector-question">What sector do you sell to?</span>
+              <details class="audit-sector-menu" id="audit-sector">
+                <summary aria-labelledby="audit-sector-question audit-sector-summary"><span id="audit-sector-summary">Select a sector</span></summary>
+                <div class="audit-sector-options" role="group" aria-labelledby="audit-sector-question">
+                  <label><input type="checkbox" value="other"> <span>Other or mixed sectors</span></label>
+                  <label><input type="checkbox" value="technology"> <span>Technology and SaaS</span></label>
+                  <label><input type="checkbox" value="retail"> <span>Retail and ecommerce</span></label>
+                  <label><input type="checkbox" value="financial"> <span>Financial services</span></label>
+                  <label><input type="checkbox" value="healthcare"> <span>Healthcare</span></label>
+                  <label><input type="checkbox" value="services"> <span>Professional services</span></label>
+                  <label><input type="checkbox" value="manufacturing"> <span>Manufacturing</span></label>
+                </div>
+              </details>
+            </div>
             <label class="audit-field" data-audit-step hidden>
               <span>What’s your monthly company revenue?</span>
               <span class="audit-select">
@@ -330,8 +351,9 @@ dialog p{color:var(--muted)}
         </div>
         <div class="engine-results" hidden>
           <section class="audit-result" id="audit-result" tabindex="-1" aria-live="polite" aria-label="Estimated gains">
-            <p title="Assumes the same spend and acquisition results each month."><strong class="audit-total" id="audit-annual-gain"></strong><span class="audit-total-label">Extra lifetime revenue at the same annual spend</span></p>
-            <p id="audit-uplift">You could earn <strong id="audit-lift"></strong> more revenue for every euro spent on marketing.</p>
+            <p title="Assumes the same spend and acquisition results each month."><strong class="audit-total"><span id="audit-annual-gain"></span> revenue</strong><span class="audit-total-label">Extra lifetime revenue at the same annual spend</span></p>
+            <p id="audit-uplift"><strong id="audit-lift"></strong> more revenue per €1 spent on marketing.</p>
+            <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customer results</p>
           </section>
           <table class="engine-comparison" aria-label="Revenue engine before and after">
             <thead>
@@ -351,7 +373,6 @@ dialog p{color:var(--muted)}
             </tbody>
           </table>
           <div class="audit-next-step">
-            <p class="audit-method" title="The draft calculator uses scenario assumptions until customer data is added.">Based on sector benchmarks and our average customer results</p>
             <p class="audit-package">Find what to fix first in a two-week Pipeline Audit.</p>
             <button class="audit-call" type="button" data-book aria-describedby="expert-cta-person">Book a discovery call</button>
           </div>
@@ -514,9 +535,12 @@ dialog p{color:var(--muted)}
   const auditCustomers = document.querySelector('#audit-customers');
   const auditValue = document.querySelector('#audit-value');
   const auditSector = document.querySelector('#audit-sector');
+  const auditSectorSummary = document.querySelector('#audit-sector-summary');
+  const auditSectorChoices = [...auditSector.querySelectorAll('input')];
+  const auditNumberInputs = [...auditForm.querySelectorAll('[data-audit-number]')];
   let auditPending = false;
   const auditSteps = [...auditForm.querySelectorAll('[data-audit-step]')];
-  const auditInputs = auditSteps.map(step => step.querySelector('input, select'));
+  const auditInputs = auditSteps.map(step => step.querySelector('summary, input, select'));
   const auditAction = auditForm.querySelector('.audit-action');
   const auditBack = auditForm.querySelector('.audit-back');
   const auditStepIndicator = document.querySelector('#audit-step-indicator');
@@ -537,6 +561,84 @@ dialog p{color:var(--muted)}
     ['services', 2.5],
     ['manufacturing', 2],
   ]);
+
+  function groupAuditNumber(input) {
+    const value = input.value;
+    const raw = value.replace(/[.€\s]/g, '');
+    const pattern = input.inputMode === 'decimal' ? /^\d+(?:,\d{0,2})?$/ : /^\d+$/;
+    if (!raw || !pattern.test(raw)) {
+      input.setCustomValidity(value ? 'Enter an amount using dots for thousands and a comma for decimals.' : '');
+      return;
+    }
+    const position = value.slice(0, input.selectionStart).replace(/[.€\s]/g, '').length;
+    const [whole, fraction] = raw.split(',');
+    const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const next = fraction === undefined ? grouped : `${grouped},${fraction}`;
+    if (next !== value) {
+      input.value = next;
+      let caret = 0;
+      for (let digits = 0; caret < next.length && digits < position; caret += 1) {
+        if (next[caret] !== '.') digits += 1;
+      }
+      input.setSelectionRange(caret, caret);
+    }
+    const amount = readAuditNumber(input);
+    const minimum = Number(input.dataset.min);
+    const maximum = Number(input.dataset.max);
+    input.setCustomValidity(amount < minimum || amount > maximum
+      ? 'Enter a value within the supported range.'
+      : '');
+  }
+
+  function readAuditNumber(input) {
+    return Number(input.value.replaceAll('.', '').replace(',', '.'));
+  }
+
+  auditNumberInputs.forEach(input => {
+    input.addEventListener('input', event => {
+      if (!event.isComposing) groupAuditNumber(input);
+    });
+    input.addEventListener('compositionend', () => {
+      groupAuditNumber(input);
+      updateAuditAction();
+    });
+    input.addEventListener('keydown', event => {
+      const cursor = input.selectionStart;
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey ||
+          cursor !== input.selectionEnd) return;
+      if (event.key === 'Backspace' && input.value[cursor - 1] === '.') {
+        input.setSelectionRange(cursor - 1, cursor - 1);
+      }
+      if (event.key === 'Delete' && input.value[cursor] === '.') {
+        input.setSelectionRange(cursor + 1, cursor + 1);
+      }
+    });
+  });
+
+  function selectedSectors() {
+    return auditSectorChoices.filter(input => input.checked);
+  }
+
+  function updateSectorSummary() {
+    const selected = selectedSectors();
+    auditSectorSummary.textContent = selected.length > 1
+      ? `${selected.length} sectors selected`
+      : selected[0]?.nextElementSibling.textContent ?? 'Select a sector';
+  }
+
+  function auditStepIsValid(input) {
+    return input === auditSector.firstElementChild
+      ? selectedSectors().length > 0
+      : input.validity.valid;
+  }
+
+  auditSector.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && auditSector.open) {
+      event.preventDefault();
+      auditSector.open = false;
+      auditSector.firstElementChild.focus();
+    }
+  });
 
   function auditMoney(amount) {
     return amount > 0 && amount < 1 ? '<€1' : auditCurrency.format(amount);
@@ -567,12 +669,15 @@ dialog p{color:var(--muted)}
   }
 
   function showAuditResult() {
-    const spend = auditSpend.valueAsNumber;
-    const customers = auditCustomers.valueAsNumber;
-    const customerRevenue = auditValue.valueAsNumber;
+    const spend = readAuditNumber(auditSpend);
+    const customers = readAuditNumber(auditCustomers);
+    const customerRevenue = readAuditNumber(auditValue);
 
     const lifetimeRevenue = customers * customerRevenue;
-    const sectorTarget = sectorTargets.get(auditSector.value) ?? 0;
+    const selectedTargets = selectedSectors().map(input => sectorTargets.get(input.value)).filter(Boolean);
+    const sectorTarget = selectedTargets.length
+      ? selectedTargets.reduce((sum, target) => sum + target, 0) / selectedTargets.length
+      : 0;
     const sectorGap = customerRevenue > 0 ? Math.max(0, spend * sectorTarget - lifetimeRevenue) : 0;
     const extraRevenue = lifetimeRevenue * baseUplift + sectorGap;
     const projectedRevenue = lifetimeRevenue + extraRevenue;
@@ -620,13 +725,14 @@ dialog p{color:var(--muted)}
     const hasResults = finalStep && !auditResults.hidden;
     auditAction.textContent = auditPending ? 'Running…' : hasResults ? 'Reset' : finalStep ? 'Start audit' : 'Next';
     auditAction.disabled = auditPending || (finalStep
-      ? auditInputs.some(input => !input.validity.valid)
-      : !auditInputs[auditStep].validity.valid);
+      ? auditInputs.some(input => !auditStepIsValid(input))
+      : !auditStepIsValid(auditInputs[auditStep]));
     auditBack.disabled = auditPending;
     auditAction.toggleAttribute('data-ready', finalStep && !hasResults && !auditAction.disabled);
   }
 
   function showAuditStep(index) {
+    auditSector.open = false;
     auditStep = index;
     auditSteps.forEach((step, position) => { step.hidden = position !== index; });
     auditStepIndicator.textContent = `${index + 1} of ${auditSteps.length}`;
@@ -644,6 +750,7 @@ dialog p{color:var(--muted)}
   }
 
   auditForm.addEventListener('input', () => {
+    updateSectorSummary();
     if (engineCard.hasAttribute('data-audit-complete')) clearAuditResult();
     updateAuditAction();
   });
@@ -660,20 +767,25 @@ dialog p{color:var(--muted)}
     if (auditPending) return;
     if (auditStep === auditSteps.length - 1 && !auditResults.hidden) {
       auditForm.reset();
+      auditNumberInputs.forEach(input => input.setCustomValidity(''));
+      updateSectorSummary();
       clearAuditResult();
       showAuditStep(0);
       auditForm.scrollIntoView({block: 'nearest'});
       return;
     }
-    if (!auditInputs[auditStep].reportValidity()) return;
+    if (!auditStepIsValid(auditInputs[auditStep])) {
+      auditInputs[auditStep].reportValidity?.();
+      return;
+    }
     if (auditStep < auditSteps.length - 1) {
       showAuditStep(auditStep + 1);
       return;
     }
-    const invalidStep = auditInputs.findIndex(input => !input.validity.valid);
+    const invalidStep = auditInputs.findIndex(input => !auditStepIsValid(input));
     if (invalidStep !== -1) {
       showAuditStep(invalidStep);
-      auditInputs[invalidStep].reportValidity();
+      auditInputs[invalidStep].reportValidity?.();
       return;
     }
     showAuditResult();
@@ -699,26 +811,30 @@ dialog p{color:var(--muted)}
     if (!ctx) return;
 
     ctx.scale(pixelRatio, pixelRatio);
-    ctx.strokeStyle = '#368653';
-    ctx.lineWidth = 4;
+    ctx.strokeStyle = '#778472';
+    ctx.lineWidth = 1.6;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
     const startX = word.right - bounds.left - 5;
     const startY = word.top - bounds.top + word.height * 0.14;
-    const endX = panel.left - bounds.left - 14;
+    const endX = panel.left - bounds.left - 30;
     const endY = heading.top - bounds.top + heading.height / 2;
     const controlX = endX - 45;
-    const controlY = endY + 5;
+    const controlY = endY - 13;
     ctx.beginPath();
     ctx.moveTo(startX, startY);
-    ctx.bezierCurveTo(startX + 38, startY - 46, controlX, controlY, endX, endY);
+    ctx.bezierCurveTo(startX + 20, startY - 66, controlX, controlY, endX, endY);
 
     const direction = Math.atan2(endY - controlY, endX - controlX);
-    const headLength = 13;
+    const headLength = 10;
     ctx.moveTo(endX - headLength * Math.cos(direction - 0.57), endY - headLength * Math.sin(direction - 0.57));
     ctx.lineTo(endX, endY);
     ctx.lineTo(endX - headLength * Math.cos(direction + 0.57), endY - headLength * Math.sin(direction + 0.57));
+    ctx.stroke();
+    ctx.strokeStyle = '#4e5c4a70';
+    ctx.lineWidth = .75;
+    ctx.setLineDash([.6, 1.8]);
     ctx.stroke();
   }
 
