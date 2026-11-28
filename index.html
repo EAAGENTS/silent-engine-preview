@@ -270,10 +270,11 @@ h3{font-size:1.5rem;margin-bottom:.65rem}
 .card li+li{margin-top:.45rem}
 .card .btn{margin-top:auto;align-self:flex-start}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.founder{display:grid;grid-template-columns:clamp(64px,8vw,96px) minmax(0,1fr);align-items:center;gap:clamp(.85rem,2.2vw,1.5rem)}
+.founder{display:grid;grid-template-columns:clamp(64px,8vw,96px) minmax(0,1fr);align-items:center;align-content:start;gap:clamp(.85rem,2.2vw,1.5rem)}
 .founder-portrait{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;clip-path:circle(48%)}
 .founder h3{margin-bottom:.35rem}
 .founder p{margin:0;color:var(--muted);font-size:.93rem}
+.founder .founder-bio{grid-column:1/-1;line-height:1.55}
 .team .text-link{display:inline-flex;align-items:center;gap:.42rem;padding:.6rem 0 0}
 .linkedin-mark{display:grid;place-items:center;width:1.03rem;aspect-ratio:1;border-radius:2px;background:var(--ink);color:#fff;font:700 .74rem/1 Arial,sans-serif;letter-spacing:-.055em}
 .booking{background:var(--black);color:#f4f4f2}
@@ -626,6 +627,7 @@ THE SOFTWARE.
             <p>Co-founder · CRM and lifecycle marketing expert</p>
             <a class="text-link" href="https://www.linkedin.com/in/klaviyo-specialist/" aria-label="Dennis Kroon on LinkedIn"><span class="linkedin-mark" aria-hidden="true">in</span> LinkedIn</a>
           </div>
+          <p class="founder-bio">Dennis uses CRM and lifecycle marketing to help leads take the next step toward becoming customers. He builds email and WhatsApp automations that help businesses follow up at the right moment and keep customers coming back. With a master’s degree in accounting and experience in finance roles, he takes a data-driven approach to measuring what works and deciding what to improve next.</p>
         </article>
         <article class="card founder">
           <img class="founder-portrait" src="camilla-office-slate.webp" width="400" height="400" loading="lazy" decoding="async" alt="">
@@ -634,6 +636,7 @@ THE SOFTWARE.
             <p>Co-founder · Advertising and Revenue Operations Expert</p>
             <a class="text-link" href="https://www.linkedin.com/in/growth-marketing-expert/" aria-label="Camila de Casteja on LinkedIn"><span class="linkedin-mark" aria-hidden="true">in</span> LinkedIn</a>
           </div>
+          <p class="founder-bio">Camila helps businesses reach the right buyers through Google Search ads and account-based marketing on LinkedIn. She combines LinkedIn ads, organic content, and direct messages to engage priority accounts. Drawing on her revenue operations experience across several companies, she helps marketing and sales teams see which campaigns generate qualified leads and which turn into revenue.</p>
         </article>
       </div>
     </div>
